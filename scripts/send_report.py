@@ -27,9 +27,8 @@ ROOT          = Path(__file__).parent.parent
 NOVEDADES_DIR = ROOT / "data" / "novedades"
 
 # Configuración SMTP Office 365
-SMTP_HOST = "smtp.office365.com"
+SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 587
-
 
 # ── HTML helpers ──────────────────────────────────────────────────────────────
 
