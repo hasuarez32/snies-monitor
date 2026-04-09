@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv \"Structuring_SNIES.ipynb\" notebooks/)",
+      "Bash(mv \"sniespos.ipynb\" notebooks/)",
+      "Bash(mv \"Categorización divisiones SNIES .xlsx\" \"data/Categorización divisiones SNIES.xlsx\")"
+    ]
+  }
+}

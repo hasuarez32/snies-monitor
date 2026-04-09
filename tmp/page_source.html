@@ -1,0 +1,872 @@
+<html class="no-js" lang="es" xmlns="http://www.w3.org/1999/xhtml"><!--&lt;![endif]--><head id="j_idt3"><link type="text/css" rel="stylesheet" href="/consultaspublicas/javax.faces.resource/theme.css.jsf?ln=primefaces-bootstrap"><link type="text/css" rel="stylesheet" href="/consultaspublicas/javax.faces.resource/components.css.jsf;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01?ln=primefaces&amp;v=7.0"><script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="/consultaspublicas/javax.faces.resource/jquery/jquery.js.jsf;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01?ln=primefaces&amp;v=7.0"></script><script type="text/javascript" src="/consultaspublicas/javax.faces.resource/jquery/jquery-plugins.js.jsf;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01?ln=primefaces&amp;v=7.0"></script><script type="text/javascript" src="/consultaspublicas/javax.faces.resource/core.js.jsf;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01?ln=primefaces&amp;v=7.0"></script><script type="text/javascript" src="/consultaspublicas/javax.faces.resource/components.js.jsf;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01?ln=primefaces&amp;v=7.0"></script><script type="text/javascript" src="/consultaspublicas/javax.faces.resource/idlemonitor/idlemonitor.js.jsf;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01?ln=primefaces&amp;v=7.0"></script><script type="text/javascript">if(window.PrimeFaces){PrimeFaces.settings.locale='es';}</script>
+	<title>Información Poblacional - SNIES</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+  <meta name="description" content="Análisis de la información poblacional del Sistema Nacional de Información para la Educación Superior">
+
+  <meta itemprop="name" content="Información Poblacional - SNIES">
+  <meta itemprop="description" content="Análisis de la información poblacional del Sistema Nacional de Información para la Educación Superior">
+  <meta itemprop="image" content="https://sofinser.com/img/hecaa_meta.png">
+  
+  <meta property="og:url" content="/consultaspublicas/content/poblacional/index.jsf">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Información Poblacional - SNIES">
+  <meta property="og:description" content="Análisis de la información poblacional del Sistema Nacional de Información para la Educación Superior">
+  <meta property="og:image" content="https://sofinser.com/img/hecaa_meta.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Información Poblacional - SNIES">
+  <meta name="twitter:description" content="Análisis de la información poblacional del Sistema Nacional de Información para la Educación Superior">
+  <meta name="twitter:image" content="https://sofinser.com/img/hecaa_meta.png">
+
+	
+<link rel="apple-touch-icon" sizes="180x180" href="/consultaspublicas/resources/img/meta/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/consultaspublicas/resources/img/meta/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/consultaspublicas/resources/img/meta/favicon-16x16.png">
+<link rel="manifest" href="/consultaspublicas/resources/img/meta/site.webmanifest">
+<link rel="mask-icon" href="/consultaspublicas/resources/img/meta/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+  
+	<link rel="stylesheet" type="text/css" href="/consultaspublicas/resources/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/consultaspublicas/resources/plugins/glyphicons/css/glyphicons.min.css">
+	<link rel="stylesheet" type="text/css" href="/consultaspublicas/resources/plugins/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/consultaspublicas/resources/plugins/animations/css/animations.min.css">
+	<link rel="stylesheet" type="text/css" href="/consultaspublicas/resources/css/admin/main.css">
+	<link rel="stylesheet" type="text/css" href="/consultaspublicas/resources/css/admin/themes.css">
+  <link rel="stylesheet" href="/consultaspublicas/resources/css/admin/prime.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"></head><body>
+
+  <script type="text/javascript">
+      //<![CDATA[
+      function start() {
+          PF('fileDialog').show();
+      }
+       
+      function stop() {
+          PF('fileDialog').hide();
+      }
+      //]]>
+  </script><div id="fileDialogId" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container" role="dialog" aria-labelledby="fileDialogId_title" aria-describedby="fileDialogId_content" aria-hidden="true" aria-modal="true" style="width: auto; height: auto;"><div class="ui-dialog-content ui-widget-content" id="fileDialogId_content" style="height: auto;">
+    <span>Procesando...</span><br><img id="j_idt11" src="/consultaspublicas/resources/img/progress/loadingbar.gif;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01?pfdrid_c=true" alt=""></div></div><div id="loadingDialogId" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container" role="dialog" aria-labelledby="loadingDialogId_title" aria-describedby="loadingDialogId_content" aria-hidden="true" aria-modal="true" style="width: auto; height: auto;"><div class="ui-dialog-content ui-widget-content" id="loadingDialogId_content" style="height: auto;">
+		<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div></div>
+
+	<div id="page-wrapper">
+		
+		<div id="page-container" class="">
+    
+      <div class="hidden-sm hidden-md hidden-lg" style="background-color: #ffffff;">
+        <img src="https://hecaa.mineducacion.gov.co/documentos/logos/logo_men_mobile.png" width="100%" style="max-height: 200px;">
+      </div>
+      
+      
+      
+      <div id="logo-principal" class="hidden-xs" style="background-color: rgb(255, 255, 255);">
+        <img src="https://hecaa.mineducacion.gov.co/documentos/logos/logo_men.png" usemap="#image-map" width="100%" style="max-height: 150px;">
+        <map name="image-map">
+            <area target="" alt="Ministerio de Educación Nacional de Colombia" title="Ministerio de Educación Nacional de Colombia" href="https://www.mineducacion.gov.co" coords="31,17,31,131,690,149,698,8" shape="poly">
+            <area target="" alt="Sistema Nacional de Información de la  Educación Superior" title="Sistema Nacional de Información de la  Educación Superior" href="https://snies.mineducacion.gov.co" coords="3140,2,776,13,764,138,3134,147" shape="poly">
+        </map>
+      </div>
+    
+			<!-- Main Container -->
+			<div id="main-container">
+
+				<!-- Page content -->
+				<div id="page-content" style="min-height: 398.297px;">
+    <div class="content-header content-header-media">
+        <div class="header-section">
+            <div class="row">
+                <!-- Main Title (hidden on small devices for the statistics to fit) -->
+                <div class="col-md-4 col-lg-6 hidden-xs hidden-sm">
+                    <h1>Consulta de <strong>Programas</strong>
+                    <br>
+                    <small>Sistema Nacional de Información para la Educación superior en Colombia</small>
+                    </h1>
+                </div>
+                
+            </div>
+        </div>
+        <!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
+        <img src="https://sofinser.com/consultaspublicas/header.png?id=2" alt="header image" class="animation-pulseSlow">
+    </div>
+    
+    <ul class="breadcrumb breadcrumb-top text-left">
+      <li><button id="j_idt15" name="j_idt15" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left btn btn-sm btn-info" onclick="window.open('\/consultaspublicas\/ies','_self')" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c fa fa-search"></span><span class="ui-button-text ui-c">Consultar Instituciones</span></button>
+      </li>
+      <li><button id="j_idt17" name="j_idt17" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left btn btn-sm btn-info" onclick="window.open('\/consultaspublicas\/programas','_self')" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c fa fa-search"></span><span class="ui-button-text ui-c">Consultar Programas</span></button>
+      </li>
+    </ul>
+					
+          <div><div id="messages" class="ui-messages ui-widget" aria-live="polite"></div>
+          </div>
+  
+    <script>
+    var table;
+    </script>
+  
+    <div class="row">
+    
+      <div class="col-md-3">
+        <div class="block">
+<form id="formFiltro" name="formFiltro" method="post" action="/consultaspublicas/programas;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="formFiltro" value="formFiltro">
+
+          
+            <h4 class="text-center">Seleccione los filtros para la búsqueda</h4>
+          
+            <div class="row">
+              <div class="col-md-12">
+                
+                <div class="well well-sm">
+                  <h4>Institución de Educación Superior</h4>
+                  <div class="block-content1">
+                    
+                    <div class="row">
+                      <div class="col-md-12 form-group">
+                        <label>Nombre de la Institución</label><a id="formFiltro:j_idt23" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt23&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                          <i class="fa fa-info-circle text-info"></i></a><input id="formFiltro:j_idt26" name="formFiltro:j_idt26" type="text" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control input-sm" role="textbox" aria-disabled="false" aria-readonly="false">
+                      </div>
+                    
+                      <div class="col-md-12 form-group">
+                          <label>Código de la Institución</label><a id="formFiltro:j_idt28" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt28&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                            <i class="fa fa-info-circle text-info"></i></a><input id="formFiltro:codigoIes" name="formFiltro:codigoIes" type="text" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control input-sm" role="textbox" aria-disabled="false" aria-readonly="false"><div id="formFiltro:j_idt30" aria-live="polite" class="ui-message"></div>
+                      </div>
+                      <div class="col-md-12 form-group">
+                          <label>Estado de la Institución</label><a id="formFiltro:j_idt32" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt32&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                            <i class="fa fa-info-circle text-info"></i></a><table id="formFiltro:j_idt35" role="presentation" class="ui-selectoneradio ui-widget form-control-list"><tbody><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt35:0" name="formFiltro:j_idt35" type="radio" value="" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt35&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt35&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});" checked="checked"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default ui-state-active"><span class="ui-radiobutton-icon ui-icon ui-icon-bullet ui-c"></span></div></div><label for="formFiltro:j_idt35:0">Todos</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt35:1" name="formFiltro:j_idt35" type="radio" value="S" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt35&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt35&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt35:1">Activo</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt35:2" name="formFiltro:j_idt35" type="radio" value="N" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt35&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt35&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt35:2">Inactivo</label></td></tr></tbody></table>
+                      </div>
+                      
+                      <div class="col-md-12 form-group">
+                        
+                        <label>Tipo de sede</label><a id="formFiltro:j_idt40" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt40&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                          <i class="fa fa-info-circle text-info"></i></a><table id="formFiltro:j_idt42" role="presentation" class="ui-selectoneradio ui-widget form-control-list"><tbody><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt42:0" name="formFiltro:j_idt42" type="radio" value="" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt42&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt42&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});" checked="checked"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default ui-state-active"><span class="ui-radiobutton-icon ui-icon ui-icon-bullet ui-c"></span></div></div><label for="formFiltro:j_idt42:0">Todos</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt42:1" name="formFiltro:j_idt42" type="radio" value="01" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt42&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt42&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt42:1">Principal</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt42:2" name="formFiltro:j_idt42" type="radio" value="02" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt42&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt42&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt42:2">Seccional</label></td></tr></tbody></table>
+                      </div>
+                      
+                      <div class="form-group form-actions text-center"><button id="formFiltro:j_idt46" name="formFiltro:j_idt46" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left btn btn-info btn-xs" onclick="PrimeFaces.bcn(this,event,[function(event){PF('loadingDialog').show();},function(event){PrimeFaces.ab({s:&quot;formFiltro:j_idt46&quot;,f:&quot;formFiltro&quot;,u:&quot;datos formFiltro&quot;,onco:function(xhr,status,args){PF('loadingDialog').hide();;}});return false;}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c fa fa-search"></span><span class="ui-button-text ui-c">Buscar</span></button><button id="formFiltro:j_idt47" name="formFiltro:j_idt47" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left btn btn-warning btn-xs" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt47&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt47&quot;,u:&quot;formFiltro datos&quot;});return false;" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c fa fa-close"></span><span class="ui-button-text ui-c">Limpiar</span></button>
+                          
+                      </div>
+                      
+                      
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="well well-sm">
+                      <h4>Programa de Educación superior</h4>
+                      
+                      <div class="block-content2">
+                
+                        <div class="row">
+                          <div class="col-md-12 form-group">
+                            <label>Nombre del Programa</label><a id="formFiltro:j_idt49" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt49&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                              <i class="fa fa-info-circle text-info"></i></a><input id="formFiltro:j_idt51" name="formFiltro:j_idt51" type="text" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control input-sm" role="textbox" aria-disabled="false" aria-readonly="false">
+                          </div>
+                          
+                          <div class="col-md-12 form-group">
+                              <label>Registro Único Programa</label><a id="formFiltro:j_idt53" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt53&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                                <i class="fa fa-info-circle text-info"></i></a><input id="formFiltro:registroUnicoPrograma" name="formFiltro:registroUnicoPrograma" type="text" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control input-sm" role="textbox" aria-disabled="false" aria-readonly="false"><div id="formFiltro:j_idt55" aria-live="polite" class="ui-message"></div>
+                          </div>
+                          
+                          <div class="col-md-12 form-group">
+                              <label>Tiene Registro Único</label><a id="formFiltro:j_idt57" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt57&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                                <i class="fa fa-info-circle text-info"></i></a> - <div id="formFiltro:tieneregistroUnicoPrograma" class="ui-selectbooleancheckbox ui-chkbox ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:tieneregistroUnicoPrograma_input" name="formFiltro:tieneregistroUnicoPrograma_input" type="checkbox" autocomplete="off" aria-hidden="true" aria-checked="false"></div><div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default"><span class="ui-chkbox-icon ui-icon ui-icon-blank ui-c"></span></div></div><div id="formFiltro:j_idt60" aria-live="polite" class="ui-message"></div>
+                          </div>
+                        
+                          <div class="col-md-12 form-group">
+                              <label>Código SNIES Programa</label><a id="formFiltro:j_idt62" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt62&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                                <i class="fa fa-info-circle text-info"></i></a><input id="formFiltro:codigoPrograma" name="formFiltro:codigoPrograma" type="text" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control input-sm" role="textbox" aria-disabled="false" aria-readonly="false"><div id="formFiltro:j_idt64" aria-live="polite" class="ui-message"></div>
+                          </div>
+                          
+                          <div class="col-md-12 form-group">
+                              <label>Estado del Programa</label><a id="formFiltro:j_idt66" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt66&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                                <i class="fa fa-info-circle text-info"></i></a><table id="formFiltro:j_idt68" role="presentation" class="ui-selectoneradio ui-widget form-control-list"><tbody><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt68:0" name="formFiltro:j_idt68" type="radio" value="" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt68&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt68&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});" checked="checked"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default ui-state-active"><span class="ui-radiobutton-icon ui-icon ui-icon-bullet ui-c"></span></div></div><label for="formFiltro:j_idt68:0">Todos</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt68:1" name="formFiltro:j_idt68" type="radio" value="01" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt68&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt68&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt68:1">Activo (17270)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt68:2" name="formFiltro:j_idt68" type="radio" value="02" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt68&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt68&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt68:2">Inactivo (13581)</label></td></tr></tbody></table>
+                          </div>
+                          
+                          <div class="col-md-12 form-group">
+                              <label>Reconocimiento del Ministerio</label><a id="formFiltro:j_idt72" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt72&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                                <i class="fa fa-info-circle text-info"></i></a><table id="formFiltro:j_idt74" role="presentation" class="ui-selectoneradio ui-widget form-control-list"><tbody><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt74:0" name="formFiltro:j_idt74" type="radio" value="" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt74&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt74&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});" checked="checked"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default ui-state-active"><span class="ui-radiobutton-icon ui-icon ui-icon-bullet ui-c"></span></div></div><label for="formFiltro:j_idt74:0">Todos</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt74:1" name="formFiltro:j_idt74" type="radio" value="03" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt74&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt74&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt74:1">Acreditación de alta calidad (2389)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt74:2" name="formFiltro:j_idt74" type="radio" value="01" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt74&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt74&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt74:2">Acreditación previa (316)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt74:3" name="formFiltro:j_idt74" type="radio" value="04" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt74&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt74&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt74:3">n/a (9477)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt74:4" name="formFiltro:j_idt74" type="radio" value="02" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt74&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt74&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt74:4">Registro calificado (18669)</label></td></tr></tbody></table>
+                          </div>
+                          
+                          <div class="col-md-12 form-group">
+                              <label>Programa en convenio</label><a id="formFiltro:j_idt78" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt78&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                                <i class="fa fa-info-circle text-info"></i></a><table id="formFiltro:j_idt80" role="presentation" class="ui-selectoneradio ui-widget form-control-list"><tbody><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt80:0" name="formFiltro:j_idt80" type="radio" value="" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt80&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt80&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});" checked="checked"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default ui-state-active"><span class="ui-radiobutton-icon ui-icon ui-icon-bullet ui-c"></span></div></div><label for="formFiltro:j_idt80:0">Todos</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt80:1" name="formFiltro:j_idt80" type="radio" value="S" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt80&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt80&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt80:1">SI (338)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt80:2" name="formFiltro:j_idt80" type="radio" value="N" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt80&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt80&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt80:2">No Aplica (30513)</label></td></tr></tbody></table>
+                          </div>
+                          
+                          <div class="form-group form-actions text-center"><button id="formFiltro:j_idt84" name="formFiltro:j_idt84" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left btn btn-info btn-xs" onclick="PrimeFaces.bcn(this,event,[function(event){PF('loadingDialog').show();},function(event){PrimeFaces.ab({s:&quot;formFiltro:j_idt84&quot;,f:&quot;formFiltro&quot;,u:&quot;datos formFiltro&quot;,onco:function(xhr,status,args){PF('loadingDialog').hide();;}});return false;}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c fa fa-search"></span><span class="ui-button-text ui-c">Buscar</span></button>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="well well-sm">
+                
+                      <div class="block-content3">
+                        <div class="row">
+                          <div class="col-md-12 form-group">
+                            <label>Departamento</label><a id="formFiltro:j_idt86" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt86&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                              <i class="fa fa-info-circle text-info"></i></a><div id="formFiltro:j_idt88" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control-list" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formFiltro:j_idt88_items" style="min-width: 324px;"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt88_focus" name="formFiltro:j_idt88_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formFiltro:j_idt88_0" aria-describedby="formFiltro:j_idt88_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formFiltro:j_idt88_input" name="formFiltro:j_idt88_input" tabindex="-1" aria-hidden="true" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt88&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt88&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();;},onco:function(xhr,status,args){PF('loadingDialog').hide();;}});"><option value="" selected="selected" data-escape="true">Todos</option><option value="91" data-escape="true">Amazonas</option><option value="5" data-escape="true">Antioquia</option><option value="81" data-escape="true">Arauca</option><option value="88" data-escape="true">Archipiélago de San Andrés, Providencia y Santa Catalina</option><option value="8" data-escape="true">Atlántico</option><option value="11" data-escape="true">Bogotá, D.C.</option><option value="13" data-escape="true">Bolívar</option><option value="15" data-escape="true">Boyacá</option><option value="17" data-escape="true">Caldas</option><option value="18" data-escape="true">Caquetá</option><option value="85" data-escape="true">Casanare</option><option value="19" data-escape="true">Cauca</option><option value="20" data-escape="true">Cesar</option><option value="27" data-escape="true">Chocó</option><option value="23" data-escape="true">Córdoba</option><option value="25" data-escape="true">Cundinamarca</option><option value="94" data-escape="true">Guainía</option><option value="95" data-escape="true">Guaviare</option><option value="41" data-escape="true">Huila</option><option value="44" data-escape="true">La Guajira</option><option value="47" data-escape="true">Magdalena</option><option value="50" data-escape="true">Meta</option><option value="52" data-escape="true">Nariño</option><option value="1" data-escape="true">No aplica</option><option value="54" data-escape="true">Norte de Santander</option><option value="86" data-escape="true">Putumayo</option><option value="63" data-escape="true">Quindío</option><option value="66" data-escape="true">Risaralda</option><option value="68" data-escape="true">Santander</option><option value="0" data-escape="true">Sin información</option><option value="2" data-escape="true">Sin información</option><option value="70" data-escape="true">Sucre</option><option value="73" data-escape="true">Tolima</option><option value="76" data-escape="true">Valle del Cauca</option><option value="97" data-escape="true">Vaupés</option><option value="99" data-escape="true">Vichada</option></select></div><label id="formFiltro:j_idt88_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todos</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+                          </div>
+                        
+                          <div class="col-md-12 form-group">
+                            <label>Municipio</label><a id="formFiltro:j_idt93" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt93&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                              <i class="fa fa-info-circle text-info"></i></a><div id="formFiltro:municipios" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control-list" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formFiltro:municipios_items" style="min-width: 54px;"><div class="ui-helper-hidden-accessible"><input id="formFiltro:municipios_focus" name="formFiltro:municipios_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formFiltro:municipios_0" aria-describedby="formFiltro:municipios_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formFiltro:municipios_input" name="formFiltro:municipios_input" tabindex="-1" aria-hidden="true" onchange="PrimeFaces.ab({s:&quot;formFiltro:municipios&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:municipios&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"><option value="" selected="selected" data-escape="true">Todos</option></select></div><label id="formFiltro:municipios_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todos</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+                          </div>
+                          
+                          <div class="col-md-12 form-group">
+                              <label>Territorio indígena</label><a id="formFiltro:j_idt100" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt100&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                                <i class="fa fa-info-circle text-info"></i></a><table id="formFiltro:j_idt102" role="presentation" class="ui-selectoneradio ui-widget form-control-list"><tbody><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt102:0" name="formFiltro:j_idt102" type="radio" value="" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt102&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt102&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});" checked="checked"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default ui-state-active"><span class="ui-radiobutton-icon ui-icon ui-icon-bullet ui-c"></span></div></div><label for="formFiltro:j_idt102:0">Todos</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt102:1" name="formFiltro:j_idt102" type="radio" value="1" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt102&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt102&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt102:1">Consejo Regional Indígena del Cauca - CRIC (10)</label></td></tr></tbody></table>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                  
+                  <div class="col-md-12">
+                    <div class="well well-sm">
+                      <h4>Nivel académico del programa</h4>
+                      <div class="block-content4">
+                      
+                        <div class="row">
+                          
+                          <div class="col-md-12 form-group">
+                              <label>Nivel Académico</label><a id="formFiltro:j_idt107" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt107&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                                <i class="fa fa-info-circle text-info"></i></a><table id="formFiltro:j_idt109" role="presentation" class="ui-selectoneradio ui-widget form-control-list"><tbody><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt109:0" name="formFiltro:j_idt109" type="radio" value="" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt109&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt109&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});" checked="checked"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default ui-state-active"><span class="ui-radiobutton-icon ui-icon ui-icon-bullet ui-c"></span></div></div><label for="formFiltro:j_idt109:0">Todos</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt109:1" name="formFiltro:j_idt109" type="radio" value="01" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt109&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt109&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt109:1">Pregrado (16712)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt109:2" name="formFiltro:j_idt109" type="radio" value="02" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt109&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt109&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt109:2">Posgrado (14139)</label></td></tr></tbody></table>
+                          </div>
+                          
+                          <div class="col-md-12 form-group">
+                              <label>Nivel de Formación</label><a id="formFiltro:j_idt114" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt114&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                                <i class="fa fa-info-circle text-info"></i></a><table id="formFiltro:j_idt116" role="presentation" class="ui-selectoneradio ui-widget form-control-list"><tbody><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt116:0" name="formFiltro:j_idt116" type="radio" value="" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt116&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt116&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});" checked="checked"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default ui-state-active"><span class="ui-radiobutton-icon ui-icon ui-icon-bullet ui-c"></span></div></div><label for="formFiltro:j_idt116:0">Todos</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt116:1" name="formFiltro:j_idt116" type="radio" value="04" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt116&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt116&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt116:1">Formación técnica profesional (2388)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt116:2" name="formFiltro:j_idt116" type="radio" value="05" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt116&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt116&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt116:2">Tecnológico (5500)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt116:3" name="formFiltro:j_idt116" type="radio" value="06" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt116&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt116&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt116:3">Universitario (8824)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt116:4" name="formFiltro:j_idt116" type="radio" value="011" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt116&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt116&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt116:4">Especialización (0)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt116:5" name="formFiltro:j_idt116" type="radio" value="07" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt116&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt116&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt116:5">Especialización técnico profesional (65)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt116:6" name="formFiltro:j_idt116" type="radio" value="08" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt116&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt116&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt116:6">Especialización tecnológica (576)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt116:7" name="formFiltro:j_idt116" type="radio" value="01" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt116&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt116&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt116:7">Especialización universitaria (8764)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt116:8" name="formFiltro:j_idt116" type="radio" value="010" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt116&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt116&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt116:8">Especialización médico quirúrgica (739)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt116:9" name="formFiltro:j_idt116" type="radio" value="02" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt116&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt116&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt116:9">Maestría (3461)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt116:10" name="formFiltro:j_idt116" type="radio" value="03" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt116&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt116&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt116:10">Doctorado (534)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt116:11" name="formFiltro:j_idt116" type="radio" value="09" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt116&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt116&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt116:11">Posdoctorado (0)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt116:12" name="formFiltro:j_idt116" type="radio" value="00" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt116&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt116&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt116:12">Sin  programa específico (0)</label></td></tr></tbody></table>
+                          </div>
+                          
+                          <div class="col-md-12 form-group">
+                              <label>Modalidad</label><a id="formFiltro:j_idt121" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt121&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                                <i class="fa fa-info-circle text-info"></i></a><table id="formFiltro:j_idt124" role="presentation" class="ui-selectoneradio ui-widget form-control-list"><tbody><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:0" name="formFiltro:j_idt124" type="radio" value="" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});" checked="checked"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default ui-state-active"><span class="ui-radiobutton-icon ui-icon ui-icon-bullet ui-c"></span></div></div><label for="formFiltro:j_idt124:0">Todos</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:1" name="formFiltro:j_idt124" type="radio" value="02" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:1">A distancia (1431)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:2" name="formFiltro:j_idt124" type="radio" value="010" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:2">A distancia-Dual (0)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:3" name="formFiltro:j_idt124" type="radio" value="05" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:3">Dual (15)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:4" name="formFiltro:j_idt124" type="radio" value="017" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:4">Híbrida (A distancia-Virtual) (0)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:5" name="formFiltro:j_idt124" type="radio" value="018" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:5">Híbrida (Dual-Virtual) (0)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:6" name="formFiltro:j_idt124" type="radio" value="016" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:6">Híbrida (Presencial-Virtual) (0)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:7" name="formFiltro:j_idt124" type="radio" value="01" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:7">Presencial (26480)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:8" name="formFiltro:j_idt124" type="radio" value="06" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:8">Presencial-A distancia (4)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:9" name="formFiltro:j_idt124" type="radio" value="013" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:9">Presencial-A distancia-Dual (0)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:10" name="formFiltro:j_idt124" type="radio" value="07" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:10">Presencial-Dual (7)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:11" name="formFiltro:j_idt124" type="radio" value="04" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:11">Presencial-Virtual (307)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:12" name="formFiltro:j_idt124" type="radio" value="011" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:12">Presencial-Virtual-A distancia (0)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:13" name="formFiltro:j_idt124" type="radio" value="015" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:13">Presencial-Virtual-A distancia-Dual (0)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:14" name="formFiltro:j_idt124" type="radio" value="012" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:14">Presencial-Virtual-Dual (0)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:15" name="formFiltro:j_idt124" type="radio" value="00" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:15">Sin Metodología Definida (0)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:16" name="formFiltro:j_idt124" type="radio" value="03" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:16">Virtual (2450)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:17" name="formFiltro:j_idt124" type="radio" value="08" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:17">Virtual-A distancia (10)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:18" name="formFiltro:j_idt124" type="radio" value="014" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:18">Virtual-A distancia-Dual (0)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt124:19" name="formFiltro:j_idt124" type="radio" value="09" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt124&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt124&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt124:19">Virtual-Dual (6)</label></td></tr></tbody></table>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+                
+                <div class="row">
+                  
+                  <div class="col-md-12">
+                  
+                    <div class="well well-sm">
+                    
+                      <h4>Clasificación Internacional Normalizada de Educación – CINE F 2013 AC</h4>
+                      <div class="block-content5">
+                        <div class="row">
+                          
+                          <div class="col-md-12 form-group">
+                              <label>Campo amplio</label><a id="formFiltro:j_idt128" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt128&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                                <i class="fa fa-info-circle text-info"></i></a><div id="formFiltro:j_idt130" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control-list" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formFiltro:j_idt130_items" style="min-width: 307px;"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt130_focus" name="formFiltro:j_idt130_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formFiltro:j_idt130_0" aria-describedby="formFiltro:j_idt130_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formFiltro:j_idt130_input" name="formFiltro:j_idt130_input" tabindex="-1" aria-hidden="true" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt130&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt130&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();;},onco:function(xhr,status,args){PF('loadingDialog').hide();;}});"><option value="" selected="selected" data-escape="true">Todos</option><option value="4" data-escape="true">Administración de Empresas y Derecho</option><option value="8" data-escape="true">Agropecuario, Silvicultura, Pesca y Veterinaria</option><option value="2" data-escape="true">Arte y Humanidades</option><option value="5" data-escape="true">Ciencias Naturales, Matemáticas y Estadística</option><option value="3" data-escape="true">Ciencias Sociales, Periodismo e Información</option><option value="1" data-escape="true">Educación</option><option value="7" data-escape="true">Ingeniería, Industria y Construcción</option><option value="0" data-escape="true">Programas y certificaciones genéricos</option><option value="9" data-escape="true">Salud y Bienestar</option><option value="10" data-escape="true">Servicios</option><option value="99" data-escape="true">Sin información</option><option value="6" data-escape="true">Tecnologías de la Información y la Comunicación (TIC)</option></select></div><label id="formFiltro:j_idt130_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todos</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+                          </div>
+                          
+                          <div class="col-md-12 form-group">
+                              <label>Campo específico</label><a id="formFiltro:j_idt134" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt134&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                                <i class="fa fa-info-circle text-info"></i></a><div id="formFiltro:campoEspecifico" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control-list" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formFiltro:campoEspecifico_items" style="min-width: 54px;"><div class="ui-helper-hidden-accessible"><input id="formFiltro:campoEspecifico_focus" name="formFiltro:campoEspecifico_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formFiltro:campoEspecifico_0" aria-describedby="formFiltro:campoEspecifico_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formFiltro:campoEspecifico_input" name="formFiltro:campoEspecifico_input" tabindex="-1" aria-hidden="true" onchange="PrimeFaces.ab({s:&quot;formFiltro:campoEspecifico&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:campoEspecifico&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();;},onco:function(xhr,status,args){PF('loadingDialog').hide();;}});"><option value="" selected="selected" data-escape="true">Todos</option></select></div><label id="formFiltro:campoEspecifico_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todos</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+                          </div>
+                          
+                          <div class="col-md-12 form-group">
+                              <label>Campo detallado</label><a id="formFiltro:j_idt139" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt139&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                                <i class="fa fa-info-circle text-info"></i></a><div id="formFiltro:campoDetallado" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control-list" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formFiltro:campoDetallado_items" style="min-width: 54px;"><div class="ui-helper-hidden-accessible"><input id="formFiltro:campoDetallado_focus" name="formFiltro:campoDetallado_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formFiltro:campoDetallado_0" aria-describedby="formFiltro:campoDetallado_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formFiltro:campoDetallado_input" name="formFiltro:campoDetallado_input" tabindex="-1" aria-hidden="true" onchange="PrimeFaces.ab({s:&quot;formFiltro:campoDetallado&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:campoDetallado&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"><option value="" selected="selected" data-escape="true">Todos</option></select></div><label id="formFiltro:campoDetallado_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todos</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    
+                    </div>
+                    
+                  </div>
+                
+                  <div class="col-md-12">
+                    <div class="well well-sm">
+                      <h4>Programas por vigencia</h4>
+                      <div class="block-content5">
+                      <div class="row">
+                        
+                        <div class="col-md-12 form-group">
+                            <label>Año <small>(Seleccionar año a partir de 2018 y en adelante)</small></label><a id="formFiltro:j_idt146" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt146&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                              <i class="fa fa-info-circle text-info"></i></a><div id="formFiltro:j_idt148" class="ui-selectonemenu ui-widget ui-state-default ui-corner-all form-control-list" role="combobox" aria-haspopup="true" aria-expanded="false" aria-owns="formFiltro:j_idt148_items" style="min-width: 54px;"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt148_focus" name="formFiltro:j_idt148_focus" type="text" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="formFiltro:j_idt148_0" aria-describedby="formFiltro:j_idt148_0" aria-disabled="false"></div><div class="ui-helper-hidden-accessible"><select id="formFiltro:j_idt148_input" name="formFiltro:j_idt148_input" tabindex="-1" aria-hidden="true" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt148&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt148&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"><option value="" selected="selected" data-escape="true">Todos</option><option value="2018" data-escape="true">2018</option><option value="2019" data-escape="true">2019</option><option value="2020" data-escape="true">2020</option><option value="2021" data-escape="true">2021</option><option value="2022" data-escape="true">2022</option><option value="2023" data-escape="true">2023</option><option value="2024" data-escape="true">2024</option><option value="2025" data-escape="true">2025</option><option value="2026" data-escape="true">2026</option></select></div><label id="formFiltro:j_idt148_label" class="ui-selectonemenu-label ui-inputfield ui-corner-all">Todos</label><div class="ui-selectonemenu-trigger ui-state-default ui-corner-right"><span class="ui-icon ui-icon-triangle-1-s ui-c"></span></div></div>
+                        </div>
+                        
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                  
+                    <div class="well well-sm">
+                      <h4>Programas por rango de valor de matricula</h4>
+                      <div class="block-content6">
+                      <div class="row">
+                        
+                        <div class="col-md-12 form-group">
+                            <label>Valor de matrícula</label><a id="formFiltro:j_idt152" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt152&quot;,f:&quot;formFiltro&quot;,u:&quot;ayudaContent&quot;,onco:function(xhr,status,args){PF('infoAyuda').show();;}});return false;">
+                              <i class="fa fa-info-circle text-info"></i></a><table id="formFiltro:j_idt154" role="presentation" class="ui-selectoneradio ui-widget form-control-list"><tbody><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt154:0" name="formFiltro:j_idt154" type="radio" value="" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt154&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt154&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});" checked="checked"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default ui-state-active"><span class="ui-radiobutton-icon ui-icon ui-icon-bullet ui-c"></span></div></div><label for="formFiltro:j_idt154:0">Todos</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt154:1" name="formFiltro:j_idt154" type="radio" value="1" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt154&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt154&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt154:1">a. 0  a 1000000 (659)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt154:2" name="formFiltro:j_idt154" type="radio" value="2" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt154&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt154&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt154:2">b. 1000001  a  3000000 (1782)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt154:3" name="formFiltro:j_idt154" type="radio" value="3" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt154&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt154&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt154:3">c. 3000001  a  5000000 (2052)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt154:4" name="formFiltro:j_idt154" type="radio" value="4" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt154&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt154&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt154:4">d. 5000001  a  7000000 (1868)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt154:5" name="formFiltro:j_idt154" type="radio" value="5" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt154&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt154&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt154:5">e. 7000001  a  9000000 (1701)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt154:6" name="formFiltro:j_idt154" type="radio" value="6" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt154&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt154&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt154:6">f. 9000001  a  11000000 (1308)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt154:7" name="formFiltro:j_idt154" type="radio" value="7" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt154&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt154&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt154:7">g. 11000001  a  13000000 (602)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt154:8" name="formFiltro:j_idt154" type="radio" value="8" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt154&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt154&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt154:8">h. 12000001  a  15000000 (510)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt154:9" name="formFiltro:j_idt154" type="radio" value="9" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt154&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt154&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt154:9">i. Más de 15000000 (1876)</label></td></tr><tr><td><div class="ui-radiobutton ui-widget"><div class="ui-helper-hidden-accessible"><input id="formFiltro:j_idt154:10" name="formFiltro:j_idt154" type="radio" value="0" onchange="PrimeFaces.ab({s:&quot;formFiltro:j_idt154&quot;,e:&quot;valueChange&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt154&quot;,u:&quot;datos formFiltro&quot;,onst:function(cfg){PF('loadingDialog').show();},onco:function(xhr,status,args){PF('loadingDialog').hide();}});"></div><div class="ui-radiobutton-box ui-widget ui-corner-all ui-state-default"><span class="ui-radiobutton-icon ui-icon ui-icon-blank ui-c"></span></div></div><label for="formFiltro:j_idt154:10">j. Sin información (0)</label></td></tr></tbody></table>
+                        </div>
+                        
+                      </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+                
+              </div>
+              
+            </div>
+          
+             
+            <div class="row"> 
+              <div class="col-md-12 text-center">
+                <div class="form-group form-actions"><button id="formFiltro:j_idt162" name="formFiltro:j_idt162" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left btn btn-info btn-xs" onclick="PrimeFaces.bcn(this,event,[function(event){PF('loadingDialog').show();},function(event){PrimeFaces.ab({s:&quot;formFiltro:j_idt162&quot;,f:&quot;formFiltro&quot;,u:&quot;datos formFiltro&quot;,onco:function(xhr,status,args){PF('loadingDialog').hide();;}});return false;}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c fa fa-search"></span><span class="ui-button-text ui-c">Buscar</span></button><button id="formFiltro:j_idt163" name="formFiltro:j_idt163" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left btn btn-warning btn-xs" onclick="PrimeFaces.ab({s:&quot;formFiltro:j_idt163&quot;,f:&quot;formFiltro&quot;,p:&quot;formFiltro:j_idt163&quot;,u:&quot;formFiltro datos&quot;});return false;" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c fa fa-close"></span><span class="ui-button-text ui-c">Limpiar</span></button>
+ 
+                </div>
+              </div>   
+            </div><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:0" value="-3997492385320278379:-3711531057452097087" autocomplete="off">
+</form>
+          
+        </div>
+      </div>
+      
+      <div class="col-md-9"><div id="datos"><div class="block full">
+<form id="j_idt169" name="j_idt169" method="post" action="/consultaspublicas/programas;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt169" value="j_idt169">
+
+                <div class="btn-toolbar pull-left"><button id="j_idt169:j_idt171" name="j_idt169:j_idt171" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left btn btn-success btn-xs" onclick="PrimeFaces.bcn(this,event,[function(event){PrimeFaces.monitorDownload(start, stop);},function(event){}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-icon-left ui-icon ui-c fa fa-cloud-download"></span><span class="ui-button-text ui-c">Descargar programas</span></button>
+                </div><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:1" value="-3997492385320278379:-3711531057452097087" autocomplete="off">
+</form>
+              
+              <div class="pull-right text-right text-primary">Visualizando: <b>200</b> - Total Programas: <b>30.851</b></div>
+              <div class="clearfix"></div>
+              <hr>
+              
+              <div class="table-responsive">
+                <div id="programasTab_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="programasTab_length"><label>Mostrar <select name="programasTab_length" aria-controls="programasTab" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> registros</label></div></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="programasTab" class="table table-striped table-bordered table-condensed dataTable no-footer">
+                  <thead style="background-color: #848482; color: #ffffff;">
+                    <tr><th class="text-center sorting sorting_asc" tabindex="0" aria-controls="programasTab" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Nombre IES: organizar descendente" style="width: 84.4531px;">Nombre IES</th><th class="text-center sorting" tabindex="0" aria-controls="programasTab" rowspan="1" colspan="1" aria-label="Código IES: organizar ascendente" style="width: 41.3281px;">Código IES</th><th class="text-center sorting" tabindex="0" aria-controls="programasTab" rowspan="1" colspan="1" aria-label="IES padre: organizar ascendente" style="width: 32.6719px;">IES padre</th><th class="text-center sorting" tabindex="0" aria-controls="programasTab" rowspan="1" colspan="1" aria-label="Registro único: organizar ascendente" style="width: 48.6875px;">Registro único</th><th class="text-center sorting" tabindex="0" aria-controls="programasTab" rowspan="1" colspan="1" aria-label="Código SNIES programa: organizar ascendente" style="width: 55.3594px;">Código SNIES programa</th><th class="text-center sorting" tabindex="0" aria-controls="programasTab" rowspan="1" colspan="1" aria-label="Nombre programa: organizar ascendente" style="width: 127.859px;">Nombre programa</th><th class="text-center sorting" tabindex="0" aria-controls="programasTab" rowspan="1" colspan="1" aria-label="Estado programa: organizar ascendente" style="width: 55.3594px;">Estado programa</th><th class="text-center sorting" tabindex="0" aria-controls="programasTab" rowspan="1" colspan="1" aria-label="Nivel académico: organizar ascendente" style="width: 62.0469px;">Nivel académico</th><th class="text-center sorting" tabindex="0" aria-controls="programasTab" rowspan="1" colspan="1" aria-label="Modalidad: organizar ascendente" style="width: 59.3438px;">Modalidad</th><th class="text-center sorting" tabindex="0" aria-controls="programasTab" rowspan="1" colspan="1" aria-label="Reconocimiento del Ministerio: organizar ascendente" style="width: 93.3594px;">Reconocimiento del Ministerio</th></tr>
+                  </thead>
+                  <tbody style="font-size: 0.85em;">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                <tr class="odd">
+                      <td class="sorting_1">COLEGIO DE ESTUDIOS SUPERIORES DE ADMINISTRACION-CESA- </td>
+                      <td class="text-right">2704 </td>
+                      <td class="text-right">2704 </td>
+                      <td class=""> </td>
+                      <td class="text-right">
+<form id="j_idt177:177:j_idt189" name="j_idt177:177:j_idt189" method="post" action="/consultaspublicas/programas;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt177:177:j_idt189" value="j_idt177:177:j_idt189">
+<a id="j_idt177:177:j_idt189:j_idt190" href="#" class="ui-commandlink ui-widget" aria-label="Consultar" onclick="PF('loadingDialog').show();;PrimeFaces.addSubmitParam('j_idt177:177:j_idt189',{'j_idt177:177:j_idt189:j_idt190':'j_idt177:177:j_idt189:j_idt190'}).submit('j_idt177:177:j_idt189');return false;" title="Consultar">
+                              <i class="btn btn-info btn-xs fa fa-search pull-left"></i></a>91265<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:179" value="-3997492385320278379:-3711531057452097087" autocomplete="off">
+</form>
+                      </td>
+                      <td>MAESTRIA EN FINANZAS CORPORATIVAS </td>
+                      <td class="text-center"><span class="">Activo</span>  
+                      </td>
+                      <td>Posgrado </td>
+                      <td>Presencial </td>
+                      <td>Acreditación de alta calidad </td>
+                    </tr><tr class="even">
+                      <td class="sorting_1">COLEGIO MAYOR DE NUESTRA SEÑORA DEL ROSARIO </td>
+                      <td class="text-right">1714 </td>
+                      <td class="text-right">1714 </td>
+                      <td class=""> </td>
+                      <td class="text-right">
+<form id="j_idt177:19:j_idt189" name="j_idt177:19:j_idt189" method="post" action="/consultaspublicas/programas;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt177:19:j_idt189" value="j_idt177:19:j_idt189">
+<a id="j_idt177:19:j_idt189:j_idt190" href="#" class="ui-commandlink ui-widget" aria-label="Consultar" onclick="PF('loadingDialog').show();;PrimeFaces.addSubmitParam('j_idt177:19:j_idt189',{'j_idt177:19:j_idt189:j_idt190':'j_idt177:19:j_idt189:j_idt190'}).submit('j_idt177:19:j_idt189');return false;" title="Consultar">
+                              <i class="btn btn-info btn-xs fa fa-search pull-left"></i></a>16130<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:21" value="-3997492385320278379:-3711531057452097087" autocomplete="off">
+</form>
+                      </td>
+                      <td>ESPECIALIZACION EN MEDICINA MATERNO FETAL </td>
+                      <td class="text-center"><span class="">Activo</span>  
+                      </td>
+                      <td>Posgrado </td>
+                      <td>Presencial </td>
+                      <td>Registro calificado </td>
+                    </tr><tr class="odd">
+                      <td class="sorting_1">COLEGIO MAYOR DE NUESTRA SEÑORA DEL ROSARIO </td>
+                      <td class="text-right">1714 </td>
+                      <td class="text-right">1714 </td>
+                      <td class=""> </td>
+                      <td class="text-right">
+<form id="j_idt177:20:j_idt189" name="j_idt177:20:j_idt189" method="post" action="/consultaspublicas/programas;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt177:20:j_idt189" value="j_idt177:20:j_idt189">
+<a id="j_idt177:20:j_idt189:j_idt190" href="#" class="ui-commandlink ui-widget" aria-label="Consultar" onclick="PF('loadingDialog').show();;PrimeFaces.addSubmitParam('j_idt177:20:j_idt189',{'j_idt177:20:j_idt189:j_idt190':'j_idt177:20:j_idt189:j_idt190'}).submit('j_idt177:20:j_idt189');return false;" title="Consultar">
+                              <i class="btn btn-info btn-xs fa fa-search pull-left"></i></a>1305<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:22" value="-3997492385320278379:-3711531057452097087" autocomplete="off">
+</form>
+                      </td>
+                      <td>ESPECIALIZACION EN GINECOLOGIA Y OBSTETRICIA </td>
+                      <td class="text-center"><span class="">Activo</span>  
+                      </td>
+                      <td>Posgrado </td>
+                      <td>Presencial </td>
+                      <td>Acreditación de alta calidad </td>
+                    </tr><tr class="even">
+                      <td class="sorting_1">COLEGIO MAYOR DE NUESTRA SEÑORA DEL ROSARIO </td>
+                      <td class="text-right">1714 </td>
+                      <td class="text-right">1714 </td>
+                      <td class=""> </td>
+                      <td class="text-right">
+<form id="j_idt177:21:j_idt189" name="j_idt177:21:j_idt189" method="post" action="/consultaspublicas/programas;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt177:21:j_idt189" value="j_idt177:21:j_idt189">
+<a id="j_idt177:21:j_idt189:j_idt190" href="#" class="ui-commandlink ui-widget" aria-label="Consultar" onclick="PF('loadingDialog').show();;PrimeFaces.addSubmitParam('j_idt177:21:j_idt189',{'j_idt177:21:j_idt189:j_idt190':'j_idt177:21:j_idt189:j_idt190'}).submit('j_idt177:21:j_idt189');return false;" title="Consultar">
+                              <i class="btn btn-info btn-xs fa fa-search pull-left"></i></a>1302<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:23" value="-3997492385320278379:-3711531057452097087" autocomplete="off">
+</form>
+                      </td>
+                      <td>ESPECIALIZACION EN CARDIOLOGIA </td>
+                      <td class="text-center"><span class="">Activo</span>  
+                      </td>
+                      <td>Posgrado </td>
+                      <td>Presencial </td>
+                      <td>Registro calificado </td>
+                    </tr><tr class="odd">
+                      <td class="sorting_1">COLEGIO MAYOR DE NUESTRA SEÑORA DEL ROSARIO </td>
+                      <td class="text-right">1714 </td>
+                      <td class="text-right">1714 </td>
+                      <td class=""> </td>
+                      <td class="text-right">
+<form id="j_idt177:22:j_idt189" name="j_idt177:22:j_idt189" method="post" action="/consultaspublicas/programas;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt177:22:j_idt189" value="j_idt177:22:j_idt189">
+<a id="j_idt177:22:j_idt189:j_idt190" href="#" class="ui-commandlink ui-widget" aria-label="Consultar" onclick="PF('loadingDialog').show();;PrimeFaces.addSubmitParam('j_idt177:22:j_idt189',{'j_idt177:22:j_idt189:j_idt190':'j_idt177:22:j_idt189:j_idt190'}).submit('j_idt177:22:j_idt189');return false;" title="Consultar">
+                              <i class="btn btn-info btn-xs fa fa-search pull-left"></i></a>1319<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:24" value="-3997492385320278379:-3711531057452097087" autocomplete="off">
+</form>
+                      </td>
+                      <td>ESPECIALIZACION EN ENDOCRINOLOGIA </td>
+                      <td class="text-center"><span class="">Activo</span>  
+                      </td>
+                      <td>Posgrado </td>
+                      <td>Presencial </td>
+                      <td>Registro calificado </td>
+                    </tr><tr class="even">
+                      <td class="sorting_1">COLEGIO MAYOR DE NUESTRA SEÑORA DEL ROSARIO </td>
+                      <td class="text-right">1714 </td>
+                      <td class="text-right">1714 </td>
+                      <td class=""> </td>
+                      <td class="text-right">
+<form id="j_idt177:23:j_idt189" name="j_idt177:23:j_idt189" method="post" action="/consultaspublicas/programas;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt177:23:j_idt189" value="j_idt177:23:j_idt189">
+<a id="j_idt177:23:j_idt189:j_idt190" href="#" class="ui-commandlink ui-widget" aria-label="Consultar" onclick="PF('loadingDialog').show();;PrimeFaces.addSubmitParam('j_idt177:23:j_idt189',{'j_idt177:23:j_idt189:j_idt190':'j_idt177:23:j_idt189:j_idt190'}).submit('j_idt177:23:j_idt189');return false;" title="Consultar">
+                              <i class="btn btn-info btn-xs fa fa-search pull-left"></i></a>54054<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:25" value="-3997492385320278379:-3711531057452097087" autocomplete="off">
+</form>
+                      </td>
+                      <td>ESPECIALIZACIÓN EN CIRUGÍA VASCULAR PERIFÉRICA </td>
+                      <td class="text-center"><span class="">Activo</span>  
+                      </td>
+                      <td>Posgrado </td>
+                      <td>Presencial </td>
+                      <td>Registro calificado </td>
+                    </tr><tr class="odd">
+                      <td class="sorting_1">COLEGIO MAYOR DE NUESTRA SEÑORA DEL ROSARIO </td>
+                      <td class="text-right">1714 </td>
+                      <td class="text-right">1714 </td>
+                      <td class=""> </td>
+                      <td class="text-right">
+<form id="j_idt177:24:j_idt189" name="j_idt177:24:j_idt189" method="post" action="/consultaspublicas/programas;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt177:24:j_idt189" value="j_idt177:24:j_idt189">
+<a id="j_idt177:24:j_idt189:j_idt190" href="#" class="ui-commandlink ui-widget" aria-label="Consultar" onclick="PF('loadingDialog').show();;PrimeFaces.addSubmitParam('j_idt177:24:j_idt189',{'j_idt177:24:j_idt189:j_idt190':'j_idt177:24:j_idt189:j_idt190'}).submit('j_idt177:24:j_idt189');return false;" title="Consultar">
+                              <i class="btn btn-info btn-xs fa fa-search pull-left"></i></a>1313<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:26" value="-3997492385320278379:-3711531057452097087" autocomplete="off">
+</form>
+                      </td>
+                      <td>ESPECIALIZACION EN OTORRINOLARINGOLOGIA </td>
+                      <td class="text-center"><span class="">Activo</span>  
+                      </td>
+                      <td>Posgrado </td>
+                      <td>Presencial </td>
+                      <td>Registro calificado </td>
+                    </tr><tr class="even">
+                      <td class="sorting_1">COLEGIO MAYOR DE NUESTRA SEÑORA DEL ROSARIO </td>
+                      <td class="text-right">1714 </td>
+                      <td class="text-right">1714 </td>
+                      <td class=""> </td>
+                      <td class="text-right">
+<form id="j_idt177:25:j_idt189" name="j_idt177:25:j_idt189" method="post" action="/consultaspublicas/programas;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt177:25:j_idt189" value="j_idt177:25:j_idt189">
+<a id="j_idt177:25:j_idt189:j_idt190" href="#" class="ui-commandlink ui-widget" aria-label="Consultar" onclick="PF('loadingDialog').show();;PrimeFaces.addSubmitParam('j_idt177:25:j_idt189',{'j_idt177:25:j_idt189:j_idt190':'j_idt177:25:j_idt189:j_idt190'}).submit('j_idt177:25:j_idt189');return false;" title="Consultar">
+                              <i class="btn btn-info btn-xs fa fa-search pull-left"></i></a>6569<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:27" value="-3997492385320278379:-3711531057452097087" autocomplete="off">
+</form>
+                      </td>
+                      <td>ESPECIALIZACION EN CARDIOLOGIA PEDIATRICA </td>
+                      <td class="text-center"><span class="">Activo</span>  
+                      </td>
+                      <td>Posgrado </td>
+                      <td>Presencial </td>
+                      <td>Registro calificado </td>
+                    </tr><tr class="odd">
+                      <td class="sorting_1">COLEGIO MAYOR DE NUESTRA SEÑORA DEL ROSARIO </td>
+                      <td class="text-right">1714 </td>
+                      <td class="text-right">1714 </td>
+                      <td class=""> </td>
+                      <td class="text-right">
+<form id="j_idt177:32:j_idt189" name="j_idt177:32:j_idt189" method="post" action="/consultaspublicas/programas;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt177:32:j_idt189" value="j_idt177:32:j_idt189">
+<a id="j_idt177:32:j_idt189:j_idt190" href="#" class="ui-commandlink ui-widget" aria-label="Consultar" onclick="PF('loadingDialog').show();;PrimeFaces.addSubmitParam('j_idt177:32:j_idt189',{'j_idt177:32:j_idt189:j_idt190':'j_idt177:32:j_idt189:j_idt190'}).submit('j_idt177:32:j_idt189');return false;" title="Consultar">
+                              <i class="btn btn-info btn-xs fa fa-search pull-left"></i></a>108360<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:34" value="-3997492385320278379:-3711531057452097087" autocomplete="off">
+</form>
+                      </td>
+                      <td>DOCTORADO EN INVESTIGACIÓN CLÍNICA </td>
+                      <td class="text-center"><span class="">Activo</span>  
+                      </td>
+                      <td>Posgrado </td>
+                      <td>Presencial </td>
+                      <td>Registro calificado </td>
+                    </tr><tr class="even">
+                      <td class="sorting_1">COLEGIO MAYOR DE NUESTRA SEÑORA DEL ROSARIO </td>
+                      <td class="text-right">1714 </td>
+                      <td class="text-right">1714 </td>
+                      <td class=""> </td>
+                      <td class="text-right">
+<form id="j_idt177:75:j_idt189" name="j_idt177:75:j_idt189" method="post" action="/consultaspublicas/programas;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt177:75:j_idt189" value="j_idt177:75:j_idt189">
+<a id="j_idt177:75:j_idt189:j_idt190" href="#" class="ui-commandlink ui-widget" aria-label="Consultar" onclick="PF('loadingDialog').show();;PrimeFaces.addSubmitParam('j_idt177:75:j_idt189',{'j_idt177:75:j_idt189:j_idt190':'j_idt177:75:j_idt189:j_idt190'}).submit('j_idt177:75:j_idt189');return false;" title="Consultar">
+                              <i class="btn btn-info btn-xs fa fa-search pull-left"></i></a>1312<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:77" value="-3997492385320278379:-3711531057452097087" autocomplete="off">
+</form>
+                      </td>
+                      <td>ESPECIALIZACION EN ORTOPEDIA Y TRAUMATOLOGIA </td>
+                      <td class="text-center"><span class="">Activo</span>  
+                      </td>
+                      <td>Posgrado </td>
+                      <td>Presencial </td>
+                      <td>Registro calificado </td>
+                    </tr></tbody>
+              </table></div></div><div class="row"><div class="col-sm-5"></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="programasTab_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="programasTab_previous"><a href="#" aria-controls="programasTab" data-dt-idx="0" tabindex="0">Anterior</a></li><li class="paginate_button active"><a href="#" aria-controls="programasTab" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="programasTab" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="programasTab" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="programasTab" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="programasTab" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button disabled" id="programasTab_ellipsis"><a href="#" aria-controls="programasTab" data-dt-idx="6" tabindex="0">…</a></li><li class="paginate_button "><a href="#" aria-controls="programasTab" data-dt-idx="7" tabindex="0">20</a></li><li class="paginate_button next" id="programasTab_next"><a href="#" aria-controls="programasTab" data-dt-idx="8" tabindex="0">Siguiente</a></li></ul></div></div></div></div>
+            </div>
+            
+            <div class="block">
+	            <h5><b>NOTA: </b> La información del presente reporte corresponde a los datos de caracterización del registro calificado del programa académico de educación superior que administra la Subdirección de Aseguramiento de la Calidad de la Educación Superior a través del sistema SACES (Soporte al Aseguramiento de la Calidad de la Educación Superior).</h5>
+	        </div>
+            
+            <script>
+            if (table){
+            	table.clear();
+            
+              table = $('#programasTab').DataTable({
+                "paging":   true,
+                "ordering": true,
+                "info":     false,
+                "searching": false,
+                "lengthChange": true,
+                "pageLength": 10,
+                "language": {
+                  "emptyTable":     "No encontramos información",
+                  "info":           "Mostrando _START_ a _END_ de _TOTAL_",
+                  "infoEmpty":      "Mostrando 0 - 0 de 0",
+                  "infoFiltered":   "(filtrado de _MAX_)",
+                  "infoPostFix":    "",
+                  "lengthMenu":     "Mostrar _MENU_ registros",
+                  "loadingRecords": "Cargando...",
+                  "processing":     "Procesando...",
+                  "search":         "Buscar:",
+                  "zeroRecords":    "No se encontraron resultados",
+                  "paginate": {
+                    "first":      "Primero",
+                    "last":       "Último",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                  },
+                  "aria": {
+                    "sortAscending":  ": organizar ascendente",
+                    "sortDescending": ": organizar descendente"
+                  }
+                }
+              });
+            }
+            </script></div></div>
+      </div>
+      
+    </div><div id="j_idt207" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container ui-draggable ui-resizable" role="dialog" aria-labelledby="j_idt207_title" aria-describedby="j_idt207_content" aria-hidden="true" aria-modal="true" style="width: 500px; height: auto;"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top ui-draggable-handle"><span id="j_idt207_title" class="ui-dialog-title">Información</span><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Close" role="button"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" id="j_idt207_content" style="height: auto;"><div id="ayudaContent">
+        <p>
+        </p>
+        
+        <div class="text-center">
+          <button type="submit" class="btn btn-sm btn-default" onclick="PF('infoAyuda').hide();"><i class="fa fa-close"></i> Cerrar</button>
+        </div></div></div><div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div></div>
+    
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.js"></script>
+    <script type="text/javascript">
+    //<![CDATA[
+
+    $(document).ready(function() {
+    	table = $('#programasTab').DataTable({
+          "paging":   true,
+          "ordering": true,
+          "info":     false,
+          "searching": false,
+          "lengthChange": true,
+          "pageLength": 10,
+          "language": {
+            "emptyTable":     "No encontramos información",
+            "info":           "Mostrando _START_ a _END_ de _TOTAL_",
+            "infoEmpty":      "Mostrando 0 - 0 de 0",
+            "infoFiltered":   "(filtrado de _MAX_)",
+            "infoPostFix":    "",
+            "lengthMenu":     "Mostrar _MENU_ registros",
+            "loadingRecords": "Cargando...",
+            "processing":     "Procesando...",
+            "search":         "Buscar:",
+            "zeroRecords":    "No se encontraron resultados",
+            "paginate": {
+              "first":      "Primero",
+              "last":       "Último",
+              "next":       "Siguiente",
+              "previous":   "Anterior"
+            },
+            "aria": {
+              "sortAscending":  ": organizar ascendente",
+              "sortDescending": ": organizar descendente"
+            }
+          }
+        });
+    } );
+    //]]>
+    </script>
+
+				</div>
+
+        <footer class="clearfix">
+          <div class="pull-right">
+            <a href="https://www.mineducacion.gov.co/sistemasinfo/snies/" target="_blank" class="text-danger">SNIES</a> - <a href="http://www.sofinser.com/hecaa.html" target="_blank">HECAA</a>
+          </div>
+          <div class="pull-left">
+            <span id="year-copy">2014-26</span> © Sofinser, Licenciado para M.E.N |
+            <span>  hecaa01  </span> |
+            <span>V 5.01 (.003_25053014)</span>
+          </div>
+        </footer>
+			</div>
+		</div>
+	</div>
+	
+	
+  <!-- Timeout de 1 hora = 3600 segundos, debe ser menor al session-timeout en web.xml  -->
+<form id="sessionIdle" name="sessionIdle" method="post" action="/consultaspublicas/programas;jsessionid=PiY6uNmEQdDy4-f6Q4VwDsylIJ4ZhLbKF-mR6i-s.m1aphecaa01" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="sessionIdle" value="sessionIdle">
+<div id="sessionIdle:confirmDialogIdl" class="ui-confirm-dialog ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container" role="dialog" aria-labelledby="sessionIdle:confirmDialogIdl_title" aria-describedby="sessionIdle:confirmDialogIdl_content" aria-hidden="true" aria-modal="true" style="width: auto; height: auto;"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="sessionIdle:confirmDialogIdl_title" class="ui-dialog-title">Información</span></div><div class="ui-dialog-content ui-widget-content" id="sessionIdle:confirmDialogIdl_content" style="height: auto;"><span class="ui-icon ui-icon-alert ui-confirm-dialog-severity"></span><span class="ui-confirm-dialog-message">La sesión se ha cerrado por inactividad</span></div><div class="ui-dialog-buttonpane ui-dialog-footer ui-widget-content ui-helper-clearfix"><button id="sessionIdle:confirm" name="sessionIdle:confirm" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btn btn-xs btn-info" onclick="" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Recargar</span></button></div></div><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:202" value="-3997492385320278379:-3711531057452097087" autocomplete="off">
+</form>
+	
+  <script src="/consultaspublicas/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/consultaspublicas/resources/js/admin/maps.js"></script>
+  <script src="/consultaspublicas/resources/js/admin/app.js"></script>  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  
+    ga('create', '???analytics.index.id???', 'auto');
+    ga('send', 'pageview');
+  
+  </script>
+<div id="textarea_simulator" style="position: absolute; top: 0px; left: 0px; visibility: hidden;"></div><div class="ui-dialog-docking-zone"></div><div id="formFiltro:j_idt88_panel" class="ui-selectonemenu-panel ui-widget ui-widget-content ui-corner-all ui-helper-hidden ui-shadow ui-input-overlay"><div class="ui-selectonemenu-items-wrapper" style="max-height:200px"><ul id="formFiltro:j_idt88_items" class="ui-selectonemenu-items ui-selectonemenu-list ui-widget-content ui-widget ui-corner-all ui-helper-reset" role="listbox" aria-activedescendant="formFiltro:j_idt88_0"><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all ui-state-highlight" data-label="Todos" tabindex="-1" role="option" id="formFiltro:j_idt88_0">Todos</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Amazonas" tabindex="-1" role="option" id="formFiltro:j_idt88_1">Amazonas</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Antioquia" tabindex="-1" role="option" id="formFiltro:j_idt88_2">Antioquia</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Arauca" tabindex="-1" role="option" id="formFiltro:j_idt88_3">Arauca</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Archipiélago de San Andrés, Providencia y Santa Catalina" tabindex="-1" role="option" id="formFiltro:j_idt88_4">Archipiélago de San Andrés, Providencia y Santa Catalina</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Atlántico" tabindex="-1" role="option" id="formFiltro:j_idt88_5">Atlántico</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Bogotá, D.C." tabindex="-1" role="option" id="formFiltro:j_idt88_6">Bogotá, D.C.</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Bolívar" tabindex="-1" role="option" id="formFiltro:j_idt88_7">Bolívar</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Boyacá" tabindex="-1" role="option" id="formFiltro:j_idt88_8">Boyacá</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Caldas" tabindex="-1" role="option" id="formFiltro:j_idt88_9">Caldas</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Caquetá" tabindex="-1" role="option" id="formFiltro:j_idt88_10">Caquetá</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Casanare" tabindex="-1" role="option" id="formFiltro:j_idt88_11">Casanare</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Cauca" tabindex="-1" role="option" id="formFiltro:j_idt88_12">Cauca</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Cesar" tabindex="-1" role="option" id="formFiltro:j_idt88_13">Cesar</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Chocó" tabindex="-1" role="option" id="formFiltro:j_idt88_14">Chocó</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Córdoba" tabindex="-1" role="option" id="formFiltro:j_idt88_15">Córdoba</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Cundinamarca" tabindex="-1" role="option" id="formFiltro:j_idt88_16">Cundinamarca</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Guainía" tabindex="-1" role="option" id="formFiltro:j_idt88_17">Guainía</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Guaviare" tabindex="-1" role="option" id="formFiltro:j_idt88_18">Guaviare</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Huila" tabindex="-1" role="option" id="formFiltro:j_idt88_19">Huila</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="La Guajira" tabindex="-1" role="option" id="formFiltro:j_idt88_20">La Guajira</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Magdalena" tabindex="-1" role="option" id="formFiltro:j_idt88_21">Magdalena</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Meta" tabindex="-1" role="option" id="formFiltro:j_idt88_22">Meta</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Nariño" tabindex="-1" role="option" id="formFiltro:j_idt88_23">Nariño</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="No aplica" tabindex="-1" role="option" id="formFiltro:j_idt88_24">No aplica</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Norte de Santander" tabindex="-1" role="option" id="formFiltro:j_idt88_25">Norte de Santander</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Putumayo" tabindex="-1" role="option" id="formFiltro:j_idt88_26">Putumayo</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Quindío" tabindex="-1" role="option" id="formFiltro:j_idt88_27">Quindío</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Risaralda" tabindex="-1" role="option" id="formFiltro:j_idt88_28">Risaralda</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Santander" tabindex="-1" role="option" id="formFiltro:j_idt88_29">Santander</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Sin información" tabindex="-1" role="option" id="formFiltro:j_idt88_30">Sin información</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Sin información" tabindex="-1" role="option" id="formFiltro:j_idt88_31">Sin información</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Sucre" tabindex="-1" role="option" id="formFiltro:j_idt88_32">Sucre</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Tolima" tabindex="-1" role="option" id="formFiltro:j_idt88_33">Tolima</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Valle del Cauca" tabindex="-1" role="option" id="formFiltro:j_idt88_34">Valle del Cauca</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Vaupés" tabindex="-1" role="option" id="formFiltro:j_idt88_35">Vaupés</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Vichada" tabindex="-1" role="option" id="formFiltro:j_idt88_36">Vichada</li></ul></div></div><div id="formFiltro:municipios_panel" class="ui-selectonemenu-panel ui-widget ui-widget-content ui-corner-all ui-helper-hidden ui-shadow ui-input-overlay"><div class="ui-selectonemenu-items-wrapper" style="max-height:200px"><ul id="formFiltro:municipios_items" class="ui-selectonemenu-items ui-selectonemenu-list ui-widget-content ui-widget ui-corner-all ui-helper-reset" role="listbox" aria-activedescendant="formFiltro:municipios_0"><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all ui-state-highlight" data-label="Todos" tabindex="-1" role="option" id="formFiltro:municipios_0">Todos</li></ul></div></div><div id="formFiltro:j_idt130_panel" class="ui-selectonemenu-panel ui-widget ui-widget-content ui-corner-all ui-helper-hidden ui-shadow ui-input-overlay"><div class="ui-selectonemenu-items-wrapper" style="max-height:200px"><ul id="formFiltro:j_idt130_items" class="ui-selectonemenu-items ui-selectonemenu-list ui-widget-content ui-widget ui-corner-all ui-helper-reset" role="listbox" aria-activedescendant="formFiltro:j_idt130_0"><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all ui-state-highlight" data-label="Todos" tabindex="-1" role="option" id="formFiltro:j_idt130_0">Todos</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Administración de Empresas y Derecho" tabindex="-1" role="option" id="formFiltro:j_idt130_1">Administración de Empresas y Derecho</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Agropecuario, Silvicultura, Pesca y Veterinaria" tabindex="-1" role="option" id="formFiltro:j_idt130_2">Agropecuario, Silvicultura, Pesca y Veterinaria</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Arte y Humanidades" tabindex="-1" role="option" id="formFiltro:j_idt130_3">Arte y Humanidades</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Ciencias Naturales, Matemáticas y Estadística" tabindex="-1" role="option" id="formFiltro:j_idt130_4">Ciencias Naturales, Matemáticas y Estadística</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Ciencias Sociales, Periodismo e Información" tabindex="-1" role="option" id="formFiltro:j_idt130_5">Ciencias Sociales, Periodismo e Información</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Educación" tabindex="-1" role="option" id="formFiltro:j_idt130_6">Educación</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Ingeniería, Industria y Construcción" tabindex="-1" role="option" id="formFiltro:j_idt130_7">Ingeniería, Industria y Construcción</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Programas y certificaciones genéricos" tabindex="-1" role="option" id="formFiltro:j_idt130_8">Programas y certificaciones genéricos</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Salud y Bienestar" tabindex="-1" role="option" id="formFiltro:j_idt130_9">Salud y Bienestar</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Servicios" tabindex="-1" role="option" id="formFiltro:j_idt130_10">Servicios</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Sin información" tabindex="-1" role="option" id="formFiltro:j_idt130_11">Sin información</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="Tecnologías de la Información y la Comunicación (TIC)" tabindex="-1" role="option" id="formFiltro:j_idt130_12">Tecnologías de la Información y la Comunicación (TIC)</li></ul></div></div><div id="formFiltro:campoEspecifico_panel" class="ui-selectonemenu-panel ui-widget ui-widget-content ui-corner-all ui-helper-hidden ui-shadow ui-input-overlay"><div class="ui-selectonemenu-items-wrapper" style="max-height:200px"><ul id="formFiltro:campoEspecifico_items" class="ui-selectonemenu-items ui-selectonemenu-list ui-widget-content ui-widget ui-corner-all ui-helper-reset" role="listbox" aria-activedescendant="formFiltro:campoEspecifico_0"><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all ui-state-highlight" data-label="Todos" tabindex="-1" role="option" id="formFiltro:campoEspecifico_0">Todos</li></ul></div></div><div id="formFiltro:campoDetallado_panel" class="ui-selectonemenu-panel ui-widget ui-widget-content ui-corner-all ui-helper-hidden ui-shadow ui-input-overlay"><div class="ui-selectonemenu-items-wrapper" style="max-height:200px"><ul id="formFiltro:campoDetallado_items" class="ui-selectonemenu-items ui-selectonemenu-list ui-widget-content ui-widget ui-corner-all ui-helper-reset" role="listbox" aria-activedescendant="formFiltro:campoDetallado_0"><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all ui-state-highlight" data-label="Todos" tabindex="-1" role="option" id="formFiltro:campoDetallado_0">Todos</li></ul></div></div><div id="formFiltro:j_idt148_panel" class="ui-selectonemenu-panel ui-widget ui-widget-content ui-corner-all ui-helper-hidden ui-shadow ui-input-overlay"><div class="ui-selectonemenu-items-wrapper" style="max-height:200px"><ul id="formFiltro:j_idt148_items" class="ui-selectonemenu-items ui-selectonemenu-list ui-widget-content ui-widget ui-corner-all ui-helper-reset" role="listbox" aria-activedescendant="formFiltro:j_idt148_0"><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all ui-state-highlight" data-label="Todos" tabindex="-1" role="option" id="formFiltro:j_idt148_0">Todos</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="2018" tabindex="-1" role="option" id="formFiltro:j_idt148_1">2018</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="2019" tabindex="-1" role="option" id="formFiltro:j_idt148_2">2019</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="2020" tabindex="-1" role="option" id="formFiltro:j_idt148_3">2020</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="2021" tabindex="-1" role="option" id="formFiltro:j_idt148_4">2021</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="2022" tabindex="-1" role="option" id="formFiltro:j_idt148_5">2022</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="2023" tabindex="-1" role="option" id="formFiltro:j_idt148_6">2023</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="2024" tabindex="-1" role="option" id="formFiltro:j_idt148_7">2024</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="2025" tabindex="-1" role="option" id="formFiltro:j_idt148_8">2025</li><li class="ui-selectonemenu-item ui-selectonemenu-list-item ui-corner-all" data-label="2026" tabindex="-1" role="option" id="formFiltro:j_idt148_9">2026</li></ul></div></div></body></html>
