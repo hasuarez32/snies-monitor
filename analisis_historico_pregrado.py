@@ -1,214 +1,128 @@
-
 """
 analisis_historico_pregrado.py
 -------------------------------
-Carga todos los snapshots históricos de SNIES Pregrado, construye una serie
-de tiempo por División Uninorte y guarda tres gráficos en Novedades_SNIES/.
+Genera gráficos de barras agrupadas Nuevos vs Inactivos por División Uninorte
+a partir de los archivos acumulados en data/novedades/.
 
-Si los archivos de gráficos ya existen, se eliminan antes de regenerarlos.
-
-Diseñado para ejecución automática (sin intervención humana):
+Ejecución standalone:
   python analisis_historico_pregrado.py
 
-Dependencias: pandas openpyxl matplotlib
+También puede ser importado desde run_snies.py:
+  from analisis_historico_pregrado import generar_graficos
 """
 
 import os
-import re
-import glob
 import warnings
 import pandas as pd
 import matplotlib
-matplotlib.use("Agg")           # backend no-interactivo: obligatorio en automatización
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-import matplotlib.ticker as ticker
-from datetime import datetime
 
 warnings.filterwarnings("ignore")
 
-# ── Rutas (relativas al directorio de este script) ────────────────────────────
-BASE     = os.path.dirname(os.path.abspath(__file__))
-SNAP_DIR = os.path.join(BASE, "Programas")
-CAT_FILE = os.path.join(BASE, "Categorización divisiones SNIES .xlsx")
-OUT_DIR  = os.path.join(BASE, "Novedades_SNIES")
+BASE          = os.path.dirname(os.path.abspath(__file__))
+NOVEDADES_DIR = os.path.join(BASE, "data", "novedades")
 
-# ── Paleta de colores por división ────────────────────────────────────────────
-COLORS = {
-    "Ingenierías":                                    "#1f77b4",
-    "Escuela de Negocios":                            "#ff7f0e",
-    "Humanidades y Cs. Sociales":                     "#2ca02c",
-    "Instituto de Estudios en Educación":             "#d62728",
-    "Ciencias de la Salud":                           "#9467bd",
-    "Derecho, C. Política y Rel. Internacionales":    "#e377c2",
-    "Ciencias Básicas":                               "#7f7f7f",
-    "Escuela de Arquitectura, Urbanismo y Diseño":    "#bcbd22",
-    "Música":                                         "#17becf",
-    "Instituto de Idiomas":                           "#aec7e8",
-    "Otro":                                           "#8c564b",
-    "Sin clasificar":                                 "#dddddd",
-}
+DIV_COL = "DIVISIÓN UNINORTE"
+
+COLOR_NUEVOS    = "#2ca02c"
+COLOR_INACTIVOS = "#d62728"
 
 
-# ── Carga de datos ────────────────────────────────────────────────────────────
+def _conteo_por_division(path: str) -> pd.Series:
+    if not os.path.exists(path):
+        return pd.Series(dtype=int)
+    df = pd.read_excel(path)
+    col = next((c for c in df.columns if "DIVIS" in c.upper() and "UNINORTE" in c.upper()), None)
+    if col is None:
+        return pd.Series(dtype=int)
+    return df[col].value_counts()
 
-def load_categorizacion() -> pd.DataFrame:
-    return (
-        pd.read_excel(CAT_FILE, sheet_name="Hoja3")[
-            ["CINE_F_2013_AC_CAMPO_DETALLADO", "DIVISIÓN UNINORTE"]
-        ]
-        .drop_duplicates()
+
+def _chart_nuevos_vs_inactivos(conteos: pd.DataFrame, sfx: str, out_path: str) -> None:
+    """Barras agrupadas horizontales: Nuevos vs Inactivos por División."""
+    n      = len(conteos)
+    height = 0.35
+
+    fig, ax = plt.subplots(figsize=(12, max(5, n * 0.7)))
+
+    y = range(n)
+    bars_n = ax.barh(
+        [i + height / 2 for i in y],
+        conteos["Nuevos"],
+        height=height,
+        color=COLOR_NUEVOS,
+        label="Nuevos",
+    )
+    bars_i = ax.barh(
+        [i - height / 2 for i in y],
+        conteos["Inactivos"],
+        height=height,
+        color=COLOR_INACTIVOS,
+        label="Inactivos",
     )
 
+    ax.bar_label(bars_n, padding=3, fontsize=8)
+    ax.bar_label(bars_i, padding=3, fontsize=8)
 
-def _parse_date(filepath: str) -> datetime | None:
-    m = re.search(r"(\d{2}-\d{2}-\d{2})\.xlsx$", os.path.basename(filepath))
-    return datetime.strptime(m.group(1), "%d-%m-%y") if m else None
-
-
-def build_time_series(cat: pd.DataFrame) -> pd.DataFrame:
-    """
-    Devuelve un DataFrame pivotado:
-        index   → fecha del snapshot
-        columns → DIVISIÓN UNINORTE
-        values  → número de programas activos
-    """
-    files = glob.glob(os.path.join(SNAP_DIR, "Programas *.xlsx"))
-    dated = sorted(
-        [(d, f) for f in files if (d := _parse_date(f))],
-        key=lambda x: x[0],
-    )
-    if not dated:
-        raise FileNotFoundError(f"No se encontraron archivos 'Programas DD-MM-YY.xlsx' en {SNAP_DIR}")
-
-    records = []
-    for date, filepath in dated:
-        df = pd.read_excel(filepath).iloc[:-2]          # quita 2 filas de pie de página
-        df = df.merge(cat, on="CINE_F_2013_AC_CAMPO_DETALLADO", how="left")
-        df["DIVISIÓN UNINORTE"] = df["DIVISIÓN UNINORTE"].fillna("Sin clasificar")
-        counts = df.groupby("DIVISIÓN UNINORTE").size().reset_index(name="programas")
-        counts["fecha"] = date
-        records.append(counts)
-
-    ts = pd.concat(records, ignore_index=True)
-    return ts.pivot_table(
-        index="fecha", columns="DIVISIÓN UNINORTE", values="programas", aggfunc="sum"
-    ).fillna(0)
-
-
-# ── Gráficos ──────────────────────────────────────────────────────────────────
-
-def _fmt_xaxis(ax):
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %Y"))
-    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=2))
-    plt.xticks(rotation=45, ha="right")
-
-
-def chart_evolucion(pivot: pd.DataFrame, out_path: str) -> None:
-    """Línea de tiempo: programas activos por división."""
-    fig, ax = plt.subplots(figsize=(14, 7))
-    for div in pivot.columns:
-        ax.plot(
-            pivot.index, pivot[div],
-            label=div,
-            color=COLORS.get(div, "#333333"),
-            linewidth=1.8,
-            marker="o", markersize=2,
-        )
-    _fmt_xaxis(ax)
+    ax.set_yticks(list(y))
+    ax.set_yticklabels(conteos.index, fontsize=9)
+    ax.set_xlabel("Número de programas")
     ax.set_title(
-        "Evolución histórica de programas activos por División Uninorte (Pregrado)",
-        fontsize=13, fontweight="bold",
+        f"Nuevos vs Inactivos por División Uninorte — {sfx.capitalize()}\n"
+        "(acumulado histórico de detecciones)",
+        fontsize=12,
+        fontweight="bold",
     )
-    ax.set_xlabel("Fecha")
-    ax.set_ylabel("Número de programas activos")
-    ax.legend(loc="upper left", fontsize=8, framealpha=0.8)
-    ax.grid(axis="y", alpha=0.3)
-    fig.tight_layout()
-    fig.savefig(out_path, dpi=150)
-    plt.close(fig)
-
-
-def chart_variacion_neta(pivot: pd.DataFrame, out_path: str) -> None:
-    """Barras horizontales: cambio absoluto entre primera y última fecha."""
-    net = (pivot.iloc[-1] - pivot.iloc[0]).sort_values()
-    first_date = pivot.index[0].strftime("%d/%m/%Y")
-    last_date  = pivot.index[-1].strftime("%d/%m/%Y")
-    bar_colors = ["#d62728" if v < 0 else "#2ca02c" for v in net.values]
-
-    fig, ax = plt.subplots(figsize=(10, 6))
-    bars = ax.barh(net.index, net.values, color=bar_colors)
-    ax.bar_label(bars, fmt="%+.0f", padding=4, fontsize=9)
-    ax.axvline(0, color="black", linewidth=0.8)
-    ax.set_title(
-        f"Variación neta de programas por División\n({first_date}  →  {last_date})",
-        fontsize=12, fontweight="bold",
-    )
-    ax.set_xlabel("Programas ganados / perdidos")
+    ax.legend()
     ax.grid(axis="x", alpha=0.3)
     fig.tight_layout()
     fig.savefig(out_path, dpi=150)
     plt.close(fig)
 
 
-def chart_crecimiento_pct(pivot: pd.DataFrame, out_path: str) -> None:
-    """Crecimiento porcentual acumulado desde la primera fecha (excluye Otro y Sin clasificar)."""
-    exclude = {"Sin clasificar", "Otro"}
-    cols = [c for c in pivot.columns if c not in exclude]
-    base = pivot[cols].iloc[0].replace(0, float("nan"))   # evita división por cero
-    pct  = (pivot[cols] / base - 1) * 100
+def generar_graficos() -> list:
+    """
+    Genera un gráfico por nivel (pregrado / posgrado).
+    Devuelve la lista de rutas de los PNG generados.
+    """
+    os.makedirs(NOVEDADES_DIR, exist_ok=True)
+    generados = []
 
-    fig, ax = plt.subplots(figsize=(14, 6))
-    for div in pct.columns:
-        ax.plot(
-            pct.index, pct[div],
-            label=div,
-            color=COLORS.get(div, "#333333"),
-            linewidth=1.8,
+    for sfx in ("pregrado", "posgrado"):
+        nuevos_c    = _conteo_por_division(
+            os.path.join(NOVEDADES_DIR, f"Nuevos_{sfx}.xlsx")
+        ).rename("Nuevos")
+        inactivos_c = _conteo_por_division(
+            os.path.join(NOVEDADES_DIR, f"Inactivos_{sfx}.xlsx")
+        ).rename("Inactivos")
+
+        conteos = (
+            pd.concat([nuevos_c, inactivos_c], axis=1)
+            .fillna(0)
+            .astype(int)
+            .sort_values("Nuevos", ascending=True)
         )
-    ax.axhline(0, color="black", linewidth=0.8, linestyle="--", alpha=0.5)
-    _fmt_xaxis(ax)
-    ax.set_title(
-        "Crecimiento porcentual acumulado de programas activos por División\n"
-        "(base = primera fecha disponible)",
-        fontsize=12, fontweight="bold",
-    )
-    ax.set_xlabel("Fecha")
-    ax.set_ylabel("Variación acumulada (%)")
-    ax.yaxis.set_major_formatter(ticker.PercentFormatter())
-    ax.legend(loc="upper left", fontsize=8, framealpha=0.8)
-    ax.grid(axis="y", alpha=0.3)
-    fig.tight_layout()
-    fig.savefig(out_path, dpi=150)
-    plt.close(fig)
 
+        if conteos.empty or conteos[["Nuevos", "Inactivos"]].sum().sum() == 0:
+            print(f"  [{sfx}] Sin datos suficientes, se omite el gráfico.")
+            continue
 
-# ── Entry point ───────────────────────────────────────────────────────────────
+        out_path = os.path.join(NOVEDADES_DIR, f"grafico_novedades_{sfx}.png")
+        if os.path.exists(out_path):
+            os.remove(out_path)
+
+        _chart_nuevos_vs_inactivos(conteos, sfx, out_path)
+        generados.append(out_path)
+        print(f"  [{sfx}] Gráfico guardado: {out_path}")
+
+    return generados
+
 
 def main() -> None:
-    today_str = datetime.today().strftime("%d/%m/%Y")
-    print(f"[{today_str}] Iniciando análisis histórico pregrado...")
-
-    cat   = load_categorizacion()
-    pivot = build_time_series(cat)
-    print(
-        f"  Snapshots cargados: {len(pivot)}"
-        f"  |  Periodo: {pivot.index[0].date()} -> {pivot.index[-1].date()}"
-    )
-
-    chart1 = os.path.join(OUT_DIR, "historico_evolucion_divisiones.png")
-    chart2 = os.path.join(OUT_DIR, "historico_variacion_neta.png")
-    chart3 = os.path.join(OUT_DIR, "historico_crecimiento_pct.png")
-
-    for path in (chart1, chart2, chart3):
-        if os.path.exists(path):
-            os.remove(path)
-
-    chart_evolucion(pivot,       chart1)
-    chart_variacion_neta(pivot,  chart2)
-    chart_crecimiento_pct(pivot, chart3)
-    print("  Gráficos generados.")
-    print("  Listo.")
+    print("Generando gráficos de novedades SNIES...")
+    generados = generar_graficos()
+    print(f"  {len(generados)} gráfico(s) generado(s). Listo.")
 
 
 if __name__ == "__main__":

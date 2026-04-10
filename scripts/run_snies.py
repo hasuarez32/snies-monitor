@@ -309,7 +309,7 @@ def detectar_novedades(
     # ── Metadatos comunes ─────────────────────────────────────────────────────
     today_str = today.strftime("%Y-%m-%d")
     for df_tmp in (nuevosDF, inactivosDF, modificadosDF):
-        df_tmp["FECHA_DETECCION"] = today_str
+        df_tmp["FECHA_OBTENCION"] = today_str
         df_tmp["Estado"] = df_tmp["CÓDIGO_SNIES_DEL_PROGRAMA"].apply(
             lambda x: "Activo" if x in snies_hoy else "Inactivo"
         )
@@ -330,9 +330,11 @@ def merge_division(df: pd.DataFrame, cat: pd.DataFrame) -> pd.DataFrame:
 
 def acumular(existing_path: Path, nuevo_df: pd.DataFrame) -> pd.DataFrame:
     """Concatena con el archivo existente y deduplica por código + fecha."""
-    dedup_cols = ["CÓDIGO_SNIES_DEL_PROGRAMA", "FECHA_DETECCION"]
-    if existing_path.exists() and not nuevo_df.empty:
+    dedup_cols = ["CÓDIGO_SNIES_DEL_PROGRAMA", "FECHA_OBTENCION"]
+    if existing_path.exists():
         existing = pd.read_excel(existing_path)
+        if nuevo_df.empty:
+            return existing
         combined = pd.concat([existing, nuevo_df], ignore_index=True)
         return combined.drop_duplicates(subset=dedup_cols, keep="last")
     return nuevo_df
@@ -436,9 +438,18 @@ def main() -> None:
             log.exception(f"Error fatal procesando {sfx}. Continuando con el siguiente.")
             resultados[sfx] = None
 
+    # Generar gráficos antes del correo
+    chart_paths = []
+    try:
+        sys.path.insert(0, str(ROOT))
+        from analisis_historico_pregrado import generar_graficos
+        chart_paths = generar_graficos()
+    except Exception:
+        log.exception("Error generando gráficos de novedades.")
+
     try:
         from send_report import enviar_reporte
-        enviar_reporte(resultados, today)
+        enviar_reporte(resultados, today, chart_paths)
     except Exception:
         log.exception("Error enviando el correo.")
 
