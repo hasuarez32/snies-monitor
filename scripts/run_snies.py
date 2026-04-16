@@ -1,9 +1,10 @@
 """
 run_snies.py
 ------------
-Orquestador principal del monitor SNIES.
-Descarga los snapshots de pregrado y posgrado, detecta novedades,
-acumula los resultados en data/novedades/ y llama al módulo de correo.
+Orquestador principal del monitor SNIES para pregrado.
+Descarga el snapshot de pregrado, detecta novedades,
+acumula los resultados en data/novedades/, archiva cada Excel crudo en
+Programas/ y llama al módulo de correo.
 
 Ejecución:
     python scripts/run_snies.py
@@ -13,7 +14,7 @@ import sys
 import logging
 import shutil
 import time
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 import matplotlib
@@ -45,36 +46,26 @@ log = logging.getLogger(__name__)
 ROOT          = Path(__file__).parent.parent
 DATA_DIR      = ROOT / "data"
 NOVEDADES_DIR = DATA_DIR / "novedades"
+PROGRAMAS_DIR = ROOT / "Programas"
 CAT_FILE      = DATA_DIR / "Categorización divisiones SNIES.xlsx"
 TMP_DIR       = ROOT / "tmp"
 
 NOVEDADES_DIR.mkdir(parents=True, exist_ok=True)
+PROGRAMAS_DIR.mkdir(parents=True, exist_ok=True)
 TMP_DIR.mkdir(parents=True, exist_ok=True)
 
 # ── Constantes de descarga ────────────────────────────────────────────────────
 SNIES_URL        = "https://hecaa.mineducacion.gov.co/consultaspublicas/programas"
 DOWNLOAD_TIMEOUT = 120  # segundos máximos esperando la descarga
 
-# ── XPaths por nivel ──────────────────────────────────────────────────────────
-# Both levels use the same filter IDs (j_idt35/68/109/116) — same SNIES page.
-# academicoFilter: pregrado = tr[2] (Pregrado), posgrado = tr[3] (Posgrado).
-# formacionFilter: pregrado = tr[4] (Universitario), posgrado = tr[1] (Todos).
+# ── XPaths del flujo de pregrado ─────────────────────────────────────────────
 # If the portal is updated, run the page-dump snippet in tmp/ to re-derive IDs.
 XPATHS = {
-    "pregrado": {
-        "institucion": '//*[@id="formFiltro:j_idt35"]/tbody/tr[2]/td/div/div[2]/span',
-        "programa":    '//*[@id="formFiltro:j_idt68"]/tbody/tr[2]/td/div/div[2]/span',
-        "academico":   '//*[@id="formFiltro:j_idt109"]/tbody/tr[2]/td/div/div[2]/span',
-        "formacion":   '//*[@id="formFiltro:j_idt116"]/tbody/tr[4]/td/div/div[2]/span',
-        "descarga":    '//*[@id="j_idt169:j_idt171"]',
-    },
-    "posgrado": {
-        "institucion": '//*[@id="formFiltro:j_idt35"]/tbody/tr[2]/td/div/div[2]/span',
-        "programa":    '//*[@id="formFiltro:j_idt68"]/tbody/tr[2]/td/div/div[2]/span',
-        "academico":   '//*[@id="formFiltro:j_idt109"]/tbody/tr[3]/td/div/div[2]/span',
-        "formacion":   '//*[@id="formFiltro:j_idt116"]/tbody/tr[1]/td/div/div[2]/span',
-        "descarga":    '//*[@id="j_idt169:j_idt171"]',
-    },
+    "institucion": '//*[@id="formFiltro:j_idt35"]/tbody/tr[2]/td/div/div[2]/span',
+    "programa":    '//*[@id="formFiltro:j_idt68"]/tbody/tr[2]/td/div/div[2]/span',
+    "academico":   '//*[@id="formFiltro:j_idt109"]/tbody/tr[2]/td/div/div[2]/span',
+    "formacion":   '//*[@id="formFiltro:j_idt116"]/tbody/tr[4]/td/div/div[2]/span',
+    "descarga":    '//*[@id="j_idt169:j_idt171"]',
 }
 
 # ── Columnas de trabajo ───────────────────────────────────────────────────────
@@ -98,11 +89,6 @@ BASE_COLS = [
     "CINE_F_2013_AC_CAMPO_DETALLADO",
     "NÚCLEO_BÁSICO_DEL_CONOCIMIENTO",
 ]
-
-# El notebook de posgrado incluía además NIVEL_DE_FORMACIÓN
-EXTRA_COLS = {
-    "posgrado": ["NIVEL_DE_FORMACIÓN"],
-}
 
 # Campos cuyo cambio clasifica un programa como "Modificado"
 COLS_VIGILAR = [
@@ -152,12 +138,30 @@ def _safe_click(driver: webdriver.Chrome, xpath: str, timeout: int = 15) -> None
             time.sleep(2)
 
 
-def descargar_snies(sfx: str, download_dir: Path) -> Path:
+def _wait_ajax(driver: webdriver.Chrome, timeout: int = 20) -> None:
+    """
+    Espera a que terminen las peticiones AJAX lanzadas por PrimeFaces/jQuery
+    tras un click de filtro.  Si jQuery o PrimeFaces no están cargados en la
+    página, la condición se evalúa como True de inmediato.
+    Si el timeout vence (portal muy lento) se emite un warning y se continúa.
+    """
+    try:
+        WebDriverWait(driver, timeout).until(
+            lambda d: d.execute_script(
+                "return (typeof jQuery === 'undefined' || jQuery.active === 0) && "
+                "(typeof PrimeFaces === 'undefined' || PrimeFaces.ajax.Queue.isEmpty())"
+            )
+        )
+    except TimeoutException:
+        log.warning("AJAX no terminó en %ds; continuando de todas formas.", timeout)
+
+
+def descargar_snies(download_dir: Path) -> Path:
     """
     Navega el portal SNIES con los filtros del nivel `sfx` y descarga el Excel.
     Devuelve la ruta al archivo Programas.xlsx dentro de download_dir.
     """
-    xp            = XPATHS[sfx]
+    xp            = XPATHS
     expected_file = download_dir / "Programas.xlsx"
     partial_file  = download_dir / "Programas.crdownload"
 
@@ -168,21 +172,21 @@ def descargar_snies(sfx: str, download_dir: Path) -> Path:
 
     driver = _build_driver(download_dir)
     try:
-        log.info(f"[{sfx}] Abriendo SNIES...")
+        log.info("[pregrado] Abriendo SNIES...")
         driver.get(SNIES_URL)
         driver.implicitly_wait(5)
 
-        log.info(f"[{sfx}] Aplicando filtros...")
+        log.info("[pregrado] Aplicando filtros...")
         _safe_click(driver, xp["institucion"], timeout=30)
-        time.sleep(3)
+        _wait_ajax(driver)
         _safe_click(driver, xp["programa"], timeout=30)
-        time.sleep(3)
+        _wait_ajax(driver)
         _safe_click(driver, xp["academico"], timeout=30)
-        time.sleep(3)
+        _wait_ajax(driver)
         _safe_click(driver, xp["formacion"], timeout=30)
-        time.sleep(3)
+        _wait_ajax(driver)
 
-        log.info(f"[{sfx}] Solicitando descarga...")
+        log.info("[pregrado] Solicitando descarga...")
         _safe_click(driver, xp["descarga"])
 
         elapsed = 0
@@ -190,12 +194,12 @@ def descargar_snies(sfx: str, download_dir: Path) -> Path:
             time.sleep(5)
             elapsed += 5
             if expected_file.exists() and not partial_file.exists():
-                log.info(f"[{sfx}] Descarga completada en {elapsed}s.")
+                log.info(f"[pregrado] Descarga completada en {elapsed}s.")
                 break
-            log.info(f"[{sfx}] Esperando descarga... ({elapsed}s)")
+            log.info(f"[pregrado] Esperando descarga... ({elapsed}s)")
         else:
             raise TimeoutError(
-                f"[{sfx}] Archivo no apareció tras {DOWNLOAD_TIMEOUT}s. "
+                f"[pregrado] Archivo no apareció tras {DOWNLOAD_TIMEOUT}s. "
                 "Verifica que los XPaths del portal no hayan cambiado."
             )
     finally:
@@ -215,18 +219,16 @@ def load_categorizacion() -> pd.DataFrame:
     )
 
 
-def load_snapshot(path: Path, sfx: str) -> pd.DataFrame:
+def load_snapshot(path: Path) -> pd.DataFrame:
     """
     Lee un archivo Excel del SNIES, elimina las 2 filas de pie de página,
     filtra las columnas de trabajo y normaliza tipos.
     """
-    cols_deseadas = BASE_COLS + EXTRA_COLS.get(sfx, [])
-
     df = pd.read_excel(path, sheet_name="Programas")
     df = df.iloc[:-2].copy()  # las 2 últimas filas son el aviso legal del SNIES
 
     # Intersección defensiva: sólo columnas que existen en este archivo
-    cols_ok = [c for c in cols_deseadas if c in df.columns]
+    cols_ok = [c for c in BASE_COLS if c in df.columns]
     df = df[cols_ok].copy()
 
     df["CÓDIGO_SNIES_DEL_PROGRAMA"] = pd.to_numeric(
@@ -269,9 +271,29 @@ def detectar_novedades(
     df_com_hoy = df_hoy[df_hoy["CÓDIGO_SNIES_DEL_PROGRAMA"].isin(comunes)]
     df_com_ant = df_ant[df_ant["CÓDIGO_SNIES_DEL_PROGRAMA"].isin(comunes)]
 
+    # Deduplicar por código antes del merge para evitar producto cartesiano.
+    # Si el snapshot tiene filas duplicadas con el mismo código (p.ej. error del
+    # portal o varias modalidades sin variación de código), el merge many-to-many
+    # generaría combinaciones falsas que se detectarían como modificados espurios.
+    _KEY = "CÓDIGO_SNIES_DEL_PROGRAMA"
+    dups_hoy = df_com_hoy.duplicated(subset=_KEY, keep=False).sum()
+    dups_ant = df_com_ant.duplicated(subset=_KEY, keep=False).sum()
+    if dups_hoy:
+        log.warning(
+            f"  Snapshot HOY tiene {dups_hoy} fila(s) con código SNIES duplicado "
+            "en el conjunto 'comunes'. Se conserva la primera aparición."
+        )
+    if dups_ant:
+        log.warning(
+            f"  Snapshot ANTERIOR tiene {dups_ant} fila(s) con código SNIES duplicado "
+            "en el conjunto 'comunes'. Se conserva la primera aparición."
+        )
+    df_com_hoy = df_com_hoy.drop_duplicates(subset=_KEY, keep="first")
+    df_com_ant = df_com_ant.drop_duplicates(subset=_KEY, keep="first")
+
     comparativa = df_com_hoy.merge(
         df_com_ant,
-        on="CÓDIGO_SNIES_DEL_PROGRAMA",
+        on=_KEY,
         suffixes=("_NUEVO", "_ANTIGUO"),
     )
 
@@ -345,30 +367,45 @@ def _guardar(df: pd.DataFrame, path: Path) -> None:
     log.info(f"  Guardado {path.name} ({len(df)} filas)")
 
 
-# ── Pipeline por nivel ────────────────────────────────────────────────────────
+def archivar_descarga(raw_file: Path, today: date) -> Path:
+    """Guarda una copia permanente del Excel crudo en Programas/."""
+    PROGRAMAS_DIR.mkdir(parents=True, exist_ok=True)
+    archive_path = PROGRAMAS_DIR / f"Programas {today.strftime('%d-%m-%y')}.xlsx"
+    if archive_path.exists():
+        stamp = datetime.now().strftime("%H%M%S")
+        archive_path = PROGRAMAS_DIR / f"Programas {today.strftime('%d-%m-%y')}__{stamp}.xlsx"
+    shutil.copy2(raw_file, archive_path)
+    log.info(f"  Archivado {archive_path.name}")
+    return archive_path
 
-def procesar(sfx: str, cat: pd.DataFrame, today: date) -> dict:
+
+# ── Pipeline de pregrado ─────────────────────────────────────────────────────
+
+def procesar(cat: pd.DataFrame, today: date) -> dict:
     """
-    Ejecuta el pipeline completo para un nivel (pregrado / posgrado).
+    Ejecuta el pipeline completo para pregrado.
     Devuelve {'nuevos': df, 'inactivos': df, 'modificados': df}.
     """
-    log.info(f"── {sfx.upper()} ──────────────────────────────────")
+    log.info("── PREGRADO ──────────────────────────────────")
     vacio = {"nuevos": pd.DataFrame(), "inactivos": pd.DataFrame(), "modificados": pd.DataFrame()}
 
     # 1. Descargar
-    download_dir = TMP_DIR / sfx
+    download_dir = TMP_DIR / "pregrado"
     download_dir.mkdir(parents=True, exist_ok=True)
-    raw_file = descargar_snies(sfx, download_dir)
+    raw_file = descargar_snies(download_dir)
 
-    # 2. Cargar snapshot de hoy
-    df_hoy = load_snapshot(raw_file, sfx)
-    log.info(f"[{sfx}] Snapshot HOY: {len(df_hoy)} programas")
+    # 2. Archivar el Excel crudo antes de cualquier limpieza o comparación.
+    archivar_descarga(raw_file, today)
 
-    # 3. Cargar snapshot anterior
-    anterior_path = DATA_DIR / f"Programas_{sfx}_anterior.xlsx"
+    # 3. Cargar snapshot de hoy
+    df_hoy = load_snapshot(raw_file)
+    log.info(f"[pregrado] Snapshot HOY: {len(df_hoy)} programas")
+
+    # 4. Cargar snapshot anterior
+    anterior_path = DATA_DIR / "Programas_pregrado_anterior.xlsx"
     if not anterior_path.exists():
         log.warning(
-            f"[{sfx}] No hay snapshot anterior. "
+            "[pregrado] No hay snapshot anterior. "
             "Guardando el de hoy como línea base para el próximo run."
         )
         shutil.copy2(raw_file, anterior_path)
@@ -376,48 +413,48 @@ def procesar(sfx: str, cat: pd.DataFrame, today: date) -> dict:
         return vacio
 
     try:
-        df_ant = load_snapshot(anterior_path, sfx)
+        df_ant = load_snapshot(anterior_path)
     except Exception as e:
         log.warning(
-            f"[{sfx}] Snapshot anterior no legible ({e}). "
+            f"[pregrado] Snapshot anterior no legible ({e}). "
             "Reemplazando con el snapshot de hoy como nueva línea base."
         )
         shutil.copy2(raw_file, anterior_path)
         raw_file.unlink(missing_ok=True)
         return vacio
-    log.info(f"[{sfx}] Snapshot ANTERIOR: {len(df_ant)} programas")
+    log.info(f"[pregrado] Snapshot ANTERIOR: {len(df_ant)} programas")
 
-    # 4. Detectar novedades
+    # 5. Detectar novedades
     nuevos, inactivos, modificados = detectar_novedades(df_hoy, df_ant, today)
     log.info(
-        f"[{sfx}] Nuevos={len(nuevos)} | "
+        f"[pregrado] Nuevos={len(nuevos)} | "
         f"Inactivos={len(inactivos)} | "
         f"Modificados={len(modificados)}"
     )
 
-    # 5. Agregar división Uninorte
+    # 6. Agregar división Uninorte
     nuevos      = merge_division(nuevos,      cat)
     inactivos   = merge_division(inactivos,   cat)
     modificados = merge_division(modificados, cat)
 
-    # 6. Acumular y guardar
+    # 7. Acumular y guardar
     _guardar(
-        acumular(NOVEDADES_DIR / f"Nuevos_{sfx}.xlsx",      nuevos),
-        NOVEDADES_DIR / f"Nuevos_{sfx}.xlsx",
+        acumular(NOVEDADES_DIR / "Nuevos_pregrado.xlsx", nuevos),
+        NOVEDADES_DIR / "Nuevos_pregrado.xlsx",
     )
     _guardar(
-        acumular(NOVEDADES_DIR / f"Inactivos_{sfx}.xlsx",   inactivos),
-        NOVEDADES_DIR / f"Inactivos_{sfx}.xlsx",
+        acumular(NOVEDADES_DIR / "Inactivos_pregrado.xlsx", inactivos),
+        NOVEDADES_DIR / "Inactivos_pregrado.xlsx",
     )
     _guardar(
-        acumular(NOVEDADES_DIR / f"Modificados_{sfx}.xlsx", modificados),
-        NOVEDADES_DIR / f"Modificados_{sfx}.xlsx",
+        acumular(NOVEDADES_DIR / "Modificados_pregrado.xlsx", modificados),
+        NOVEDADES_DIR / "Modificados_pregrado.xlsx",
     )
 
-    # 7. Rotar snapshot: raw de hoy → nuevo anterior
+    # 8. Rotar snapshot: raw de hoy → nuevo anterior
     shutil.copy2(raw_file, anterior_path)
     raw_file.unlink(missing_ok=True)
-    log.info(f"[{sfx}] Snapshot anterior actualizado.")
+    log.info("[pregrado] Snapshot anterior actualizado.")
 
     return {"nuevos": nuevos, "inactivos": inactivos, "modificados": modificados}
 
@@ -429,14 +466,12 @@ def main() -> None:
     log.info(f"╔══ Run SNIES — {today.isoformat()} ══╗")
 
     cat = load_categorizacion()
-    resultados: dict[str, dict | None] = {}
+    resultados: dict[str, dict | None] = {"pregrado": None}
 
-    for sfx in ("pregrado", "posgrado"):
-        try:
-            resultados[sfx] = procesar(sfx, cat, today)
-        except Exception:
-            log.exception(f"Error fatal procesando {sfx}. Continuando con el siguiente.")
-            resultados[sfx] = None
+    try:
+        resultados["pregrado"] = procesar(cat, today)
+    except Exception:
+        log.exception("Error fatal procesando pregrado.")
 
     # Generar gráficos antes del correo
     chart_paths = []

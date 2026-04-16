@@ -1,7 +1,7 @@
 """
 send_report.py
 --------------
-Construcción y envío del correo de reporte SNIES por SMTP (Office 365).
+Construcción y envío del correo de reporte SNIES para pregrado por SMTP.
 
 Variables de entorno requeridas:
     SMTP_USER      — dirección de correo remitente (ej. monitor@uninorte.edu.co)
@@ -84,13 +84,13 @@ def _tabla_html(df: pd.DataFrame | None, color_header: str) -> str:
     return html
 
 
-def _bloque_nivel(sfx: str, label: str, res: dict | None) -> str:
-    """Genera el bloque HTML de un nivel (pregrado / posgrado)."""
+def _bloque_pregrado(res: dict | None) -> str:
+    """Genera el bloque HTML de pregrado."""
     if res is None:
         return (
-            f"<h3 style='color:#003893;'>{label}</h3>"
+            "<h3 style='color:#003893;'>Pregrado</h3>"
             f"<p style='color:#dc3545;'>"
-            f"Error procesando {label}. Revisar los logs del workflow.</p>"
+            f"Error procesando Pregrado. Revisar los logs del workflow.</p>"
         )
 
     nuevos     = res.get("nuevos",     pd.DataFrame())
@@ -100,7 +100,7 @@ def _bloque_nivel(sfx: str, label: str, res: dict | None) -> str:
     return f"""
     <h3 style="color:#003893;border-bottom:2px solid #003893;padding-bottom:6px;
                font-family:Arial,sans-serif;">
-        {label}
+        Pregrado
     </h3>
 
     <h4 style="color:#28a745;font-family:Arial,sans-serif;">
@@ -133,17 +133,16 @@ def _bloque_nivel(sfx: str, label: str, res: dict | None) -> str:
 def construir_cuerpo(resultados: dict, today: date) -> str:
     today_str = today.strftime("%d/%m/%Y")
 
-    bloques = _bloque_nivel("pregrado", "Pregrado", resultados.get("pregrado"))
-    bloques += _bloque_nivel("posgrado", "Posgrado", resultados.get("posgrado"))
+    bloques = _bloque_pregrado(resultados.get("pregrado"))
 
     return f"""
     <div style="font-family:Arial,sans-serif;max-width:950px;margin:auto;">
         <h2 style="color:#003893;border-bottom:3px solid #003893;padding-bottom:10px;">
-            Reporte Diario SNIES — {today_str}
+            Reporte Diario SNIES — Pregrado — {today_str}
         </h2>
         <p style="font-size:13px;color:#333;">
-            Monitoreo automático de programas académicos activos en Colombia.
-            Los archivos Excel completos van adjuntos a este correo.
+            Monitoreo automático de programas académicos de pregrado en Colombia.
+            Los archivos Excel completos de pregrado van adjuntos a este correo.
         </p>
 
         {bloques}
@@ -172,7 +171,7 @@ def enviar_reporte(resultados: dict, today: date, chart_paths: list | None = Non
     cuerpo = construir_cuerpo(resultados, today)
 
     msg            = MIMEMultipart("mixed")
-    msg["Subject"] = f"Reporte SNIES — {today.strftime('%d/%m/%Y')}"
+    msg["Subject"] = f"Reporte SNIES Pregrado — {today.strftime('%d/%m/%Y')}"
     msg["From"]    = smtp_user
     msg["To"]      = ", ".join(destinatarios)
     msg.attach(MIMEText(cuerpo, "html", "utf-8"))
@@ -193,8 +192,8 @@ def enviar_reporte(resultados: dict, today: date, chart_paths: list | None = Non
         except Exception:
             log.exception(f"No se pudo adjuntar {png_path}")
 
-    # Adjuntar todos los xlsx de novedades que existan
-    adjuntos = sorted(NOVEDADES_DIR.glob("*.xlsx"))
+    # Adjuntar solo los xlsx de novedades de pregrado
+    adjuntos = sorted(NOVEDADES_DIR.glob("*_pregrado.xlsx"))
     for path in adjuntos:
         try:
             with open(path, "rb") as f:
