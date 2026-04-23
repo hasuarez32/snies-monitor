@@ -2,7 +2,7 @@ name: SNIES Monitor
 
 on:
   schedule:
-    - cron: '0 13 * * 1-5'   # 08:00 hora Colombia (UTC-5), lun-vie
+    - cron: '0 13 * * *'   # 08:00 hora Colombia (UTC-5), lun-vie
   workflow_dispatch:
 
 jobs:
