@@ -43,6 +43,6 @@ jobs:
         run: |
           git config user.name  "snies-bot"
           git config user.email "snies-bot@uninorte.edu.co"
-          git add data/
+          git add data/ Programas/
           git diff --staged --quiet || git commit -m "snies: $(date +'%Y-%m-%d')"
           git push
