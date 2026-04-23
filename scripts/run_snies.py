@@ -140,13 +140,39 @@ def _safe_click(driver: webdriver.Chrome, xpath: str, timeout: int = 15) -> None
             time.sleep(2)
 
 
-def _click_radio_box(driver: webdriver.Chrome, box_xpath: str, label: str, timeout: int = 30) -> None:
-    """JS-click en el div.ui-radiobutton-box de PrimeFaces para disparar su handler jQuery."""
-    el = WebDriverWait(driver, timeout).until(
-        EC.presence_of_element_located((By.XPATH, box_xpath))
+def _pf_select_radio(
+    driver: webdriver.Chrome,
+    label_prefix: str,
+    *,
+    exact: bool = False,
+    timeout: int = 30,
+) -> None:
+    """
+    Selecciona un radio button de PrimeFaces localizándolo por el texto de su
+    <label>, luego activando el <input> oculto y disparando su evento 'change'.
+    Esto invoca directamente el onchange="PrimeFaces.ab({...})" sin depender de
+    la estructura DOM ni de que jQuery haya atachado sus handlers al box div.
+    """
+    xpath = (
+        f'//label[normalize-space()="{label_prefix}"]'
+        if exact
+        else f'//label[starts-with(normalize-space(),"{label_prefix}")]'
     )
-    driver.execute_script("arguments[0].click();", el)
-    log.info(f"[radio] click JS en box → {label}")
+    label_el = WebDriverWait(driver, timeout).until(
+        EC.presence_of_element_located((By.XPATH, xpath))
+    )
+    input_id = label_el.get_attribute("for")
+    log.info(f"[radio] {label_prefix!r} → input#{input_id}")
+    driver.execute_script(
+        """
+        var el = document.getElementById(arguments[0]);
+        if (el && !el.checked) {
+            el.checked = true;
+            el.dispatchEvent(new Event('change', {bubbles: true}));
+        }
+        """,
+        input_id,
+    )
 
 
 def _wait_ajax(driver: webdriver.Chrome, timeout: int = 20) -> None:
@@ -192,27 +218,19 @@ def descargar_snies(download_dir: Path) -> Path:
         log.info(f"[pregrado] Screenshot guardado en {screenshot_path}")
 
         log.info("[pregrado] Aplicando filtros...")
-        _click_radio_box(driver,
-            '//label[normalize-space()="Activo"]/../div[contains(@class,"ui-radiobutton")]/div[contains(@class,"ui-radiobutton-box")]',
-            "institución Activo")
+        _pf_select_radio(driver, "Activo", exact=True)
         _wait_ajax(driver)
         time.sleep(3)
 
-        _click_radio_box(driver,
-            '//label[starts-with(normalize-space(),"Activo (")]/../div[contains(@class,"ui-radiobutton")]/div[contains(@class,"ui-radiobutton-box")]',
-            "programa Activo")
+        _pf_select_radio(driver, "Activo (")
         _wait_ajax(driver)
         time.sleep(3)
 
-        _click_radio_box(driver,
-            '//label[starts-with(normalize-space(),"Pregrado (")]/../div[contains(@class,"ui-radiobutton")]/div[contains(@class,"ui-radiobutton-box")]',
-            "académico Pregrado")
+        _pf_select_radio(driver, "Pregrado (")
         _wait_ajax(driver)
         time.sleep(3)
 
-        _click_radio_box(driver,
-            '//label[starts-with(normalize-space(),"Universitario (")]/../div[contains(@class,"ui-radiobutton")]/div[contains(@class,"ui-radiobutton-box")]',
-            "nivel Universitario")
+        _pf_select_radio(driver, "Universitario (")
         _wait_ajax(driver)
         time.sleep(5)
 
