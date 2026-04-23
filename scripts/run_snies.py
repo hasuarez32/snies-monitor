@@ -11,6 +11,7 @@ Ejecución:
 """
 
 import os
+import re
 import sys
 import logging
 import shutil
@@ -397,12 +398,30 @@ def archivar_descarga(raw_file: Path, today: date) -> Path:
     """Guarda una copia permanente del Excel crudo en Programas/."""
     PROGRAMAS_DIR.mkdir(parents=True, exist_ok=True)
     archive_path = PROGRAMAS_DIR / f"Programas {today.strftime('%d-%m-%y')}.xlsx"
-    if archive_path.exists():
-        stamp = datetime.now().strftime("%H%M%S")
-        archive_path = PROGRAMAS_DIR / f"Programas {today.strftime('%d-%m-%y')}__{stamp}.xlsx"
     shutil.copy2(raw_file, archive_path)
     log.info(f"  Archivado {archive_path.name}")
     return archive_path
+
+
+_PROG_RE = re.compile(r"^Programas (\d{2}-\d{2}-\d{2})(?:__\d{6})?\.xlsx$")
+
+
+def get_snapshot_anterior(today: date) -> Path | None:
+    """Devuelve el archivo más reciente de Programas/ con fecha estrictamente anterior a today."""
+    candidates = []
+    for f in PROGRAMAS_DIR.glob("Programas *.xlsx"):
+        m = _PROG_RE.match(f.name)
+        if not m:
+            continue
+        try:
+            file_date = datetime.strptime(m.group(1), "%d-%m-%y").date()
+        except ValueError:
+            continue
+        if file_date < today:
+            candidates.append((file_date, f))
+    if not candidates:
+        return None
+    return max(candidates, key=lambda x: x[0])[1]
 
 
 # ── Pipeline de pregrado ─────────────────────────────────────────────────────
@@ -415,42 +434,64 @@ def procesar(cat: pd.DataFrame, today: date) -> dict:
     log.info("── PREGRADO ──────────────────────────────────")
     vacio = {"nuevos": pd.DataFrame(), "inactivos": pd.DataFrame(), "modificados": pd.DataFrame()}
 
-    # 1. Descargar
-    download_dir = TMP_DIR / "pregrado"
-    download_dir.mkdir(parents=True, exist_ok=True)
-    raw_file = descargar_snies(download_dir)
+    # 1. Descargar (o reutilizar si ya existe el archivo de hoy)
+    today_archive = PROGRAMAS_DIR / f"Programas {today.strftime('%d-%m-%y')}.xlsx"
+    if today_archive.exists():
+        log.info(f"[pregrado] Archivo de hoy ya archivado ({today_archive.name}). Saltando descarga.")
+        raw_file = today_archive
+        ya_archivado = True
+    else:
+        download_dir = TMP_DIR / "pregrado"
+        download_dir.mkdir(parents=True, exist_ok=True)
+        raw_file = descargar_snies(download_dir)
+        ya_archivado = False
 
-    # 2. Archivar el Excel crudo antes de cualquier limpieza o comparación.
-    archivar_descarga(raw_file, today)
+    # 2. Archivar el Excel crudo (solo si fue descargado ahora)
+    if not ya_archivado:
+        archivar_descarga(raw_file, today)
 
     # 3. Cargar snapshot de hoy
     df_hoy = load_snapshot(raw_file)
     log.info(f"[pregrado] Snapshot HOY: {len(df_hoy)} programas")
 
-    # 4. Cargar snapshot anterior
-    anterior_path = DATA_DIR / "Programas_pregrado_anterior.xlsx"
-    if not anterior_path.exists():
-        log.warning(
-            "[pregrado] No hay snapshot anterior. "
-            "Guardando el de hoy como línea base para el próximo run."
-        )
-        shutil.copy2(raw_file, anterior_path)
-        raw_file.unlink(missing_ok=True)
+    # 4. Cargar snapshot anterior (el más reciente en Programas/ antes de hoy)
+    anterior_path = get_snapshot_anterior(today)
+    if anterior_path is None:
+        log.warning("[pregrado] No hay snapshot anterior en Programas/. El de hoy quedará como línea base.")
+        if not ya_archivado:
+            raw_file.unlink(missing_ok=True)
         return vacio
 
     try:
         df_ant = load_snapshot(anterior_path)
     except Exception as e:
-        log.warning(
-            f"[pregrado] Snapshot anterior no legible ({e}). "
-            "Reemplazando con el snapshot de hoy como nueva línea base."
-        )
-        shutil.copy2(raw_file, anterior_path)
-        raw_file.unlink(missing_ok=True)
+        log.warning(f"[pregrado] Snapshot anterior no legible ({e}). Abortando comparación.")
+        if not ya_archivado:
+            raw_file.unlink(missing_ok=True)
         return vacio
-    log.info(f"[pregrado] Snapshot ANTERIOR: {len(df_ant)} programas")
 
-    # 5. Detectar novedades
+    log.info(f"[pregrado] Snapshot ANTERIOR: {anterior_path.name} ({len(df_ant)} programas)")
+
+    # 5. Validar tamaño razonable (pregrado activo ≈ 8-10k programas)
+    UMBRAL = 15_000
+    if len(df_hoy) > UMBRAL:
+        log.error(
+            f"[pregrado] Snapshot HOY tiene {len(df_hoy)} programas — demasiados. "
+            "Probable descarga sin filtros. Abortando comparación."
+        )
+        if not ya_archivado:
+            raw_file.unlink(missing_ok=True)
+        return vacio
+    if len(df_ant) > UMBRAL:
+        log.error(
+            f"[pregrado] Snapshot ANTERIOR ({anterior_path.name}) tiene {len(df_ant)} programas "
+            "— parece un archivo sin filtrar. Abortando comparación."
+        )
+        if not ya_archivado:
+            raw_file.unlink(missing_ok=True)
+        return vacio
+
+    # 6. Detectar novedades
     nuevos, inactivos, modificados = detectar_novedades(df_hoy, df_ant, today)
     log.info(
         f"[pregrado] Nuevos={len(nuevos)} | "
@@ -458,12 +499,12 @@ def procesar(cat: pd.DataFrame, today: date) -> dict:
         f"Modificados={len(modificados)}"
     )
 
-    # 6. Agregar división Uninorte
+    # 7. Agregar división Uninorte
     nuevos      = merge_division(nuevos,      cat)
     inactivos   = merge_division(inactivos,   cat)
     modificados = merge_division(modificados, cat)
 
-    # 7. Acumular y guardar
+    # 8. Acumular y guardar
     _guardar(
         acumular(NOVEDADES_DIR / "Nuevos_pregrado.xlsx", nuevos),
         NOVEDADES_DIR / "Nuevos_pregrado.xlsx",
@@ -477,10 +518,8 @@ def procesar(cat: pd.DataFrame, today: date) -> dict:
         NOVEDADES_DIR / "Modificados_pregrado.xlsx",
     )
 
-    # 8. Rotar snapshot: raw de hoy → nuevo anterior
-    shutil.copy2(raw_file, anterior_path)
-    raw_file.unlink(missing_ok=True)
-    log.info("[pregrado] Snapshot anterior actualizado.")
+    if not ya_archivado:
+        raw_file.unlink(missing_ok=True)
 
     return {"nuevos": nuevos, "inactivos": inactivos, "modificados": modificados}
 
@@ -508,11 +547,14 @@ def main() -> None:
     except Exception:
         log.exception("Error generando gráficos de novedades.")
 
-    try:
-        from send_report import enviar_reporte
-        enviar_reporte(resultados, today, chart_paths)
-    except Exception:
-        log.exception("Error enviando el correo.")
+    if today.weekday() == 0:  # 0 = lunes
+        try:
+            from send_report import enviar_reporte
+            enviar_reporte(resultados, today, chart_paths)
+        except Exception:
+            log.exception("Error enviando el correo.")
+    else:
+        log.info("[correo] No es lunes — reporte semanal omitido.")
 
     log.info("╚══ Run finalizado. ══╝")
 
