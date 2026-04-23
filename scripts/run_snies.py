@@ -208,6 +208,12 @@ def descargar_snies(download_dir: Path) -> Path:
             '//label[starts-with(normalize-space(),"Pregrado (")]/../div[contains(@class,"ui-radiobutton")]/div[contains(@class,"ui-radiobutton-box")]',
             "académico Pregrado")
         _wait_ajax(driver)
+        time.sleep(3)
+
+        _click_radio_box(driver,
+            '//label[starts-with(normalize-space(),"Universitario (")]/../div[contains(@class,"ui-radiobutton")]/div[contains(@class,"ui-radiobutton-box")]',
+            "nivel Universitario")
+        _wait_ajax(driver)
         time.sleep(5)
 
         driver.save_screenshot(str(TMP_DIR / "debug_post_filtros.png"))
@@ -472,8 +478,8 @@ def procesar(cat: pd.DataFrame, today: date) -> dict:
 
     log.info(f"[pregrado] Snapshot ANTERIOR: {anterior_path.name} ({len(df_ant)} programas)")
 
-    # 5. Validar tamaño razonable (pregrado activo ≈ 8-10k programas)
-    UMBRAL = 15_000
+    # 5. Validar tamaño razonable (universitario activo ≈ 5k programas)
+    UMBRAL = 10_000
     if len(df_hoy) > UMBRAL:
         log.error(
             f"[pregrado] Snapshot HOY tiene {len(df_hoy)} programas — demasiados. "
