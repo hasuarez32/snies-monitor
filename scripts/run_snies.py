@@ -10,6 +10,7 @@ Ejecución:
     python scripts/run_snies.py
 """
 
+import os
 import sys
 import logging
 import shutil
@@ -59,13 +60,9 @@ SNIES_URL        = "https://hecaa.mineducacion.gov.co/consultaspublicas/programa
 DOWNLOAD_TIMEOUT = 120  # segundos máximos esperando la descarga
 
 # ── XPaths del flujo de pregrado ─────────────────────────────────────────────
-# If the portal is updated, run the page-dump snippet in tmp/ to re-derive IDs.
+# Anclados al texto visible, no a IDs dinámicos JSF que cambian con cada deploy.
 XPATHS = {
-    "institucion": '//*[@id="formFiltro:j_idt35"]/tbody/tr[2]/td/div/div[2]/span',
-    "programa":    '//*[@id="formFiltro:j_idt68"]/tbody/tr[2]/td/div/div[2]/span',
-    "academico":   '//*[@id="formFiltro:j_idt109"]/tbody/tr[2]/td/div/div[2]/span',
-    "formacion":   '//*[@id="formFiltro:j_idt116"]/tbody/tr[4]/td/div/div[2]/span',
-    "descarga":    '//*[@id="j_idt169:j_idt171"]',
+    "descarga": '//button[.//span[normalize-space()="Descargar programas"]]',
 }
 
 # ── Columnas de trabajo ───────────────────────────────────────────────────────
@@ -101,12 +98,16 @@ COLS_VIGILAR = [
 
 # ── Selenium ──────────────────────────────────────────────────────────────────
 
-def _build_driver(download_dir: Path) -> webdriver.Chrome:
+def _build_driver(download_dir: Path, headless: bool = True) -> webdriver.Chrome:
     opts = webdriver.ChromeOptions()
-    opts.add_argument("--headless=new")
+    if headless:
+        opts.add_argument("--headless=new")
+    opts.add_argument("--window-size=1920,1080")
     opts.add_argument("--no-sandbox")
     opts.add_argument("--disable-dev-shm-usage")
-    opts.add_argument("--disable-gpu")
+    opts.add_argument("--disable-blink-features=AutomationControlled")
+    opts.add_experimental_option("excludeSwitches", ["enable-automation"])
+    opts.add_experimental_option("useAutomationExtension", False)
     opts.add_argument(
         "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -138,6 +139,15 @@ def _safe_click(driver: webdriver.Chrome, xpath: str, timeout: int = 15) -> None
             time.sleep(2)
 
 
+def _click_radio_box(driver: webdriver.Chrome, box_xpath: str, label: str, timeout: int = 30) -> None:
+    """JS-click en el div.ui-radiobutton-box de PrimeFaces para disparar su handler jQuery."""
+    el = WebDriverWait(driver, timeout).until(
+        EC.presence_of_element_located((By.XPATH, box_xpath))
+    )
+    driver.execute_script("arguments[0].click();", el)
+    log.info(f"[radio] click JS en box → {label}")
+
+
 def _wait_ajax(driver: webdriver.Chrome, timeout: int = 20) -> None:
     """
     Espera a que terminen las peticiones AJAX lanzadas por PrimeFaces/jQuery
@@ -158,36 +168,52 @@ def _wait_ajax(driver: webdriver.Chrome, timeout: int = 20) -> None:
 
 def descargar_snies(download_dir: Path) -> Path:
     """
-    Navega el portal SNIES con los filtros del nivel `sfx` y descarga el Excel.
+    Navega el portal SNIES, aplica filtros (institución activa, programa activo,
+    pregrado) usando labels de texto y descarga el Excel.
     Devuelve la ruta al archivo Programas.xlsx dentro de download_dir.
     """
-    xp            = XPATHS
     expected_file = download_dir / "Programas.xlsx"
     partial_file  = download_dir / "Programas.crdownload"
 
-    # Limpiar restos de descargas anteriores
     for f in (expected_file, partial_file):
         if f.exists():
             f.unlink()
 
-    driver = _build_driver(download_dir)
+    headless = os.environ.get("SNIES_HEADLESS", "1") != "0"
+    driver = _build_driver(download_dir, headless=headless)
     try:
         log.info("[pregrado] Abriendo SNIES...")
         driver.get(SNIES_URL)
-        driver.implicitly_wait(5)
+        time.sleep(8)
+
+        screenshot_path = TMP_DIR / "debug_snies.png"
+        driver.save_screenshot(str(screenshot_path))
+        log.info(f"[pregrado] Screenshot guardado en {screenshot_path}")
 
         log.info("[pregrado] Aplicando filtros...")
-        _safe_click(driver, xp["institucion"], timeout=30)
+        _click_radio_box(driver,
+            '//label[normalize-space()="Activo"]/../div[contains(@class,"ui-radiobutton")]/div[contains(@class,"ui-radiobutton-box")]',
+            "institución Activo")
         _wait_ajax(driver)
-        _safe_click(driver, xp["programa"], timeout=30)
+        time.sleep(3)
+
+        _click_radio_box(driver,
+            '//label[starts-with(normalize-space(),"Activo (")]/../div[contains(@class,"ui-radiobutton")]/div[contains(@class,"ui-radiobutton-box")]',
+            "programa Activo")
         _wait_ajax(driver)
-        _safe_click(driver, xp["academico"], timeout=30)
+        time.sleep(3)
+
+        _click_radio_box(driver,
+            '//label[starts-with(normalize-space(),"Pregrado (")]/../div[contains(@class,"ui-radiobutton")]/div[contains(@class,"ui-radiobutton-box")]',
+            "académico Pregrado")
         _wait_ajax(driver)
-        _safe_click(driver, xp["formacion"], timeout=30)
-        _wait_ajax(driver)
+        time.sleep(5)
+
+        driver.save_screenshot(str(TMP_DIR / "debug_post_filtros.png"))
+        log.info("[pregrado] Screenshot post-filtros guardado")
 
         log.info("[pregrado] Solicitando descarga...")
-        _safe_click(driver, xp["descarga"])
+        _safe_click(driver, XPATHS["descarga"])
 
         elapsed = 0
         while elapsed < DOWNLOAD_TIMEOUT:
