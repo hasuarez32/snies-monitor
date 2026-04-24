@@ -3,7 +3,9 @@
     "allow": [
       "Bash(mv \"Structuring_SNIES.ipynb\" notebooks/)",
       "Bash(mv \"sniespos.ipynb\" notebooks/)",
-      "Bash(mv \"Categorización divisiones SNIES .xlsx\" \"data/Categorización divisiones SNIES.xlsx\")"
+      "Bash(mv \"Categorización divisiones SNIES .xlsx\" \"data/Categorización divisiones SNIES.xlsx\")",
+      "Bash(find \"c:\\\\\\\\Users\\\\\\\\ARACATACA\\\\\\\\Desktop\\\\\\\\snies-monitor\" -maxdepth 1 -type f -name \"README*\")",
+      "Bash(ls -1 \"c:\\\\\\\\Users\\\\\\\\ARACATACA\\\\\\\\Desktop\\\\\\\\snies-monitor\\\\\\\\Programas\\\\\\\\\")"
     ]
   }
 }

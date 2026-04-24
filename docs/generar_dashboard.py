@@ -51,7 +51,7 @@ def _distribucion(df, campo, top_n=15):
     return [{"label": str(k), "value": int(v)} for k, v in counts.items()]
 
 
-def _to_records(df, cols, max_rows=500):
+def _to_records(df, cols):
     if df is None or df.empty:
         return []
     if "FECHA_OBTENCION" in df.columns:
@@ -59,7 +59,7 @@ def _to_records(df, cols, max_rows=500):
         df["_s"] = pd.to_datetime(df["FECHA_OBTENCION"], errors="coerce")
         df = df.sort_values("_s", ascending=False).drop(columns=["_s"])
     cols_ok = [c for c in cols if c in df.columns]
-    sub = df[cols_ok].head(max_rows).copy()
+    sub = df[cols_ok].copy()
     for c in sub.columns:
         sub[c] = sub[c].fillna("").astype(str)
     return sub.to_dict("records")
@@ -89,9 +89,9 @@ def leer_historico():
         try:
             df = _read_xl(f, sheet_name="Programas",
                           usecols=["CÓDIGO_SNIES_DEL_PROGRAMA"])
-            df = df.dropna(subset=["CÓDIGO_SNIES_DEL_PROGRAMA"])
             if len(df) > 2:
                 df = df.iloc[:-2]
+            df = df.dropna(subset=["CÓDIGO_SNIES_DEL_PROGRAMA"])
             puntos.append({"fecha": fecha.isoformat(), "total": len(df)})
         except Exception as e:
             print(f"  saltando {f.name}: {e}")
@@ -162,6 +162,10 @@ def main():
         "nuevos":        _to_records(nuevos_df,    COLS_NOVEDAD),
         "inactivos":     _to_records(inactivos_df, COLS_NOVEDAD),
         "modificados":   _to_records(mods_df,      COLS_MOD),
+        # Conteos reales (sin truncar) para los badges
+        "n_nuevos":      len(nuevos_df),
+        "n_inactivos":   len(inactivos_df),
+        "n_modificados": len(mods_df),
     }
 
     DOCS_DIR.mkdir(exist_ok=True)
@@ -344,15 +348,15 @@ tr:hover td{background:#f8fafc}
     </div>
 
     <div id="tp-nue" class="tab-pane on">
-      <input class="search" placeholder="Buscar nuevos…" oninput="filter('nue',this.value)">
+      <input class="search" placeholder="Buscar por nombre, institución, código SNIES…" oninput="filter('nue',this.value)">
       <div class="tbl-wrap" id="tw-nue"></div>
     </div>
     <div id="tp-ina" class="tab-pane">
-      <input class="search" placeholder="Buscar inactivos…" oninput="filter('ina',this.value)">
+      <input class="search" placeholder="Buscar por nombre, institución, código SNIES…" oninput="filter('ina',this.value)">
       <div class="tbl-wrap" id="tw-ina"></div>
     </div>
     <div id="tp-mod" class="tab-pane">
-      <input class="search" placeholder="Buscar modificados…" oninput="filter('mod',this.value)">
+      <input class="search" placeholder="Buscar por nombre, institución, código SNIES…" oninput="filter('mod',this.value)">
       <div class="tbl-wrap" id="tw-mod"></div>
     </div>
   </section>
