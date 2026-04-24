@@ -65,6 +65,62 @@ def _to_records(df, cols):
     return sub.to_dict("records")
 
 
+def _normalizar_modificados(df: pd.DataFrame) -> pd.DataFrame:
+    """Rellena columnas base vacías desde variantes _NUEVO para filas acumuladas
+    antes de que detectar_novedades renombrara los sufijos del merge."""
+    if df is None or df.empty:
+        return df
+    df = df.copy()
+
+    # Columnas que pueden estar en _NUEVO cuando la base está vacía
+    fallbacks = {
+        "NOMBRE_DEL_PROGRAMA":         "NOMBRE_DEL_PROGRAMA_NUEVO",
+        "NOMBRE_INSTITUCIÓN":          "NOMBRE_INSTITUCIÓN_NUEVO",
+        "SECTOR":                      "SECTOR_NUEVO",
+        "MODALIDAD":                   "MODALIDAD_NUEVO",
+        "DEPARTAMENTO_OFERTA_PROGRAMA":"DEPARTAMENTO_OFERTA_PROGRAMA_NUEVO",
+    }
+    for base, nuevo in fallbacks.items():
+        if nuevo not in df.columns:
+            continue
+        if base not in df.columns:
+            df[base] = df[nuevo]
+        else:
+            mask = df[base].isna() | (df[base].astype(str).str.strip() == "")
+            df.loc[mask, base] = df.loc[mask, nuevo]
+
+    # Reconstruir QUE_CAMBIO cuando está vacío usando pares _NUEVO / _ANTIGUO
+    vigilar = [
+        ("MODALIDAD",                    "MODALIDAD"),
+        ("NÚMERO_CRÉDITOS",              "NÚMERO_CRÉDITOS"),
+        ("COSTO_MATRÍCULA_ESTUD_NUEVOS", "COSTO_MATRÍCULA_ESTUD_NUEVOS"),
+        ("MUNICIPIO_OFERTA_PROGRAMA",    "MUNICIPIO_OFERTA_PROGRAMA"),
+    ]
+    if "QUE_CAMBIO" not in df.columns:
+        df["QUE_CAMBIO"] = ""
+
+    empty_mask = df["QUE_CAMBIO"].isna() | (df["QUE_CAMBIO"].astype(str).str.strip() == "")
+    if empty_mask.any():
+        def _reconstruir(row):
+            partes = []
+            for label, col in vigilar:
+                n_col = f"{col}_NUEVO"
+                a_col = next(
+                    (c for c in (f"{col}_ANTIGUO", f"{col}_ANTERIOR") if c in row.index),
+                    None,
+                )
+                if n_col in row.index and a_col:
+                    vn = str(row[n_col]).strip()
+                    va = str(row[a_col]).strip()
+                    if vn != va and vn not in ("nan", "") and va not in ("nan", ""):
+                        partes.append(f"{label}: {va} -> {vn}")
+            return " | ".join(partes) if partes else ""
+
+        df.loc[empty_mask, "QUE_CAMBIO"] = df[empty_mask].apply(_reconstruir, axis=1)
+
+    return df
+
+
 def _count_last_run(df):
     if df is None or df.empty:
         return 0
@@ -141,6 +197,8 @@ def main():
     inactivos_df = leer_novedades("Inactivos_pregrado.xlsx")
     mods_df      = leer_novedades("Modificados_pregrado.xlsx")
     snapshot_df  = leer_snapshot_actual(historico)
+
+    mods_df = _normalizar_modificados(mods_df)
 
     kpis = {
         "total_activos":   historico[-1]["total"] if historico else 0,
