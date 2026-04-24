@@ -52,6 +52,6 @@ jobs:
 
       - name: Publicar dashboard
         run: |
-          git add docs/index.html docs/dashboard_data.json
+          git add docs/
           git diff --staged --quiet || git commit -m "dashboard: $(date +'%Y-%m-%d')"
           git push
