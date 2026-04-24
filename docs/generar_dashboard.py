@@ -89,7 +89,7 @@ CHARTS_HTML = {
   <div class="card"><div class="ct">Por modalidad</div><div id="ch-modalidad" style="height:260px"></div></div>
 </div>
 <div class="card"><div class="ct">Top 15 departamentos de oferta</div><div id="ch-depto" style="height:310px"></div></div>
-<div class="card"><div class="ct">Detectados por fecha de run</div><div id="ch-timeline" style="height:200px"></div></div>
+<div class="card"><div class="ct">Acumulado de nuevos por modalidad en el tiempo</div><div id="ch-timeline" style="height:240px"></div></div>
 """,
     "inactivos": """
 <div class="g2">
@@ -101,7 +101,7 @@ CHARTS_HTML = {
   <div class="card"><div class="ct">Por modalidad</div><div id="ch-modalidad" style="height:260px"></div></div>
 </div>
 <div class="card"><div class="ct">Top 15 departamentos de oferta</div><div id="ch-depto" style="height:310px"></div></div>
-<div class="card"><div class="ct">Detectados por fecha de run</div><div id="ch-timeline" style="height:200px"></div></div>
+<div class="card"><div class="ct">Acumulado de inactivos por modalidad en el tiempo</div><div id="ch-timeline" style="height:240px"></div></div>
 """,
     "modificados": """
 <div class="card"><div class="ct">Tipo de cambio detectado</div><div id="ch-tipo-cambio" style="height:260px"></div></div>
@@ -891,6 +891,34 @@ function plotTimeline(id, rows) {
     plot_bgcolor:'white',paper_bgcolor:'white',hovermode:'x unified'},PC);
 }
 
+function plotAcumuladoModalidad(id, rows) {
+  const el=document.getElementById(id); if(!el||!rows.length) return;
+  const fechas=[...new Set(rows.map(r=>r['FECHA_OBTENCION']).filter(Boolean))]
+    .sort((a,b)=>parseFecha(a)-parseFecha(b));
+  if(!fechas.length) return;
+  const mods=[...new Set(rows.map(r=>r['MODALIDAD']).filter(v=>v&&v.trim()))].sort();
+  const COLORS=['#2563eb','#059669','#d97706','#dc2626','#8b5cf6','#06b6d4','#ec4899'];
+  const traces=mods.map((mod,i)=>{
+    const bd={};
+    rows.filter(r=>r['MODALIDAD']===mod).forEach(r=>{const f=r['FECHA_OBTENCION']||'?';bd[f]=(bd[f]||0)+1;});
+    let cum=0; const x=[],y=[];
+    fechas.forEach(f=>{cum+=(bd[f]||0);x.push(f);y.push(cum);});
+    return{x,y,name:mod,type:'scatter',mode:'lines+markers',
+      line:{color:COLORS[i%COLORS.length],width:2.5},
+      marker:{color:COLORS[i%COLORS.length],size:6},
+      hovertemplate:mod+'<br>%{x}<br><b>%{y:,}</b> acumulados<extra></extra>'};
+  });
+  if(!traces.length) return;
+  Plotly.react(id,traces,{
+    margin:{t:10,r:20,b:55,l:55},
+    xaxis:{showgrid:false,tickfont:{size:11}},
+    yaxis:{showgrid:true,gridcolor:'#e2e8f0',rangemode:'tozero',tickfont:{size:11}},
+    plot_bgcolor:'white',paper_bgcolor:'white',
+    hovermode:'x unified',
+    legend:{orientation:'h',y:-0.22,font:{size:11}}
+  },PC);
+}
+
 function plotTipoCambio(id, rows) {
   const el=document.getElementById(id); if(!el) return;
   const c={};
@@ -982,13 +1010,14 @@ function renderAll(rows) {
   plotHBar('ch-instituciones', rows, 'NOMBRE_INSTITUCIÓN', C, 10);
   plotHBar('ch-division',      rows, 'DIVISIÓN UNINORTE',  C, 12);
   plotHBar('ch-depto',         rows, 'DEPARTAMENTO_OFERTA_PROGRAMA', '#6366f1', 15);
-  plotTimeline('ch-timeline', rows);
 
   if (CFG.tipo === 'modificados') {
     plotTipoCambio('ch-tipo-cambio', rows);
     plotScatter('ch-scatter', rows);
+    plotTimeline('ch-timeline', rows);
   } else {
     plotVBar('ch-modalidad', rows, 'MODALIDAD', C);
+    plotAcumuladoModalidad('ch-timeline', rows);
   }
 
   renderTbl(rows);
