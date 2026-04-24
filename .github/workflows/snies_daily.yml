@@ -46,3 +46,12 @@ jobs:
           git add data/ Programas/
           git diff --staged --quiet || git commit -m "snies: $(date +'%Y-%m-%d')"
           git push
+
+      - name: Generar dashboard
+        run: python docs/generar_dashboard.py
+
+      - name: Publicar dashboard
+        run: |
+          git add docs/index.html docs/dashboard_data.json
+          git diff --staged --quiet || git commit -m "dashboard: $(date +'%Y-%m-%d')"
+          git push
