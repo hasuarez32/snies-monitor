@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-04-23",
+  "ultima_actualizacion": "2026-04-24",
   "historico": [
     {
       "fecha": "2024-02-23",
@@ -92,21 +92,25 @@
     {
       "fecha": "2026-04-23",
       "total": 5256
+    },
+    {
+      "fecha": "2026-04-24",
+      "total": 5257
     }
   ],
   "kpis": {
-    "total_activos": 5256,
+    "total_activos": 5257,
     "nuevos_ultimo": 7,
     "inactivos_ultimo": 6,
     "mods_ultimo": 3,
-    "nuevos_total": 571,
+    "nuevos_total": 572,
     "inactivos_total": 147,
-    "mods_total": 783
+    "mods_total": 796
   },
   "por_sector": [
     {
       "label": "Privado",
-      "value": 3624
+      "value": 3625
     },
     {
       "label": "Oficial",
@@ -116,11 +120,11 @@
   "por_depto": [
     {
       "label": "Bogotá, D.C.",
-      "value": 1533
+      "value": 1535
     },
     {
       "label": "Antioquia",
-      "value": 746
+      "value": 748
     },
     {
       "label": "Valle del Cauca",
@@ -128,11 +132,11 @@
     },
     {
       "label": "Santander",
-      "value": 283
+      "value": 284
     },
     {
       "label": "Atlántico",
-      "value": 273
+      "value": 275
     },
     {
       "label": "Bolívar",
@@ -147,12 +151,12 @@
       "value": 137
     },
     {
-      "label": "Cauca",
+      "label": "Cundinamarca",
       "value": 134
     },
     {
-      "label": "Cundinamarca",
-      "value": 132
+      "label": "Cauca",
+      "value": 134
     },
     {
       "label": "Caldas",
@@ -182,7 +186,7 @@
     },
     {
       "label": "Virtual",
-      "value": 541
+      "value": 542
     },
     {
       "label": "A distancia",
