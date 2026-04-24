@@ -36,7 +36,7 @@ COLS_DETAIL = [
     "FECHA_OBTENCION", "CÓDIGO_SNIES_DEL_PROGRAMA", "NOMBRE_DEL_PROGRAMA",
     "NOMBRE_INSTITUCIÓN", "SECTOR", "MODALIDAD", "DEPARTAMENTO_OFERTA_PROGRAMA",
     "MUNICIPIO_OFERTA_PROGRAMA", "NÚMERO_CRÉDITOS", "COSTO_MATRÍCULA_ESTUD_NUEVOS",
-    "PERIODICIDAD", "DIVISIÓN UNINORTE",
+    "PERIODICIDAD", "FECHA_DE_REGISTRO_EN_SNIES", "DIVISIÓN UNINORTE",
 ]
 COLS_MOD_DETAIL = COLS_DETAIL + ["QUE_CAMBIO", "NÚMERO_CRÉDITOS_ANTERIOR"]
 
@@ -89,7 +89,7 @@ CHARTS_HTML = {
   <div class="card"><div class="ct">Por modalidad</div><div id="ch-modalidad" style="height:260px"></div></div>
 </div>
 <div class="card"><div class="ct">Top 15 departamentos de oferta</div><div id="ch-depto" style="height:310px"></div></div>
-<div class="card"><div class="ct">Acumulado de nuevos por modalidad en el tiempo</div><div id="ch-timeline" style="height:240px"></div></div>
+<div class="card"><div class="ct">Nuevos por modalidad acumulado semestral (fecha de registro SNIES)</div><div id="ch-timeline" style="height:260px"></div></div>
 """,
     "inactivos": """
 <div class="g2">
@@ -101,7 +101,7 @@ CHARTS_HTML = {
   <div class="card"><div class="ct">Por modalidad</div><div id="ch-modalidad" style="height:260px"></div></div>
 </div>
 <div class="card"><div class="ct">Top 15 departamentos de oferta</div><div id="ch-depto" style="height:310px"></div></div>
-<div class="card"><div class="ct">Acumulado de inactivos por modalidad en el tiempo</div><div id="ch-timeline" style="height:240px"></div></div>
+<div class="card"><div class="ct">Inactivos por modalidad acumulado semestral (fecha de registro SNIES)</div><div id="ch-timeline" style="height:260px"></div></div>
 """,
     "modificados": """
 <div class="card"><div class="ct">Tipo de cambio detectado</div><div id="ch-tipo-cambio" style="height:260px"></div></div>
@@ -893,29 +893,52 @@ function plotTimeline(id, rows) {
 
 function plotAcumuladoModalidad(id, rows) {
   const el=document.getElementById(id); if(!el||!rows.length) return;
-  const fechas=[...new Set(rows.map(r=>r['FECHA_OBTENCION']).filter(Boolean))]
-    .sort((a,b)=>parseFecha(a)-parseFecha(b));
-  if(!fechas.length) return;
+
+  // Map any date string to "YYYY-S1" or "YYYY-S2"; returns null if out of range or unparseable
+  function getSem(s) {
+    if(!s||!s.trim()) return null;
+    let y,m;
+    const iso=s.match(/^(\d{4})-(\d{2})/);
+    if(iso){y=+iso[1];m=+iso[2];}
+    else{const dmy=s.match(/^(\d{2})\/(\d{2})\/(\d{4})/);if(dmy){y=+dmy[3];m=+dmy[2];}}
+    if(!y||y<2014||y>2035) return null;
+    return y+'-'+(m<=6?'S1':'S2');
+  }
+
+  const semSet=new Set();
+  rows.forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)semSet.add(s);});
+  const sems=[...semSet].sort(); // "YYYY-S1" < "YYYY-S2" sorts correctly as strings
+
+  if(!sems.length){
+    el.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#64748b;font-size:.82rem">Sin datos de fecha de registro en SNIES</div>';
+    return;
+  }
+
   const mods=[...new Set(rows.map(r=>r['MODALIDAD']).filter(v=>v&&v.trim()))].sort();
   const COLORS=['#2563eb','#059669','#d97706','#dc2626','#8b5cf6','#06b6d4','#ec4899'];
+
   const traces=mods.map((mod,i)=>{
-    const bd={};
-    rows.filter(r=>r['MODALIDAD']===mod).forEach(r=>{const f=r['FECHA_OBTENCION']||'?';bd[f]=(bd[f]||0)+1;});
+    const bySem={};
+    rows.filter(r=>r['MODALIDAD']===mod).forEach(r=>{
+      const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']); if(s)bySem[s]=(bySem[s]||0)+1;
+    });
     let cum=0; const x=[],y=[];
-    fechas.forEach(f=>{cum+=(bd[f]||0);x.push(f);y.push(cum);});
+    sems.forEach(s=>{cum+=(bySem[s]||0);x.push(s);y.push(cum);});
+    if(cum===0) return null;
     return{x,y,name:mod,type:'scatter',mode:'lines+markers',
       line:{color:COLORS[i%COLORS.length],width:2.5},
       marker:{color:COLORS[i%COLORS.length],size:6},
-      hovertemplate:mod+'<br>%{x}<br><b>%{y:,}</b> acumulados<extra></extra>'};
-  });
+      hovertemplate:mod+'<br><b>%{x}</b><br>%{y:,} acumulados<extra></extra>'};
+  }).filter(Boolean);
+
   if(!traces.length) return;
   Plotly.react(id,traces,{
-    margin:{t:10,r:20,b:55,l:55},
-    xaxis:{showgrid:false,tickfont:{size:11}},
+    margin:{t:10,r:20,b:65,l:55},
+    xaxis:{showgrid:false,tickfont:{size:11},tickangle:-30,type:'category'},
     yaxis:{showgrid:true,gridcolor:'#e2e8f0',rangemode:'tozero',tickfont:{size:11}},
     plot_bgcolor:'white',paper_bgcolor:'white',
     hovermode:'x unified',
-    legend:{orientation:'h',y:-0.22,font:{size:11}}
+    legend:{orientation:'h',y:-0.28,font:{size:11}}
   },PC);
 }
 
