@@ -30,6 +30,8 @@ NOVEDADES_DIR = ROOT / "data" / "novedades"
 SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 587
 
+DASHBOARD_URL = "https://hasuarez32.github.io/snies-monitor/"
+
 # ── HTML helpers ──────────────────────────────────────────────────────────────
 
 def _tabla_html(df: pd.DataFrame | None, color_header: str) -> str:
@@ -144,6 +146,19 @@ def construir_cuerpo(resultados: dict, today: date) -> str:
             Monitoreo automático de programas académicos de pregrado en Colombia.
             Los archivos Excel completos de pregrado van adjuntos a este correo.
         </p>
+
+        <div style="text-align:center;margin:24px 0;">
+            <a href="{DASHBOARD_URL}"
+               style="display:inline-block;background-color:#1e40af;color:#ffffff;
+                      font-family:Arial,sans-serif;font-size:15px;font-weight:bold;
+                      text-decoration:none;padding:14px 36px;border-radius:8px;
+                      letter-spacing:0.03em;">
+                📊 Ver Dashboard Completo
+            </a>
+            <p style="font-size:11px;color:#888;margin-top:8px;font-family:Arial,sans-serif;">
+                Gráficos interactivos · Historial · Tablas con filtros
+            </p>
+        </div>
 
         {bloques}
 
