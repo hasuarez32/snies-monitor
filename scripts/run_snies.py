@@ -571,14 +571,11 @@ def main() -> None:
     except Exception:
         log.exception("Error generando gráficos de novedades.")
 
-    if today.weekday() == 0:  # 0 = lunes
-        try:
-            from send_report import enviar_reporte
-            enviar_reporte(resultados, today, chart_paths)
-        except Exception:
-            log.exception("Error enviando el correo.")
-    else:
-        log.info("[correo] No es lunes — reporte semanal omitido.")
+    try:
+        from send_report import enviar_reporte
+        enviar_reporte(resultados, today, chart_paths)
+    except Exception:
+        log.exception("Error enviando el correo.")
 
     log.info("╚══ Run finalizado. ══╝")
 
