@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-04-24",
+  "ultima_actualizacion": "2026-04-25",
   "historico": [
     {
       "fecha": "2024-02-23",
@@ -96,16 +96,20 @@
     {
       "fecha": "2026-04-24",
       "total": 5259
+    },
+    {
+      "fecha": "2026-04-25",
+      "total": 5260
     }
   ],
   "kpis": {
-    "total_activos": 5259,
+    "total_activos": 5260,
     "nuevos_ultimo": 7,
     "inactivos_ultimo": 6,
     "mods_ultimo": 3,
-    "nuevos_total": 572,
+    "nuevos_total": 573,
     "inactivos_total": 147,
-    "mods_total": 796
+    "mods_total": 824
   },
   "por_sector": [
     {
@@ -114,7 +118,7 @@
     },
     {
       "label": "Oficial",
-      "value": 1634
+      "value": 1635
     }
   ],
   "por_depto": [
@@ -182,7 +186,7 @@
   "por_modalidad": [
     {
       "label": "Presencial",
-      "value": 4344
+      "value": 4345
     },
     {
       "label": "Virtual",
@@ -5945,6 +5949,16 @@
       "MODALIDAD": "Virtual",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118575",
+      "NOMBRE_DEL_PROGRAMA": "Farmacia",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD NACIONAL DE COLOMBIA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "",
+      "DIVISIÓN UNINORTE": "Ciencias de la Salud"
     }
   ],
   "inactivos": [
@@ -16175,9 +16189,317 @@
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Antioquia",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
       "QUE_CAMBIO": "MUNICIPIO_OFERTA_PROGRAMA: nan → Medellín"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "5129",
+      "NOMBRE_DEL_PROGRAMA": "ACUICULTURA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Otro",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 776400.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "54095",
+      "NOMBRE_DEL_PROGRAMA": "ADMINISTRACIÓN EN FINANZAS Y NEGOCIOS INTERNACIONALES",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "A distancia",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Escuela de Negocios",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 827191.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "53559",
+      "NOMBRE_DEL_PROGRAMA": "ADMINISTRACIÓN EN SALUD",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "A distancia",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Escuela de Negocios",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 804114.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "8015",
+      "NOMBRE_DEL_PROGRAMA": "BACTERIOLOGIA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Ciencias de la Salud",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 811111.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "7822",
+      "NOMBRE_DEL_PROGRAMA": "BIOLOGIA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Ciencias Básicas",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 837560.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "104855",
+      "NOMBRE_DEL_PROGRAMA": "DERECHO",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Derecho, C. Política y Rel. Internacionales",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 891615.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "325",
+      "NOMBRE_DEL_PROGRAMA": "ENFERMERIA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Ciencias de la Salud",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 817359.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "103514",
+      "NOMBRE_DEL_PROGRAMA": "ESTADÍSTICA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Ciencias Básicas",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 789950.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "104222",
+      "NOMBRE_DEL_PROGRAMA": "FÍSICA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Ciencias Básicas",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 806465.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "4863",
+      "NOMBRE_DEL_PROGRAMA": "GEOGRAFÍA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 785389.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "327",
+      "NOMBRE_DEL_PROGRAMA": "INGENIERIA AGRONOMICA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Otro",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 805783.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "53343",
+      "NOMBRE_DEL_PROGRAMA": "INGENIERÍA AMBIENTAL",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Ingenierías",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 847408.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "326",
+      "NOMBRE_DEL_PROGRAMA": "INGENIERIA DE ALIMENTOS",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Ingenierías",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 727596.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "51795",
+      "NOMBRE_DEL_PROGRAMA": "INGENIERIA DE SISTEMAS",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "A distancia",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Ingenierías",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 862800.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "6544",
+      "NOMBRE_DEL_PROGRAMA": "INGENIERIA INDUSTRIAL",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Ingenierías",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 878917.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "53354",
+      "NOMBRE_DEL_PROGRAMA": "INGENIERÍA MECÁNICA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Ingenierías",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 791267.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "105233",
+      "NOMBRE_DEL_PROGRAMA": "INGENIERÍA QUÍMICA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Ingenierías",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 791175.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "106199",
+      "NOMBRE_DEL_PROGRAMA": "LICENCIATURA EN CIENCIAS NATURALES Y EDUCACIÓN AMBIENTAL",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 791492.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "52967",
+      "NOMBRE_DEL_PROGRAMA": "LICENCIATURA EN CIENCIAS NATURALES Y EDUCACIÓN AMBIENTAL",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "A distancia",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 791492.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "105950",
+      "NOMBRE_DEL_PROGRAMA": "LICENCIATURA EN CIENCIAS SOCIALES",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 788957.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "106065",
+      "NOMBRE_DEL_PROGRAMA": "LICENCIATURA EN EDUCACIÓN ARTÍSTICA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 835995.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "11604",
+      "NOMBRE_DEL_PROGRAMA": "LICENCIATURA EN EDUCACION FISICA, RECREACION Y DEPORTES",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 814533.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "106119",
+      "NOMBRE_DEL_PROGRAMA": "LICENCIATURA EN INFORMATICA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 807450.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "105949",
+      "NOMBRE_DEL_PROGRAMA": "Licenciatura en Lenguas Extranjeras con énfasis en Inglés",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 880710.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "105951",
+      "NOMBRE_DEL_PROGRAMA": "Licenciatura en Literatura y Lengua Castellana",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 815203.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "8105",
+      "NOMBRE_DEL_PROGRAMA": "MATEMATICAS",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Ciencias Básicas",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 777980.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "320",
+      "NOMBRE_DEL_PROGRAMA": "MEDICINA VETERINARIA Y ZOOTECNIA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Otro",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 948852.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-25",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "4981",
+      "NOMBRE_DEL_PROGRAMA": "QUIMICA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CORDOBA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
+      "DIVISIÓN UNINORTE": "Ciencias Básicas",
+      "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 791175.0"
     }
   ],
-  "n_nuevos": 572,
+  "n_nuevos": 573,
   "n_inactivos": 147,
-  "n_modificados": 796
+  "n_modificados": 824
 }
