@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-04-25",
+  "ultima_actualizacion": "2026-04-26",
   "historico": [
     {
       "fecha": "2024-02-23",
@@ -99,6 +99,10 @@
     },
     {
       "fecha": "2026-04-25",
+      "total": 5260
+    },
+    {
+      "fecha": "2026-04-26",
       "total": 5260
     }
   ],
