@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-04-28",
+  "ultima_actualizacion": "2026-04-29",
   "historico": [
     {
       "fecha": "2024-02-23",
@@ -112,21 +112,25 @@
     {
       "fecha": "2026-04-28",
       "total": 5260
+    },
+    {
+      "fecha": "2026-04-29",
+      "total": 5261
     }
   ],
   "kpis": {
-    "total_activos": 5260,
+    "total_activos": 5261,
     "nuevos_ultimo": 7,
     "inactivos_ultimo": 6,
     "mods_ultimo": 3,
-    "nuevos_total": 573,
+    "nuevos_total": 574,
     "inactivos_total": 147,
-    "mods_total": 824
+    "mods_total": 827
   },
   "por_sector": [
     {
       "label": "Privado",
-      "value": 3625
+      "value": 3626
     },
     {
       "label": "Oficial",
@@ -156,7 +160,7 @@
     },
     {
       "label": "Bolívar",
-      "value": 203
+      "value": 204
     },
     {
       "label": "Norte de Santander",
@@ -198,7 +202,7 @@
   "por_modalidad": [
     {
       "label": "Presencial",
-      "value": 4345
+      "value": 4346
     },
     {
       "label": "Virtual",
@@ -5971,6 +5975,16 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "",
       "DIVISIÓN UNINORTE": "Ciencias de la Salud"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-29",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118577",
+      "NOMBRE_DEL_PROGRAMA": "LICENCIATURA EN MATEMÁTICAS",
+      "NOMBRE_INSTITUCIÓN": "FUNDACION UNIVERSITARIA ANTONIO DE AREVALO - UNITECNAR",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Bolívar",
+      "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación"
     }
   ],
   "inactivos": [
@@ -16509,9 +16523,42 @@
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Córdoba",
       "DIVISIÓN UNINORTE": "Ciencias Básicas",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: nan → 791175.0"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-29",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "108041",
+      "NOMBRE_DEL_PROGRAMA": "LICENCIATURA EN LENGUAS MODERNAS CON ÉNFASIS EN INGLÉS",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD PEDAGOGICA Y TECNOLOGICA DE COLOMBIA - UPTC",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Boyacá",
+      "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
+      "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 170 → 162"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-29",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "5094",
+      "NOMBRE_DEL_PROGRAMA": "ADMINISTRACION DE EMPRESAS",
+      "NOMBRE_INSTITUCIÓN": "FUNDACION UNIVERSITARIA LOS LIBERTADORES",
+      "SECTOR": "Privado",
+      "MODALIDAD": "A distancia",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
+      "DIVISIÓN UNINORTE": "Escuela de Negocios",
+      "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 144 → 140"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-29",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "53041",
+      "NOMBRE_DEL_PROGRAMA": "DERECHO",
+      "NOMBRE_INSTITUCIÓN": "FUNDACION UNIVERSITARIA LOS LIBERTADORES",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
+      "DIVISIÓN UNINORTE": "Derecho, C. Política y Rel. Internacionales",
+      "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 168 → 146"
     }
   ],
-  "n_nuevos": 573,
+  "n_nuevos": 574,
   "n_inactivos": 147,
-  "n_modificados": 824
+  "n_modificados": 827
 }
