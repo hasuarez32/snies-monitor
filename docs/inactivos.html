@@ -217,14 +217,19 @@ function plotDonut(id, rows, field) {
     plot_bgcolor:'white',paper_bgcolor:'white'},PC);
 }
 
-function plotHBar(id, rows, field, color, n) {
+function plotHBar(id, rows, field, color, n, maxLen) {
   const el=document.getElementById(id); if(!el) return;
   const d=[...countBy(rows,field,n||10)].reverse(); if(!d.length) return;
-  Plotly.react(id,[{y:d.map(e=>e[0]),x:d.map(e=>e[1]),type:'bar',orientation:'h',
-    marker:{color,opacity:.85},hovertemplate:'%{y}<br><b>%{x:,}</b><extra></extra>'}],
-    {margin:{t:10,r:20,b:30,l:210},
+  const trunc=s=>maxLen&&s.length>maxLen?s.slice(0,maxLen)+'…':s;
+  const labels=d.map(e=>trunc(e[0]));
+  const full=d.map(e=>e[0]);
+  const lMargin=maxLen?Math.min(maxLen*6.5,200):210;
+  Plotly.react(id,[{y:labels,x:d.map(e=>e[1]),customdata:full,type:'bar',orientation:'h',
+    marker:{color,opacity:.85},
+    hovertemplate:'%{customdata}<br><b>%{x:,}</b><extra></extra>'}],
+    {margin:{t:10,r:20,b:30,l:lMargin},
     xaxis:{showgrid:true,gridcolor:'#e2e8f0',tickfont:{size:10}},
-    yaxis:{tickfont:{size:10},automargin:true},
+    yaxis:{tickfont:{size:10},automargin:false},
     plot_bgcolor:'white',paper_bgcolor:'white',bargap:.3},PC);
 }
 
@@ -474,7 +479,7 @@ function renderAll(rows) {
   document.getElementById('f-count').textContent = fmt(rows.length) + ' programas';
 
   plotDonut('ch-sector', rows, 'SECTOR');
-  plotHBar('ch-instituciones', rows, 'NOMBRE_INSTITUCIÓN', C, 10);
+  plotHBar('ch-instituciones', rows, 'NOMBRE_INSTITUCIÓN', C, 10, 32);
   plotHBar('ch-division',      rows, 'DIVISIÓN UNINORTE',  C, 12);
   plotHBar('ch-depto',         rows, 'DEPARTAMENTO_OFERTA_PROGRAMA', '#6366f1', 15);
 
