@@ -116,7 +116,21 @@ CHARTS_HTML = {
   <div class="card"><div class="ct">Por modalidad</div><div id="ch-modalidad" style="height:260px"></div></div>
 </div>
 <div class="card"><div class="ct">Top 15 departamentos de oferta</div><div id="ch-depto" style="height:310px"></div></div>
-<div class="card"><div class="ct">Inactivos por modalidad acumulado semestral (fecha de registro SNIES)</div><div id="ch-timeline" style="height:260px"></div></div>
+<div class="card">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;flex-wrap:wrap;gap:.5rem">
+    <div class="ct" style="margin-bottom:0">Acumulado por campo CINE semestral (fecha de registro SNIES)</div>
+    <div style="display:flex;gap:.5rem;align-items:center">
+      <input id="cine-search" list="cine-list" placeholder="Buscar campo CINE…"
+             style="padding:.35rem .7rem;border:1px solid #cbd5e1;border-radius:.4rem;font-size:.78rem;width:260px;outline:none"
+             onkeydown="if(event.key==='Enter')cineAdd()">
+      <datalist id="cine-list"></datalist>
+      <button onclick="cineAdd()"
+              style="padding:.35rem .8rem;background:#2563eb;color:#fff;border:none;border-radius:.4rem;font-size:.78rem;cursor:pointer;white-space:nowrap">+ Agregar</button>
+    </div>
+  </div>
+  <div id="cine-tags" style="display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.6rem;min-height:1.4rem"></div>
+  <div id="ch-timeline" style="height:300px"></div>
+</div>
 """,
     "modificados": """
 <div class="card"><div class="ct">Tipo de cambio detectado</div><div id="ch-tipo-cambio" style="height:260px"></div></div>
@@ -1152,7 +1166,7 @@ function renderAll(rows) {
     plotTipoCambio('ch-tipo-cambio', rows);
     plotScatter('ch-scatter', rows);
     plotTimeline('ch-timeline', rows);
-  } else if (CFG.tipo === 'nuevos') {
+  } else if (CFG.tipo === 'nuevos' || CFG.tipo === 'inactivos') {
     plotVBar('ch-modalidad', rows, 'MODALIDAD', C);
     plotAcumuladoCINE('ch-timeline', rows);
   } else {

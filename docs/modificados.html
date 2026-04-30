@@ -488,7 +488,7 @@ function renderAll(rows) {
     plotTipoCambio('ch-tipo-cambio', rows);
     plotScatter('ch-scatter', rows);
     plotTimeline('ch-timeline', rows);
-  } else if (CFG.tipo === 'nuevos') {
+  } else if (CFG.tipo === 'nuevos' || CFG.tipo === 'inactivos') {
     plotVBar('ch-modalidad', rows, 'MODALIDAD', C);
     plotAcumuladoCINE('ch-timeline', rows);
   } else {
