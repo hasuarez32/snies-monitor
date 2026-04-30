@@ -983,7 +983,8 @@ function renderCineChart(rows) {
   const el=document.getElementById('ch-timeline'); if(!el) return;
   const semSet=new Set();
   rows.forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)semSet.add(s);});
-  const sems=[...semSet].sort();
+  const allSems=[...semSet].sort();
+  const sems=allSems.filter(s=>s>='2018-S1');
 
   const tagsEl=document.getElementById('cine-tags');
   if(tagsEl){
@@ -1012,7 +1013,7 @@ function renderCineChart(rows) {
     rows.filter(r=>{const v=(r[CINE_COL]||'').trim();return isUnclass?!v:v===cine;})
         .forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)bySem[s]=(bySem[s]||0)+1;});
     let cum=0;const x=[],y=[];
-    sems.forEach(s=>{cum+=(bySem[s]||0);x.push(s);y.push(cum);});
+    allSems.forEach(s=>{cum+=(bySem[s]||0);if(s>='2018-S1'){x.push(s);y.push(cum);}});
     if(cum===0) return null;
     const col=CINE_COLORS[i%CINE_COLORS.length];
     return{x,y,name:cine,type:'scatter',mode:'lines+markers',
