@@ -37,6 +37,7 @@ COLS_DETAIL = [
     "NOMBRE_INSTITUCIÓN", "SECTOR", "MODALIDAD", "DEPARTAMENTO_OFERTA_PROGRAMA",
     "MUNICIPIO_OFERTA_PROGRAMA", "NÚMERO_CRÉDITOS", "COSTO_MATRÍCULA_ESTUD_NUEVOS",
     "PERIODICIDAD", "FECHA_DE_REGISTRO_EN_SNIES", "DIVISIÓN UNINORTE",
+    "CINE_F_2013_AC_CAMPO_ESPECÍFIC",
 ]
 COLS_MOD_DETAIL = COLS_DETAIL + ["QUE_CAMBIO", "NÚMERO_CRÉDITOS_ANTERIOR"]
 
@@ -89,7 +90,21 @@ CHARTS_HTML = {
   <div class="card"><div class="ct">Por modalidad</div><div id="ch-modalidad" style="height:260px"></div></div>
 </div>
 <div class="card"><div class="ct">Top 15 departamentos de oferta</div><div id="ch-depto" style="height:310px"></div></div>
-<div class="card"><div class="ct">Nuevos por modalidad acumulado semestral (fecha de registro SNIES)</div><div id="ch-timeline" style="height:260px"></div></div>
+<div class="card">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;flex-wrap:wrap;gap:.5rem">
+    <div class="ct" style="margin-bottom:0">Acumulado por campo CINE semestral (fecha de registro SNIES)</div>
+    <div style="display:flex;gap:.5rem;align-items:center">
+      <input id="cine-search" list="cine-list" placeholder="Buscar campo CINE…"
+             style="padding:.35rem .7rem;border:1px solid #cbd5e1;border-radius:.4rem;font-size:.78rem;width:260px;outline:none"
+             onkeydown="if(event.key==='Enter')cineAdd()">
+      <datalist id="cine-list"></datalist>
+      <button onclick="cineAdd()"
+              style="padding:.35rem .8rem;background:#2563eb;color:#fff;border:none;border-radius:.4rem;font-size:.78rem;cursor:pointer;white-space:nowrap">+ Agregar</button>
+    </div>
+  </div>
+  <div id="cine-tags" style="display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.6rem;min-height:1.4rem"></div>
+  <div id="ch-timeline" style="height:300px"></div>
+</div>
 """,
     "inactivos": """
 <div class="g2">
@@ -845,6 +860,17 @@ function byDate(rows) {
   return {x:e.map(i=>i[0]), y:e.map(i=>i[1])};
 }
 
+// ── Shared date helper ─────────────────────────────────────────────────────
+function getSem(s) {
+  if(!s||!s.trim()) return null;
+  let y,m;
+  const iso=s.match(/^(\d{4})-(\d{2})/);
+  if(iso){y=+iso[1];m=+iso[2];}
+  else{const dmy=s.match(/^(\d{2})\/(\d{2})\/(\d{4})/);if(dmy){y=+dmy[3];m=+dmy[2];}}
+  if(!y||y<2014||y>2035) return null;
+  return y+'-'+(m<=6?'S1':'S2');
+}
+
 // ── Charts ─────────────────────────────────────────────────────────────────
 function plotDonut(id, rows, field) {
   const el=document.getElementById(id); if(!el) return;
@@ -894,17 +920,6 @@ function plotTimeline(id, rows) {
 function plotAcumuladoModalidad(id, rows) {
   const el=document.getElementById(id); if(!el||!rows.length) return;
 
-  // Map any date string to "YYYY-S1" or "YYYY-S2"; returns null if out of range or unparseable
-  function getSem(s) {
-    if(!s||!s.trim()) return null;
-    let y,m;
-    const iso=s.match(/^(\d{4})-(\d{2})/);
-    if(iso){y=+iso[1];m=+iso[2];}
-    else{const dmy=s.match(/^(\d{2})\/(\d{2})\/(\d{4})/);if(dmy){y=+dmy[3];m=+dmy[2];}}
-    if(!y||y<2014||y>2035) return null;
-    return y+'-'+(m<=6?'S1':'S2');
-  }
-
   const semSet=new Set();
   rows.forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)semSet.add(s);});
   const sems=[...semSet].sort(); // "YYYY-S1" < "YYYY-S2" sorts correctly as strings
@@ -940,6 +955,99 @@ function plotAcumuladoModalidad(id, rows) {
     hovermode:'x unified',
     legend:{orientation:'h',y:-0.28,font:{size:11}}
   },PC);
+}
+
+// ── CINE cumulative chart (nuevos page only) ───────────────────────────────
+const CINE_COLORS=['#2563eb','#059669','#d97706','#dc2626','#8b5cf6',
+                   '#06b6d4','#ec4899','#f97316','#84cc16','#14b8a6'];
+const CINE_COL='CINE_F_2013_AC_CAMPO_ESPECÍFIC';
+let _cineInit=false, _cineAll=[], _cineActive=[];
+
+function initCINE() {
+  const counts={};
+  ROWS.forEach(r=>{
+    const v=(r[CINE_COL]||'').trim()||'Sin clasificar';
+    counts[v]=(counts[v]||0)+1;
+  });
+  _cineAll=Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
+  _cineActive=[..._cineAll.slice(0,8)];
+  const dl=document.getElementById('cine-list');
+  if(dl){
+    dl.innerHTML='';
+    _cineAll.forEach(c=>{const o=document.createElement('option');o.value=c;dl.appendChild(o);});
+  }
+  _cineInit=true;
+}
+
+function renderCineChart(rows) {
+  const el=document.getElementById('ch-timeline'); if(!el) return;
+  const semSet=new Set();
+  rows.forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)semSet.add(s);});
+  const sems=[...semSet].sort();
+
+  const tagsEl=document.getElementById('cine-tags');
+  if(tagsEl){
+    tagsEl.innerHTML=_cineActive.map((cine,i)=>{
+      const col=CINE_COLORS[i%CINE_COLORS.length];
+      const safe=cine.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      return '<span style="display:inline-flex;align-items:center;gap:.3rem;'+
+        'background:'+col+'22;border:1px solid '+col+'66;border-radius:2rem;'+
+        'padding:.18rem .55rem;font-size:.72rem;color:'+col+';font-weight:500">'+
+        cine+
+        '<button onclick="cineRemove(\''+safe+'\')" '+
+        'style="background:none;border:none;cursor:pointer;color:'+col+';'+
+        'font-size:.9rem;padding:0 0 0 .2rem;line-height:1;opacity:.75">\xd7</button></span>';
+    }).join('');
+  }
+
+  if(!sems.length){
+    el.innerHTML='<div style="display:flex;align-items:center;justify-content:center;'+
+      'height:100%;color:#64748b;font-size:.82rem">Sin datos de fecha de registro</div>';
+    return;
+  }
+
+  const traces=_cineActive.map((cine,i)=>{
+    const isUnclass=cine==='Sin clasificar';
+    const bySem={};
+    rows.filter(r=>{const v=(r[CINE_COL]||'').trim();return isUnclass?!v:v===cine;})
+        .forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)bySem[s]=(bySem[s]||0)+1;});
+    let cum=0;const x=[],y=[];
+    sems.forEach(s=>{cum+=(bySem[s]||0);x.push(s);y.push(cum);});
+    if(cum===0) return null;
+    const col=CINE_COLORS[i%CINE_COLORS.length];
+    return{x,y,name:cine,type:'scatter',mode:'lines+markers',
+      line:{color:col,width:2.5},marker:{color:col,size:6},
+      hovertemplate:cine+'<br><b>%{x}</b><br>%{y:,} acumulados<extra></extra>'};
+  }).filter(Boolean);
+
+  if(!traces.length) return;
+  Plotly.react('ch-timeline',traces,{
+    margin:{t:10,r:20,b:65,l:55},
+    xaxis:{showgrid:false,tickfont:{size:11},tickangle:-30,type:'category'},
+    yaxis:{showgrid:true,gridcolor:'#e2e8f0',rangemode:'tozero',tickfont:{size:11}},
+    plot_bgcolor:'white',paper_bgcolor:'white',
+    hovermode:'x unified',
+    legend:{orientation:'h',y:-0.28,font:{size:11}}
+  },PC);
+}
+
+function plotAcumuladoCINE(id, rows) {
+  if(!_cineInit) initCINE();
+  renderCineChart(rows);
+}
+
+function cineAdd() {
+  const inp=document.getElementById('cine-search'); if(!inp) return;
+  const val=inp.value.trim();
+  if(!val||_cineActive.includes(val)||!_cineAll.includes(val)){inp.value='';return;}
+  _cineActive.push(val);
+  inp.value='';
+  renderCineChart(filtered);
+}
+
+function cineRemove(cine) {
+  _cineActive=_cineActive.filter(c=>c!==cine);
+  renderCineChart(filtered);
 }
 
 function plotTipoCambio(id, rows) {
@@ -1038,6 +1146,9 @@ function renderAll(rows) {
     plotTipoCambio('ch-tipo-cambio', rows);
     plotScatter('ch-scatter', rows);
     plotTimeline('ch-timeline', rows);
+  } else if (CFG.tipo === 'nuevos') {
+    plotVBar('ch-modalidad', rows, 'MODALIDAD', C);
+    plotAcumuladoCINE('ch-timeline', rows);
   } else {
     plotVBar('ch-modalidad', rows, 'MODALIDAD', C);
     plotAcumuladoModalidad('ch-timeline', rows);
