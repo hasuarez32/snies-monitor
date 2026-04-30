@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-04-29",
+  "ultima_actualizacion": "2026-04-30",
   "historico": [
     {
       "fecha": "2024-02-23",
@@ -116,21 +116,25 @@
     {
       "fecha": "2026-04-29",
       "total": 5261
+    },
+    {
+      "fecha": "2026-04-30",
+      "total": 5262
     }
   ],
   "kpis": {
-    "total_activos": 5261,
+    "total_activos": 5262,
     "nuevos_ultimo": 7,
     "inactivos_ultimo": 6,
     "mods_ultimo": 3,
-    "nuevos_total": 574,
+    "nuevos_total": 575,
     "inactivos_total": 147,
-    "mods_total": 827
+    "mods_total": 828
   },
   "por_sector": [
     {
       "label": "Privado",
-      "value": 3626
+      "value": 3627
     },
     {
       "label": "Oficial",
@@ -140,7 +144,7 @@
   "por_depto": [
     {
       "label": "Bogotá, D.C.",
-      "value": 1535
+      "value": 1536
     },
     {
       "label": "Antioquia",
@@ -202,7 +206,7 @@
   "por_modalidad": [
     {
       "label": "Presencial",
-      "value": 4346
+      "value": 4347
     },
     {
       "label": "Virtual",
@@ -5985,6 +5989,16 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bolívar",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-30",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118581",
+      "NOMBRE_DEL_PROGRAMA": "Cultura Física, Deporte y Recreación",
+      "NOMBRE_INSTITUCIÓN": "FUNDACION UNIVERSITARIA LOS LIBERTADORES",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
+      "DIVISIÓN UNINORTE": "Otro"
     }
   ],
   "inactivos": [
@@ -16556,9 +16570,20 @@
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Derecho, C. Política y Rel. Internacionales",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 168 → 146"
+    },
+    {
+      "FECHA_OBTENCION": "2026-04-30",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "90555",
+      "NOMBRE_DEL_PROGRAMA": "ADMINISTRACION DE EMPRESAS",
+      "NOMBRE_INSTITUCIÓN": "ESCUELA NACIONAL DEL DEPORTE",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Valle del Cauca",
+      "DIVISIÓN UNINORTE": "Escuela de Negocios",
+      "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 145 → 148"
     }
   ],
-  "n_nuevos": 574,
+  "n_nuevos": 575,
   "n_inactivos": 147,
-  "n_modificados": 827
+  "n_modificados": 828
 }
