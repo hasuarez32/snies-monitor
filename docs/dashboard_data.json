@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-04-30",
+  "ultima_actualizacion": "2026-05-01",
   "historico": [
     {
       "fecha": "2024-02-23",
@@ -120,6 +120,10 @@
     {
       "fecha": "2026-04-30",
       "total": 5262
+    },
+    {
+      "fecha": "2026-05-01",
+      "total": 5262
     }
   ],
   "kpis": {
@@ -127,24 +131,24 @@
     "nuevos_ultimo": 7,
     "inactivos_ultimo": 6,
     "mods_ultimo": 3,
-    "nuevos_total": 575,
-    "inactivos_total": 147,
-    "mods_total": 828
+    "nuevos_total": 578,
+    "inactivos_total": 150,
+    "mods_total": 831
   },
   "por_sector": [
     {
       "label": "Privado",
-      "value": 3627
+      "value": 3625
     },
     {
       "label": "Oficial",
-      "value": 1635
+      "value": 1637
     }
   ],
   "por_depto": [
     {
       "label": "Bogotá, D.C.",
-      "value": 1536
+      "value": 1535
     },
     {
       "label": "Antioquia",
@@ -160,7 +164,7 @@
     },
     {
       "label": "Atlántico",
-      "value": 275
+      "value": 274
     },
     {
       "label": "Bolívar",
@@ -184,11 +188,11 @@
     },
     {
       "label": "Caldas",
-      "value": 112
+      "value": 113
     },
     {
       "label": "Risaralda",
-      "value": 111
+      "value": 112
     },
     {
       "label": "Tolima",
@@ -206,7 +210,7 @@
   "por_modalidad": [
     {
       "label": "Presencial",
-      "value": 4347
+      "value": 4346
     },
     {
       "label": "Virtual",
@@ -222,7 +226,7 @@
     },
     {
       "label": "Híbrida (Presencial-Virtual)",
-      "value": 33
+      "value": 34
     },
     {
       "label": "Dual",
@@ -5999,6 +6003,36 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Otro"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-01",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "117690",
+      "NOMBRE_DEL_PROGRAMA": "LICENCIATURA EN EDUCACIÓN BÁSICA PRIMARIA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD TECNOLOGICA DE PEREIRA - UTP",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Híbrida (Presencial-Virtual)",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Risaralda",
+      "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-01",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118588",
+      "NOMBRE_DEL_PROGRAMA": "Geografía",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE CALDAS",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Caldas",
+      "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-01",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118583",
+      "NOMBRE_DEL_PROGRAMA": "Terapia Respiratoria",
+      "NOMBRE_INSTITUCIÓN": "FUNDACION UNIVERSITARIA DEL AREA ANDINA",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "",
+      "DIVISIÓN UNINORTE": "Ciencias de la Salud"
     }
   ],
   "inactivos": [
@@ -7471,6 +7505,36 @@
       "MODALIDAD": "Virtual",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Sucre",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-01",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "101940",
+      "NOMBRE_DEL_PROGRAMA": "ADMINISTRACIÓN DE NEGOCIOS",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD SERGIO ARBOLEDA",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
+      "DIVISIÓN UNINORTE": "Escuela de Negocios"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-01",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "107287",
+      "NOMBRE_DEL_PROGRAMA": "FILOSOFÍA Y HUMANIDADES",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD SERGIO ARBOLEDA",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
+      "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-01",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "54126",
+      "NOMBRE_DEL_PROGRAMA": "FINANZAS Y COMERCIO EXTERIOR",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD SERGIO ARBOLEDA",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Magdalena",
+      "DIVISIÓN UNINORTE": "Escuela de Negocios"
     }
   ],
   "modificados": [
@@ -16581,9 +16645,42 @@
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Valle del Cauca",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 145 → 148"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-01",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "90806",
+      "NOMBRE_DEL_PROGRAMA": "FILOSOFÍA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE LA SABANA",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Cundinamarca",
+      "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
+      "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 168 → 144"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-01",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "117902",
+      "NOMBRE_DEL_PROGRAMA": "RELACIONES INTERNACIONALES",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD DE LA SABANA",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Híbrida (Presencial-Virtual)",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Cundinamarca",
+      "DIVISIÓN UNINORTE": "Derecho, C. Política y Rel. Internacionales",
+      "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 133 → 144"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-01",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "106678",
+      "NOMBRE_DEL_PROGRAMA": "INGENIERÍA AMBIENTAL",
+      "NOMBRE_INSTITUCIÓN": "FUNDACION UNIVERSITARIA DEL AREA ANDINA",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Cesar",
+      "DIVISIÓN UNINORTE": "Ingenierías",
+      "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 170 → 160"
     }
   ],
-  "n_nuevos": 575,
-  "n_inactivos": 147,
-  "n_modificados": 828
+  "n_nuevos": 578,
+  "n_inactivos": 150,
+  "n_modificados": 831
 }
