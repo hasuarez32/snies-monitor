@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-05-02",
+  "ultima_actualizacion": "2026-05-03",
   "historico": [
     {
       "fecha": "2024-02-23",
@@ -128,6 +128,10 @@
     {
       "fecha": "2026-05-02",
       "total": 5262
+    },
+    {
+      "fecha": "2026-05-03",
+      "total": 5262
     }
   ],
   "kpis": {
@@ -137,7 +141,7 @@
     "mods_ultimo": 3,
     "nuevos_total": 578,
     "inactivos_total": 150,
-    "mods_total": 831
+    "mods_total": 842
   },
   "por_sector": [
     {
@@ -152,15 +156,15 @@
   "por_depto": [
     {
       "label": "Bogotá, D.C.",
-      "value": 1535
+      "value": 1537
     },
     {
       "label": "Antioquia",
-      "value": 748
+      "value": 751
     },
     {
       "label": "Valle del Cauca",
-      "value": 470
+      "value": 472
     },
     {
       "label": "Santander",
@@ -199,12 +203,12 @@
       "value": 112
     },
     {
-      "label": "Tolima",
+      "label": "Nariño",
       "value": 110
     },
     {
-      "label": "Nariño",
-      "value": 109
+      "label": "Tolima",
+      "value": 110
     },
     {
       "label": "Huila",
@@ -16682,9 +16686,130 @@
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Cesar",
       "DIVISIÓN UNINORTE": "Ingenierías",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 170 → 160"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-03",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118575",
+      "NOMBRE_DEL_PROGRAMA": "FARMACIA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD NACIONAL DE COLOMBIA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Valle del Cauca",
+      "DIVISIÓN UNINORTE": "Ciencias de la Salud",
+      "QUE_CAMBIO": "MUNICIPIO_OFERTA_PROGRAMA: nan → Palmira"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-03",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118461",
+      "NOMBRE_DEL_PROGRAMA": "MEDICINA VETERINARIA",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD NACIONAL DE COLOMBIA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Valle del Cauca",
+      "DIVISIÓN UNINORTE": "Otro",
+      "QUE_CAMBIO": "MUNICIPIO_OFERTA_PROGRAMA: nan → Palmira"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-03",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118226",
+      "NOMBRE_DEL_PROGRAMA": "ADMINISTRACION DE EMPRESAS",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD PONTIFICIA BOLIVARIANA",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Virtual",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Antioquia",
+      "DIVISIÓN UNINORTE": "Escuela de Negocios",
+      "QUE_CAMBIO": "MUNICIPIO_OFERTA_PROGRAMA: nan → Medellín"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-03",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118583",
+      "NOMBRE_DEL_PROGRAMA": "TERAPIA RESPIRATORIA",
+      "NOMBRE_INSTITUCIÓN": "FUNDACION UNIVERSITARIA DEL AREA ANDINA",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Cesar",
+      "DIVISIÓN UNINORTE": "Ciencias de la Salud",
+      "QUE_CAMBIO": "MUNICIPIO_OFERTA_PROGRAMA: nan → Valledupar"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-03",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118363",
+      "NOMBRE_DEL_PROGRAMA": "MARKETING",
+      "NOMBRE_INSTITUCIÓN": "FUNDACION UNIVERSITARIA EMPRESARIAL DE LA CAMARA DE COMERCIO DE BOGOTA- UNIEMPRESARIAL",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Híbrida (Dual-Virtual)",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
+      "DIVISIÓN UNINORTE": "Escuela de Negocios",
+      "QUE_CAMBIO": "MUNICIPIO_OFERTA_PROGRAMA: nan → Bogotá, D.C."
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-03",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118463",
+      "NOMBRE_DEL_PROGRAMA": "PROFESIONAL EN NEGOCIOS INTERNACIONALES",
+      "NOMBRE_INSTITUCIÓN": "FUNDACION DE ESTUDIOS SUPERIORES UNIVERSITARIOS DE URABA ANTONIO ROLDAN BETANCUR",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Antioquia",
+      "DIVISIÓN UNINORTE": "Escuela de Negocios",
+      "QUE_CAMBIO": "MUNICIPIO_OFERTA_PROGRAMA: nan → Arboletes"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-03",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118464",
+      "NOMBRE_DEL_PROGRAMA": "PROFESIONAL EN NEGOCIOS INTERNACIONALES",
+      "NOMBRE_INSTITUCIÓN": "FUNDACION DE ESTUDIOS SUPERIORES UNIVERSITARIOS DE URABA ANTONIO ROLDAN BETANCUR",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Antioquia",
+      "DIVISIÓN UNINORTE": "Escuela de Negocios",
+      "QUE_CAMBIO": "MUNICIPIO_OFERTA_PROGRAMA: nan → Vigía del Fuerte"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-03",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118383",
+      "NOMBRE_DEL_PROGRAMA": "ADMINISTRACIÓN COMERCIAL",
+      "NOMBRE_INSTITUCIÓN": "TECNOLOGICO DE ANTIOQUIA",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "A distancia",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Nariño",
+      "DIVISIÓN UNINORTE": "Escuela de Negocios",
+      "QUE_CAMBIO": "MUNICIPIO_OFERTA_PROGRAMA: nan → San Andrés de Tumaco"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-03",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118450",
+      "NOMBRE_DEL_PROGRAMA": "INGENIERÍA AMBIENTAL",
+      "NOMBRE_INSTITUCIÓN": "INSTITUCIÓN UNIVERSITARIA DEL CARIBE",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Magdalena",
+      "DIVISIÓN UNINORTE": "Ingenierías",
+      "QUE_CAMBIO": "MUNICIPIO_OFERTA_PROGRAMA: nan → Ciénaga"
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-03",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "118396",
+      "NOMBRE_DEL_PROGRAMA": "MAESTRO EN ARTES VISUALES",
+      "NOMBRE_INSTITUCIÓN": "CORPORACION UNIVERSITARIA CENDA",
+      "SECTOR": "Privado",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
+      "DIVISIÓN UNINORTE": "Otro",
+      "QUE_CAMBIO": "MUNICIPIO_OFERTA_PROGRAMA: nan → Bogotá, D.C."
+    },
+    {
+      "FECHA_OBTENCION": "2026-05-03",
+      "CÓDIGO_SNIES_DEL_PROGRAMA": "107564",
+      "NOMBRE_DEL_PROGRAMA": "COMUNICACIÓN PROPIA INTERCULTURAL",
+      "NOMBRE_INSTITUCIÓN": "UNIVERSIDAD AUTÓNOMA INDÍGENA INTERCULTURAL - UAIIN",
+      "SECTOR": "Oficial",
+      "MODALIDAD": "Presencial",
+      "DEPARTAMENTO_OFERTA_PROGRAMA": "Cauca",
+      "DIVISIÓN UNINORTE": "Música",
+      "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 164 → 165"
     }
   ],
   "n_nuevos": 578,
   "n_inactivos": 150,
-  "n_modificados": 831
+  "n_modificados": 842
 }
