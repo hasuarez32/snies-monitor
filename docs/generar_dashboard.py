@@ -338,6 +338,19 @@ def main():
         "mods_total":       len(mods_df),
     }
 
+    col_per = next(
+        (c for c in snapshot_df.columns if "PERIODO" in c.upper() and "DURACI" in c.upper()),
+        None,
+    )
+    if col_per and not snapshot_df.empty:
+        counts = snapshot_df[col_per].dropna().value_counts()
+        por_periodos = sorted(
+            [{"label": int(k), "value": int(v)} for k, v in counts.items()],
+            key=lambda x: x["label"],
+        )
+    else:
+        por_periodos = []
+
     data = {
         "ultima_actualizacion": historico[-1]["fecha"] if historico else "N/A",
         "historico":     historico,
@@ -345,6 +358,7 @@ def main():
         "por_sector":    _distribucion(snapshot_df, "SECTOR"),
         "por_depto":     _distribucion(snapshot_df, "DEPARTAMENTO_OFERTA_PROGRAMA"),
         "por_modalidad": _distribucion(snapshot_df, "MODALIDAD"),
+        "por_periodos":  por_periodos,
         "nuevos":        _to_records(nuevos_df,    COLS_NOVEDAD),
         "inactivos":     _to_records(inactivos_df, COLS_NOVEDAD),
         "modificados":   _to_records(mods_df,      COLS_MOD),
@@ -526,6 +540,11 @@ tr:hover td{background:#f8fafc}
     </div>
   </section>
 
+  <section class="card">
+    <div class="card-title">Distribución de programas activos por duración (periodos requeridos)</div>
+    <div id="ch-periodos" style="height:280px"></div>
+  </section>
+
   <section>
     <div class="tab-nav">
       <button class="tab-btn on" onclick="tab('nue',this)">
@@ -611,6 +630,28 @@ document.getElementById('k-mod-sub').textContent = 'acumulado: ' + fmt(D.kpis.mo
     yaxis:{tickfont:{size:11}},
     plot_bgcolor:'white', paper_bgcolor:'white', bargap:0.3
   }, {responsive:true, displayModeBar:false});
+})();
+
+(function() {
+  const d = D.por_periodos;
+  if (!d || !d.length) return;
+  Plotly.newPlot('ch-periodos', [{
+    x: d.map(p => p.label),
+    y: d.map(p => p.value),
+    type: 'bar',
+    marker: {color: '#2563eb', opacity: 0.82},
+    text: d.map(p => p.value.toLocaleString('es-CO')),
+    textposition: 'outside',
+    cliponaxis: false,
+    hovertemplate: '%{x} periodos<br><b>%{y:,}</b> programas<extra></extra>'
+  }], {
+    margin: {t:30, r:20, b:50, l:70},
+    xaxis: {title: 'Periodos', tickmode: 'array',
+            tickvals: d.map(p => p.label), tickfont: {size:11}},
+    yaxis: {title: 'N. Programas', showgrid: true,
+            gridcolor: '#e2e8f0', tickfont: {size:11}},
+    plot_bgcolor: 'white', paper_bgcolor: 'white', bargap: 0.25
+  }, {responsive: true, displayModeBar: false});
 })();
 
 const COLS = {
@@ -1003,7 +1044,7 @@ function renderCineChart(rows) {
   const semSet=new Set();
   rows.forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)semSet.add(s);});
   const allSems=[...semSet].sort();
-  const sems=allSems.filter(s=>s>='2018-S1');
+  const sems=allSems.filter(s=>s>='2023-S2');
 
   const tagsEl=document.getElementById('cine-tags');
   if(tagsEl){
@@ -1032,7 +1073,7 @@ function renderCineChart(rows) {
     rows.filter(r=>{const v=(r[CINE_COL]||'').trim();return isUnclass?!v:v===cine;})
         .forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)bySem[s]=(bySem[s]||0)+1;});
     let cum=0;const x=[],y=[];
-    allSems.forEach(s=>{cum+=(bySem[s]||0);if(s>='2018-S1'){x.push(s);y.push(cum);}});
+    allSems.forEach(s=>{cum+=(bySem[s]||0);if(s>='2023-S2'){x.push(s);y.push(cum);}});
     if(cum===0) return null;
     const col=CINE_COLORS[i%CINE_COLORS.length];
     return{x,y,name:cine,type:'scatter',mode:'lines+markers',

@@ -203,11 +203,11 @@
       "value": 112
     },
     {
-      "label": "Nariño",
+      "label": "Tolima",
       "value": 110
     },
     {
-      "label": "Tolima",
+      "label": "Nariño",
       "value": 110
     },
     {
@@ -259,6 +259,68 @@
     {
       "label": "Presencial-Dual",
       "value": 2
+    }
+  ],
+  "por_periodos": [
+    {
+      "label": 2,
+      "value": 9
+    },
+    {
+      "label": 3,
+      "value": 4
+    },
+    {
+      "label": 4,
+      "value": 32
+    },
+    {
+      "label": 5,
+      "value": 22
+    },
+    {
+      "label": 6,
+      "value": 1
+    },
+    {
+      "label": 7,
+      "value": 15
+    },
+    {
+      "label": 8,
+      "value": 1460
+    },
+    {
+      "label": 9,
+      "value": 1519
+    },
+    {
+      "label": 10,
+      "value": 2082
+    },
+    {
+      "label": 11,
+      "value": 9
+    },
+    {
+      "label": 12,
+      "value": 73
+    },
+    {
+      "label": 13,
+      "value": 18
+    },
+    {
+      "label": 14,
+      "value": 7
+    },
+    {
+      "label": 16,
+      "value": 4
+    },
+    {
+      "label": 18,
+      "value": 3
     }
   ],
   "nuevos": [
