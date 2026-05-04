@@ -37,7 +37,7 @@ COLS_DETAIL = [
     "NOMBRE_INSTITUCIÓN", "SECTOR", "MODALIDAD", "DEPARTAMENTO_OFERTA_PROGRAMA",
     "MUNICIPIO_OFERTA_PROGRAMA", "NÚMERO_CRÉDITOS", "COSTO_MATRÍCULA_ESTUD_NUEVOS",
     "PERIODICIDAD", "FECHA_DE_REGISTRO_EN_SNIES", "DIVISIÓN UNINORTE",
-    "CINE_F_2013_AC_CAMPO_ESPECÍFIC",
+    "CINE_F_2013_AC_CAMPO_ESPECÍFIC", "NÚMERO_PERIODOS_DE_DURACIÓN",
 ]
 COLS_MOD_DETAIL = COLS_DETAIL + ["QUE_CAMBIO", "NÚMERO_CRÉDITOS_ANTERIOR"]
 
@@ -105,6 +105,7 @@ CHARTS_HTML = {
   <div id="cine-tags" style="display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.6rem;min-height:1.4rem"></div>
   <div id="ch-timeline" style="height:300px"></div>
 </div>
+<div class="card"><div class="ct">Distribución por duración (periodos requeridos)</div><div id="ch-periodos" style="height:260px"></div></div>
 """,
     "inactivos": """
 <div class="g2">
@@ -131,6 +132,7 @@ CHARTS_HTML = {
   <div id="cine-tags" style="display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.6rem;min-height:1.4rem"></div>
   <div id="ch-timeline" style="height:300px"></div>
 </div>
+<div class="card"><div class="ct">Distribución por duración (periodos requeridos)</div><div id="ch-periodos" style="height:260px"></div></div>
 """,
     "modificados": """
 <div class="card"><div class="ct">Tipo de cambio detectado</div><div id="ch-tipo-cambio" style="height:260px"></div></div>
@@ -1111,6 +1113,27 @@ function cineRemove(cine) {
   renderCineChart(filtered);
 }
 
+function plotPeriodos(id, rows) {
+  const el=document.getElementById(id); if(!el) return;
+  const COL='NÚMERO_PERIODOS_DE_DURACIÓN';
+  const c={};
+  rows.forEach(r=>{const v=r[COL];if(v&&v.trim()!=='')c[+v]=(c[+v]||0)+1;});
+  const d=Object.entries(c).map(([k,v])=>({k:+k,v})).filter(e=>!isNaN(e.k)).sort((a,b)=>a.k-b.k);
+  if(!d.length) return;
+  Plotly.react(id,[{
+    x:d.map(e=>e.k), y:d.map(e=>e.v), type:'bar',
+    marker:{color:C,opacity:.82},
+    text:d.map(e=>e.v.toLocaleString('es-CO')),
+    textposition:'outside', cliponaxis:false,
+    hovertemplate:'%{x} periodos<br><b>%{y:,}</b> programas<extra></extra>'
+  }],{
+    margin:{t:25,r:20,b:45,l:60},
+    xaxis:{title:'Periodos',tickmode:'array',tickvals:d.map(e=>e.k),tickfont:{size:11}},
+    yaxis:{title:'N. Programas',showgrid:true,gridcolor:'#e2e8f0',tickfont:{size:11}},
+    plot_bgcolor:'white',paper_bgcolor:'white',bargap:.25
+  },PC);
+}
+
 function plotTipoCambio(id, rows) {
   const el=document.getElementById(id); if(!el) return;
   const c={};
@@ -1210,6 +1233,7 @@ function renderAll(rows) {
   } else if (CFG.tipo === 'nuevos' || CFG.tipo === 'inactivos') {
     plotVBar('ch-modalidad', rows, 'MODALIDAD', C);
     plotAcumuladoCINE('ch-timeline', rows);
+    plotPeriodos('ch-periodos', rows);
   } else {
     plotVBar('ch-modalidad', rows, 'MODALIDAD', C);
     plotAcumuladoModalidad('ch-timeline', rows);
