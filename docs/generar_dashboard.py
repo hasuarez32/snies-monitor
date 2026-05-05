@@ -526,11 +526,6 @@ tr:hover td{background:#f8fafc}
     </div>
   </section>
 
-  <section class="card">
-    <div class="card-title">Evolución histórica de programas universitarios activos</div>
-    <div id="ch-hist" style="height:280px"></div>
-  </section>
-
   <section class="chart-2col">
     <div class="card">
       <div class="card-title">Por sector</div>
@@ -586,22 +581,6 @@ document.getElementById('k-nue-sub').textContent = 'acumulado: ' + fmt(D.kpis.nu
 document.getElementById('k-ina-sub').textContent = 'acumulado: ' + fmt(D.kpis.inactivos_total);
 document.getElementById('k-mod-sub').textContent = 'acumulado: ' + fmt(D.kpis.mods_total);
 
-(function() {
-  const h = D.historico;
-  if (!h.length) return;
-  Plotly.newPlot('ch-hist', [{
-    x: h.map(p => p.fecha), y: h.map(p => p.total),
-    type: 'scatter', mode: 'lines+markers',
-    line: {color:'#2563eb', width:2.5}, marker: {color:'#2563eb', size:6},
-    fill: 'tozeroy', fillcolor: 'rgba(37,99,235,0.07)',
-    hovertemplate: '%{x}<br><b>%{y:,}</b> programas<extra></extra>'
-  }], {
-    margin: {t:10,r:20,b:40,l:60},
-    xaxis: {showgrid:false, tickfont:{size:11}},
-    yaxis: {showgrid:true, gridcolor:'#e2e8f0', tickfont:{size:11}, rangemode:'tozero'},
-    plot_bgcolor:'white', paper_bgcolor:'white', hovermode:'x unified'
-  }, {responsive:true, displayModeBar:false});
-})();
 
 (function() {
   const d = D.por_sector;
