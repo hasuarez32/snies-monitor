@@ -670,7 +670,7 @@ document.getElementById('k-mod-sub').textContent = 'acumulado: ' + fmt(D.kpis.mo
         z: d.map(x => x.total),
         text: d.map(x => x.depto + '<br>' + x.total.toLocaleString('es-CO') + ' programas (' + x.pct + '%)'),
         hovertemplate: '%{text}<extra></extra>',
-        colorscale: 'Blues',
+        colorscale: [[0,'#93c5fd'],[0.4,'#2563eb'],[0.7,'#34d399'],[1,'#059669']],
         showscale: true,
         colorbar: {thickness: 14, len: 0.6, title: {text: 'Programas', side: 'right', font: {size: 11}}},
         marker: {line: {color: 'white', width: 0.5}}
