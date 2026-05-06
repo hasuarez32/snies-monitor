@@ -8,6 +8,7 @@ Uso:
 """
 import json
 import re
+import unicodedata
 import warnings
 from datetime import datetime
 from pathlib import Path
@@ -260,6 +261,41 @@ def _normalizar_modificados(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+# ── mapa coroplético ──────────────────────────────────────────────────────────
+
+_DEPTO_MAP = {
+    "Bogotá, D.C.": "SANTAFE DE BOGOTA D.C",
+    "Archipiélago de San Andrés, Providencia y Santa Catalina":
+        "ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA",
+    "Nariño": "NARIÑO",
+}
+
+def _snies_to_geo(name: str) -> str:
+    if name in _DEPTO_MAP:
+        return _DEPTO_MAP[name]
+    return (
+        unicodedata.normalize("NFD", name)
+        .encode("ascii", "ignore")
+        .decode("ascii")
+        .upper()
+    )
+
+def _datos_mapa(df: pd.DataFrame) -> list:
+    col = "DEPARTAMENTO_OFERTA_PROGRAMA"
+    if df is None or df.empty or col not in df.columns:
+        return []
+    counts = df[col].value_counts()
+    total = int(counts.sum())
+    return [
+        {
+            "depto": _snies_to_geo(str(depto)),
+            "total": int(cnt),
+            "pct":   round(100 * int(cnt) / total, 1) if total else 0,
+        }
+        for depto, cnt in counts.items()
+    ]
+
+
 # ── data loading ──────────────────────────────────────────────────────────────
 
 def leer_historico():
@@ -357,10 +393,11 @@ def main():
         "ultima_actualizacion": historico[-1]["fecha"] if historico else "N/A",
         "historico":     historico,
         "kpis":          kpis,
-        "por_sector":    _distribucion(snapshot_df, "SECTOR"),
-        "por_depto":     _distribucion(snapshot_df, "DEPARTAMENTO_OFERTA_PROGRAMA"),
-        "por_modalidad": _distribucion(snapshot_df, "MODALIDAD"),
-        "por_periodos":  por_periodos,
+        "por_sector":     _distribucion(snapshot_df, "SECTOR"),
+        "por_depto":      _distribucion(snapshot_df, "DEPARTAMENTO_OFERTA_PROGRAMA"),
+        "por_modalidad":  _distribucion(snapshot_df, "MODALIDAD"),
+        "por_periodos":   por_periodos,
+        "por_depto_mapa": _datos_mapa(snapshot_df),
         "nuevos":        _to_records(nuevos_df,    COLS_NOVEDAD),
         "inactivos":     _to_records(inactivos_df, COLS_NOVEDAD),
         "modificados":   _to_records(mods_df,      COLS_MOD),
@@ -538,6 +575,11 @@ tr:hover td{background:#f8fafc}
   </section>
 
   <section class="card">
+    <div class="card-title">Programas activos por departamento</div>
+    <div id="ch-mapa" style="height:520px"></div>
+  </section>
+
+  <section class="card">
     <div class="card-title">Distribución de programas activos por duración (periodos requeridos)</div>
     <div id="ch-periodos" style="height:280px"></div>
   </section>
@@ -611,6 +653,45 @@ document.getElementById('k-mod-sub').textContent = 'acumulado: ' + fmt(D.kpis.mo
     yaxis:{tickfont:{size:11}},
     plot_bgcolor:'white', paper_bgcolor:'white', bargap:0.3
   }, {responsive:true, displayModeBar:false});
+})();
+
+(function() {
+  const d = D.por_depto_mapa;
+  if (!d || !d.length) return;
+  const GEO_URL = 'https://gist.githubusercontent.com/john-guerra/43c7656821069d00dcbc/raw/be6a6e239cd5b5b803c6e7c2ec405b793a9064dd/Colombia.geo.json';
+  fetch(GEO_URL)
+    .then(r => r.json())
+    .then(geo => {
+      Plotly.newPlot('ch-mapa', [{
+        type: 'choropleth',
+        geojson: geo,
+        featureidkey: 'properties.NOMBRE_DPT',
+        locations: d.map(x => x.depto),
+        z: d.map(x => x.total),
+        text: d.map(x => x.depto + '<br>' + x.total.toLocaleString('es-CO') + ' programas (' + x.pct + '%)'),
+        hovertemplate: '%{text}<extra></extra>',
+        colorscale: 'Blues',
+        showscale: true,
+        colorbar: {thickness: 14, len: 0.6, title: {text: 'Programas', side: 'right', font: {size: 11}}},
+        marker: {line: {color: 'white', width: 0.5}}
+      }], {
+        geo: {
+          fitbounds: 'locations',
+          showframe: false,
+          showcoastlines: false,
+          showland: true, landcolor: '#f1f5f9',
+          showocean: true, oceancolor: '#e0f2fe',
+          showlakes: false,
+          projection: {type: 'mercator'}
+        },
+        margin: {t:0, r:0, b:0, l:0},
+        paper_bgcolor: 'white'
+      }, {responsive: true, displayModeBar: false});
+    })
+    .catch(() => {
+      document.getElementById('ch-mapa').innerHTML =
+        '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#64748b;font-size:.82rem">No se pudo cargar el mapa</div>';
+    });
 })();
 
 (function() {
