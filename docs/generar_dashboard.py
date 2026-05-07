@@ -29,7 +29,7 @@ _PROG_RE = re.compile(r"^Programas (\d{2}-\d{2}-\d{2})(?:__\d{6})?\.xlsx$")
 COLS_NOVEDAD = [
     "FECHA_OBTENCION", "CÓDIGO_SNIES_DEL_PROGRAMA", "NOMBRE_DEL_PROGRAMA",
     "NOMBRE_INSTITUCIÓN", "SECTOR", "MODALIDAD", "DEPARTAMENTO_OFERTA_PROGRAMA",
-    "DIVISIÓN UNINORTE",
+    "DIVISIÓN UNINORTE", "NÚMERO_PERIODOS_DE_DURACIÓN",
 ]
 COLS_MOD = COLS_NOVEDAD + ["QUE_CAMBIO"]
 
@@ -584,6 +584,16 @@ tr:hover td{background:#f8fafc}
     <div id="ch-periodos" style="height:280px"></div>
   </section>
 
+  <div id="periodos-chip" style="display:none;align-items:center;gap:.6rem;
+      padding:.55rem 1.5rem;background:#eff6ff;border:1px solid #bfdbfe;
+      border-radius:.5rem;margin-bottom:.75rem">
+    <span style="font-size:.78rem;color:#1e40af">Filtrado por duración:
+      <strong id="periodos-chip-val"></strong></span>
+    <button onclick="clearPeriodosFilter()"
+      style="background:none;border:none;cursor:pointer;color:#2563eb;font-size:.82rem;padding:0">
+      ✕ Limpiar filtro</button>
+  </div>
+
   <section>
     <div class="tab-nav">
       <button class="tab-btn on" onclick="tab('nue',this)">
@@ -705,16 +715,43 @@ document.getElementById('k-mod-sub').textContent = 'acumulado: ' + fmt(D.kpis.mo
     text: d.map(p => p.value.toLocaleString('es-CO')),
     textposition: 'outside',
     cliponaxis: false,
-    hovertemplate: '%{x} periodos<br><b>%{y:,}</b> programas<extra></extra>'
+    hovertemplate: '%{x} periodos<br><b>%{y:,}</b> programas — clic para filtrar<extra></extra>'
   }], {
     margin: {t:30, r:20, b:50, l:70},
     xaxis: {title: 'Periodos', tickmode: 'array',
             tickvals: d.map(p => p.label), tickfont: {size:11}},
     yaxis: {title: 'N. Programas', showgrid: true,
             gridcolor: '#e2e8f0', tickfont: {size:11}},
-    plot_bgcolor: 'white', paper_bgcolor: 'white', bargap: 0.25
-  }, {responsive: true, displayModeBar: false});
+    plot_bgcolor: 'white', paper_bgcolor: 'white', bargap: 0.25,
+    cursor: 'pointer'
+  }, {responsive: true, displayModeBar: false}).then(gd => {
+    gd.on('plotly_click', function(data) {
+      const val = data.points[0].x;
+      if (periodosFiltro === val) { clearPeriodosFilter(); return; }
+      periodosFiltro = val;
+      document.getElementById('periodos-chip').style.display = 'flex';
+      document.getElementById('periodos-chip-val').textContent = val + ' periodos';
+      ['nue','ina','mod'].forEach(t => render(t, applyPeriodosFiltro(rows[t])));
+      document.getElementById('tp-nue').closest('section').scrollIntoView({behavior:'smooth'});
+    });
+  });
 })();
+
+let periodosFiltro = null;
+
+function applyPeriodosFiltro(arr) {
+  if (periodosFiltro === null) return arr;
+  return arr.filter(r => {
+    const v = r['NÚMERO_PERIODOS_DE_DURACIÓN'];
+    return Math.round(parseFloat(v)) === periodosFiltro;
+  });
+}
+
+function clearPeriodosFilter() {
+  periodosFiltro = null;
+  document.getElementById('periodos-chip').style.display = 'none';
+  ['nue','ina','mod'].forEach(t => render(t, rows[t]));
+}
 
 const COLS = {
   nue: ['FECHA_OBTENCION','CÓDIGO_SNIES_DEL_PROGRAMA','NOMBRE_DEL_PROGRAMA',
@@ -769,9 +806,8 @@ function tab(id, btn) {
 
 function filter(type, q) {
   q = q.toLowerCase();
-  const filtered = q
-    ? rows[type].filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q)))
-    : rows[type];
+  let filtered = applyPeriodosFiltro(rows[type]);
+  if (q) filtered = filtered.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q)));
   render(type, filtered);
 }
 
