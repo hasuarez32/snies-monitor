@@ -122,6 +122,16 @@ tr:hover td{background:#f8fafc}
 <div class="card"><div class="ct">Distribución por duración (periodos requeridos)</div><div id="ch-periodos" style="height:260px"></div></div>
 </section>
 
+  <div id="per-det-chip" style="display:none;align-items:center;gap:.6rem;
+      padding:.5rem 1.25rem;background:#eff6ff;border:1px solid #bfdbfe;
+      border-radius:.5rem;margin-bottom:.75rem">
+    <span style="font-size:.78rem;color:#1e40af">Filtrado por duración:
+      <strong id="per-det-val"></strong></span>
+    <button onclick="clearPeriodosDetalleFilter()"
+      style="background:none;border:none;cursor:pointer;color:#2563eb;font-size:.82rem;padding:0">
+      ✕ Limpiar filtro</button>
+  </div>
+
   <section class="card tbl-card">
     <div class="ct">Registros</div>
     <div class="tbl-wrap" id="tbl-wrap"></div>
@@ -408,23 +418,65 @@ function cineRemove(cine) {
 
 function plotPeriodos(id, rows) {
   const el=document.getElementById(id); if(!el) return;
-  const COL='NÚMERO_PERIODOS_DE_DURACIÓN';
-  const c={};
-  rows.forEach(r=>{const v=r[COL];if(v&&v.trim()!=='')c[+v]=(c[+v]||0)+1;});
-  const d=Object.entries(c).map(([k,v])=>({k:+k,v})).filter(e=>!isNaN(e.k)).sort((a,b)=>a.k-b.k);
-  if(!d.length) return;
-  Plotly.react(id,[{
-    x:d.map(e=>e.k), y:d.map(e=>e.v), type:'bar',
-    marker:{color:C,opacity:.82},
-    text:d.map(e=>e.v.toLocaleString('es-CO')),
-    textposition:'outside', cliponaxis:false,
-    hovertemplate:'%{x} periodos<br><b>%{y:,}</b> programas<extra></extra>'
-  }],{
-    margin:{t:25,r:20,b:45,l:60},
-    xaxis:{title:'Periodos',tickmode:'array',tickvals:d.map(e=>e.k),tickfont:{size:11}},
+  const COL='NÚMERO_PERIODOS_DE_DURACIÓN', PCOL='PERIODICIDAD';
+  const PCOLORS=['#2563eb','#059669','#d97706','#dc2626','#8b5cf6',
+                 '#06b6d4','#ec4899','#f97316','#84cc16','#14b8a6'];
+  const pivot={}, periSet=new Set();
+  rows.forEach(r=>{
+    const v=r[COL]; if(!v||String(v).trim()==='') return;
+    const k=Math.round(parseFloat(v)); if(isNaN(k)) return;
+    const p=(r[PCOL]||'Sin definir').trim()||'Sin definir';
+    if(!pivot[k]) pivot[k]={};
+    pivot[k][p]=(pivot[k][p]||0)+1;
+    periSet.add(p);
+  });
+  const labels=Object.keys(pivot).map(Number).sort((a,b)=>a-b);
+  if(!labels.length) return;
+  const peris=[...periSet].sort((a,b)=>{
+    const ta=labels.reduce((s,l)=>s+(pivot[l][a]||0),0);
+    const tb=labels.reduce((s,l)=>s+(pivot[l][b]||0),0);
+    return tb-ta;
+  });
+  const traces=peris.map((p,i)=>({
+    x:labels, y:labels.map(l=>pivot[l][p]||0), name:p, type:'bar',
+    marker:{color:PCOLORS[i%PCOLORS.length],opacity:.85},
+    hovertemplate:p+'<br>%{x} periodos — <b>%{y:,}</b> programas<extra></extra>'
+  }));
+  Plotly.react(id, traces, {
+    barmode:'stack',
+    margin:{t:10,r:20,b:90,l:60},
+    xaxis:{title:'Periodos',tickmode:'array',tickvals:labels,tickfont:{size:11}},
     yaxis:{title:'N. Programas',showgrid:true,gridcolor:'#e2e8f0',tickfont:{size:11}},
-    plot_bgcolor:'white',paper_bgcolor:'white',bargap:.25
-  },PC);
+    plot_bgcolor:'white',paper_bgcolor:'white',bargap:.25,
+    legend:{orientation:'h',y:-0.28,font:{size:11},entrywidth:120,entrywidthmode:'pixels'},
+    hovermode:'x unified'
+  }, PC).then(gd=>{
+    gd.removeAllListeners('plotly_click');
+    gd.on('plotly_click', ev=>setPeriodosDetalleFilter(ev.points[0].x));
+  });
+}
+
+let _periodosDet=null;
+
+function setPeriodosDetalleFilter(val) {
+  if(_periodosDet===val){clearPeriodosDetalleFilter();return;}
+  _periodosDet=val;
+  const COL='NÚMERO_PERIODOS_DE_DURACIÓN';
+  const res=filtered.filter(r=>{
+    const v=r[COL]; if(!v&&v!==0) return false;
+    return Math.round(parseFloat(String(v)))===val;
+  });
+  document.getElementById('per-det-chip').style.display='flex';
+  document.getElementById('per-det-val').textContent=
+    val+' periodos — '+res.length.toLocaleString('es-CO')+' programas';
+  renderTbl(res);
+  document.getElementById('tbl-wrap').scrollIntoView({behavior:'smooth'});
+}
+
+function clearPeriodosDetalleFilter() {
+  _periodosDet=null;
+  document.getElementById('per-det-chip').style.display='none';
+  renderTbl(filtered);
 }
 
 function plotTipoCambio(id, rows) {
@@ -512,6 +564,8 @@ function sortTbl(col) {
 
 // ── Render all ─────────────────────────────────────────────────────────────
 function renderAll(rows) {
+  _periodosDet=null;
+  const _cpd=document.getElementById('per-det-chip'); if(_cpd) _cpd.style.display='none';
   document.getElementById('f-count').textContent = fmt(rows.length) + ' programas';
 
   plotDonut('ch-sector', rows, 'SECTOR');
