@@ -378,18 +378,33 @@ def main():
         "mods_total":       len(mods_df),
     }
 
-    col_per = next(
-        (c for c in snapshot_df.columns if "PERIODO" in c.upper() and "DURACI" in c.upper()),
-        None,
-    )
+    col_per  = next((c for c in snapshot_df.columns if "PERIODO" in c.upper() and "DURACI" in c.upper()), None)
+    col_peri = next((c for c in snapshot_df.columns if c.upper() == "PERIODICIDAD"), None)
     if col_per and not snapshot_df.empty:
-        counts = snapshot_df[col_per].dropna().value_counts()
-        por_periodos = sorted(
-            [{"label": int(k), "value": int(v)} for k, v in counts.items()],
-            key=lambda x: x["label"],
-        )
+        df_p = snapshot_df[[col_per] + ([col_peri] if col_peri else [])].copy()
+        df_p[col_per] = pd.to_numeric(df_p[col_per], errors="coerce")
+        df_p = df_p.dropna(subset=[col_per])
+        df_p[col_per] = df_p[col_per].apply(lambda x: int(round(x)))
+        if col_peri:
+            df_p[col_peri] = df_p[col_peri].fillna("Sin definir")
+            pivot = df_p.groupby([col_per, col_peri]).size().unstack(fill_value=0)
+            all_labels = sorted(pivot.index.tolist())
+            all_peris  = pivot.sum().sort_values(ascending=False).index.tolist()
+            por_periodos_stacked = {
+                "labels": all_labels,
+                "series": [
+                    {"name": p, "values": [int(pivot.at[l, p]) if p in pivot.columns and l in pivot.index else 0
+                                           for l in all_labels]}
+                    for p in all_peris if pivot[p].sum() > 0
+                ],
+            }
+        else:
+            cnts = df_p[col_per].value_counts().sort_index()
+            all_labels = sorted(cnts.index.tolist())
+            por_periodos_stacked = {"labels": all_labels,
+                                    "series": [{"name": "Sin datos", "values": [int(cnts.get(l, 0)) for l in all_labels]}]}
     else:
-        por_periodos = []
+        por_periodos_stacked = {"labels": [], "series": []}
 
     data = {
         "ultima_actualizacion": historico[-1]["fecha"] if historico else "N/A",
@@ -398,7 +413,7 @@ def main():
         "por_sector":     _distribucion(snapshot_df, "SECTOR"),
         "por_depto":      _distribucion(snapshot_df, "DEPARTAMENTO_OFERTA_PROGRAMA"),
         "por_modalidad":  _distribucion(snapshot_df, "MODALIDAD"),
-        "por_periodos":   por_periodos,
+        "por_periodos_stacked": por_periodos_stacked,
         "por_depto_mapa": _datos_mapa(snapshot_df),
         "nuevos":        _to_records(nuevos_df,    COLS_NOVEDAD),
         "inactivos":     _to_records(inactivos_df, COLS_NOVEDAD),
@@ -708,36 +723,41 @@ document.getElementById('k-mod-sub').textContent = 'acumulado: ' + fmt(D.kpis.mo
 })();
 
 (function() {
-  const d = D.por_periodos;
-  if (!d || !d.length) return;
-  Plotly.newPlot('ch-periodos', [{
-    x: d.map(p => p.label),
-    y: d.map(p => p.value),
-    type: 'bar',
-    marker: {color: d.map(() => '#2563eb'), opacity: 0.82},
-    text: d.map(p => p.value.toLocaleString('es-CO')),
-    textposition: 'outside',
-    cliponaxis: false,
-    hovertemplate: '%{x} periodos — %{y:,} programas<br>Clic para filtrar novedades<extra></extra>'
-  }], {
-    margin: {t:30, r:20, b:50, l:70},
+  const ds = D.por_periodos_stacked;
+  if (!ds || !ds.labels || !ds.labels.length) return;
+  const PCOLORS = ['#2563eb','#059669','#d97706','#dc2626','#8b5cf6',
+                   '#06b6d4','#ec4899','#f97316','#84cc16','#14b8a6'];
+  const traces = ds.series.map((s, i) => ({
+    x: ds.labels, y: s.values, name: s.name, type: 'bar',
+    marker: {color: PCOLORS[i % PCOLORS.length], opacity: 0.85},
+    hovertemplate: s.name + '<br>%{x} periodos — <b>%{y:,}</b> programas<extra></extra>'
+  }));
+  Plotly.newPlot('ch-periodos', traces, {
+    barmode: 'stack',
+    margin: {t:10, r:20, b:90, l:70},
     xaxis: {title: 'Periodos', tickmode: 'array',
-            tickvals: d.map(p => p.label), tickfont: {size:11}},
+            tickvals: ds.labels, tickfont: {size:11}},
     yaxis: {title: 'N. Programas', showgrid: true,
             gridcolor: '#e2e8f0', tickfont: {size:11}},
-    plot_bgcolor: 'white', paper_bgcolor: 'white', bargap: 0.25
+    plot_bgcolor: 'white', paper_bgcolor: 'white', bargap: 0.25,
+    legend: {orientation: 'h', y: -0.28, font: {size: 11}},
+    hovermode: 'x unified'
   }, {responsive: true, displayModeBar: false}).then(gd => {
     gd.on('plotly_click', function(ev) { setPeriodosFilter(ev.points[0].x); });
   });
 
-  // Chips clickables (accesibilidad para barras pequeñas)
+  // Chips — compute total per label across all series
+  const totals = {};
+  ds.labels.forEach((l, i) => {
+    totals[l] = ds.series.reduce((acc, ser) => acc + (ser.values[i] || 0), 0);
+  });
   const sel = document.getElementById('periodos-selector');
   if (sel) {
-    sel.innerHTML = d.map(p =>
-      '<button id="pchip-'+p.label+'" onclick="setPeriodosFilter('+p.label+')" '+
+    sel.innerHTML = ds.labels.map(l =>
+      '<button id="pchip-'+l+'" onclick="setPeriodosFilter('+l+')" '+
       'style="padding:.22rem .65rem;background:#f1f5f9;border:1px solid #e2e8f0;'+
       'border-radius:2rem;font-size:.72rem;cursor:pointer;transition:all .15s;white-space:nowrap">'+
-      p.label+' sem&nbsp;<span style="opacity:.6">('+p.value.toLocaleString('es-CO')+')</span></button>'
+      l+' sem&nbsp;<span style="opacity:.6">('+totals[l].toLocaleString('es-CO')+')</span></button>'
     ).join('');
   }
 })();
