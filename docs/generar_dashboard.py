@@ -231,6 +231,8 @@ def _normalizar_modificados(df: pd.DataFrame) -> pd.DataFrame:
               ("NÚMERO_CRÉDITOS_NUEVO", "NÚMERO_CRÉDITOS_NUEVOS"))
     _fill_num(df, "NÚMERO_CRÉDITOS_ANTERIOR",
               ("NÚMERO_CRÉDITOS_ANTIGUO", "NÚMERO_CRÉDITOS_ANTERIORES"))
+    _fill_num(df, "NÚMERO_PERIODOS_DE_DURACIÓN",
+              ("NÚMERO_PERIODOS_DE_DURACIÓN_NUEVO",))
 
     vigilar = [
         ("MODALIDAD",                    "MODALIDAD"),
@@ -580,8 +582,9 @@ tr:hover td{background:#f8fafc}
   </section>
 
   <section class="card">
-    <div class="card-title">Distribución de programas activos por duración (periodos requeridos)</div>
-    <div id="ch-periodos" style="height:280px"></div>
+    <div class="card-title">Distribución de programas activos por duración (periodos requeridos) — clic para filtrar</div>
+    <div id="ch-periodos" style="height:260px"></div>
+    <div id="periodos-selector" style="display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.6rem"></div>
   </section>
 
   <div id="periodos-chip" style="display:none;align-items:center;gap:.6rem;
@@ -711,30 +714,32 @@ document.getElementById('k-mod-sub').textContent = 'acumulado: ' + fmt(D.kpis.mo
     x: d.map(p => p.label),
     y: d.map(p => p.value),
     type: 'bar',
-    marker: {color: '#2563eb', opacity: 0.82},
+    marker: {color: d.map(() => '#2563eb'), opacity: 0.82},
     text: d.map(p => p.value.toLocaleString('es-CO')),
     textposition: 'outside',
     cliponaxis: false,
-    hovertemplate: '%{x} periodos<br><b>%{y:,}</b> programas — clic para filtrar<extra></extra>'
+    hovertemplate: '%{x} periodos — %{y:,} programas<br>Clic para filtrar novedades<extra></extra>'
   }], {
     margin: {t:30, r:20, b:50, l:70},
     xaxis: {title: 'Periodos', tickmode: 'array',
             tickvals: d.map(p => p.label), tickfont: {size:11}},
     yaxis: {title: 'N. Programas', showgrid: true,
             gridcolor: '#e2e8f0', tickfont: {size:11}},
-    plot_bgcolor: 'white', paper_bgcolor: 'white', bargap: 0.25,
-    cursor: 'pointer'
+    plot_bgcolor: 'white', paper_bgcolor: 'white', bargap: 0.25
   }, {responsive: true, displayModeBar: false}).then(gd => {
-    gd.on('plotly_click', function(data) {
-      const val = data.points[0].x;
-      if (periodosFiltro === val) { clearPeriodosFilter(); return; }
-      periodosFiltro = val;
-      document.getElementById('periodos-chip').style.display = 'flex';
-      document.getElementById('periodos-chip-val').textContent = val + ' periodos';
-      ['nue','ina','mod'].forEach(t => render(t, applyPeriodosFiltro(rows[t])));
-      document.getElementById('tp-nue').closest('section').scrollIntoView({behavior:'smooth'});
-    });
+    gd.on('plotly_click', function(ev) { setPeriodosFilter(ev.points[0].x); });
   });
+
+  // Chips clickables (accesibilidad para barras pequeñas)
+  const sel = document.getElementById('periodos-selector');
+  if (sel) {
+    sel.innerHTML = d.map(p =>
+      '<button id="pchip-'+p.label+'" onclick="setPeriodosFilter('+p.label+')" '+
+      'style="padding:.22rem .65rem;background:#f1f5f9;border:1px solid #e2e8f0;'+
+      'border-radius:2rem;font-size:.72rem;cursor:pointer;transition:all .15s;white-space:nowrap">'+
+      p.label+' sem&nbsp;<span style="opacity:.6">('+p.value.toLocaleString('es-CO')+')</span></button>'
+    ).join('');
+  }
 })();
 
 let periodosFiltro = null;
@@ -743,13 +748,37 @@ function applyPeriodosFiltro(arr) {
   if (periodosFiltro === null) return arr;
   return arr.filter(r => {
     const v = r['NÚMERO_PERIODOS_DE_DURACIÓN'];
-    return Math.round(parseFloat(v)) === periodosFiltro;
+    if (!v && v !== 0) return false;
+    return Math.round(parseFloat(String(v))) === periodosFiltro;
   });
+}
+
+function _updateChipStyles() {
+  document.querySelectorAll('[id^="pchip-"]').forEach(btn => {
+    const active = btn.id === 'pchip-' + periodosFiltro;
+    btn.style.background    = active ? '#2563eb' : '#f1f5f9';
+    btn.style.color         = active ? '#fff'    : '';
+    btn.style.borderColor   = active ? '#2563eb' : '#e2e8f0';
+    btn.style.fontWeight    = active ? '600'     : '';
+  });
+}
+
+function setPeriodosFilter(val) {
+  if (periodosFiltro === val) { clearPeriodosFilter(); return; }
+  periodosFiltro = val;
+  const totales = ['nue','ina','mod'].reduce((s,t) => s + applyPeriodosFiltro(rows[t]).length, 0);
+  document.getElementById('periodos-chip').style.display = 'flex';
+  document.getElementById('periodos-chip-val').textContent =
+    val + ' periodos — ' + totales.toLocaleString('es-CO') + ' registros en novedades';
+  _updateChipStyles();
+  ['nue','ina','mod'].forEach(t => render(t, applyPeriodosFiltro(rows[t])));
+  document.getElementById('tp-nue').closest('section').scrollIntoView({behavior:'smooth'});
 }
 
 function clearPeriodosFilter() {
   periodosFiltro = null;
   document.getElementById('periodos-chip').style.display = 'none';
+  _updateChipStyles();
   ['nue','ina','mod'].forEach(t => render(t, rows[t]));
 }
 

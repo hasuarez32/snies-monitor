@@ -8512,7 +8512,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Risaralda",
       "DIVISIÓN UNINORTE": "Ciencias de la Salud",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 170.0 -> 173.0"
     },
     {
@@ -8524,7 +8524,7 @@
       "MODALIDAD": "Virtual",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "MODALIDAD: Presencial -> Virtual"
     },
     {
@@ -8536,7 +8536,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Cundinamarca",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 164.0 -> 162.0"
     },
     {
@@ -8548,7 +8548,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Cundinamarca",
       "DIVISIÓN UNINORTE": "Derecho, C. Política y Rel. Internacionales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 194.0 -> 144.0"
     },
     {
@@ -8560,7 +8560,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8572,7 +8572,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8584,7 +8584,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8596,7 +8596,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Escuela de Arquitectura, Urbanismo y Diseño",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8608,7 +8608,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8620,7 +8620,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Ciencias Básicas",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8632,7 +8632,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Derecho, C. Política y Rel. Internacionales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8644,7 +8644,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8656,7 +8656,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8668,7 +8668,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Derecho, C. Política y Rel. Internacionales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8680,7 +8680,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Música",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8692,7 +8692,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Derecho, C. Política y Rel. Internacionales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8704,7 +8704,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Ciencias Básicas",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8716,7 +8716,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8728,7 +8728,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8740,7 +8740,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8752,7 +8752,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8764,7 +8764,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8776,7 +8776,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8788,7 +8788,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8800,7 +8800,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8812,7 +8812,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8824,7 +8824,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8836,7 +8836,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8848,7 +8848,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Ciencias Básicas",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1350000.0 -> 1573000.0"
     },
     {
@@ -8860,7 +8860,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Nariño",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 167.0 -> 149.0"
     },
     {
@@ -8872,7 +8872,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -8884,7 +8884,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1328000.0 -> 1548000.0"
     },
     {
@@ -8896,7 +8896,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1502000.0 -> 1751000.0"
     },
     {
@@ -8908,7 +8908,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Ciencias Básicas",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1344000.0 -> 1567000.0"
     },
     {
@@ -8920,7 +8920,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Derecho, C. Política y Rel. Internacionales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1705000.0 -> 1987000.0"
     },
     {
@@ -8932,7 +8932,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Guaviare",
       "DIVISIÓN UNINORTE": "Derecho, C. Política y Rel. Internacionales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1411000.0 -> 1645000.0"
     },
     {
@@ -8944,7 +8944,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Ciencias de la Salud",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1731000.0 -> 2018000.0"
     },
     {
@@ -8956,7 +8956,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1260000.0 -> 1469000.0"
     },
     {
@@ -8968,7 +8968,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Putumayo",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 952000.0 -> 1110000.0"
     },
     {
@@ -8980,7 +8980,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Guaviare",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1466000.0 -> 1709000.0"
     },
     {
@@ -8992,7 +8992,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1225000.0 -> 1429000.0"
     },
     {
@@ -9004,7 +9004,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1668000.0 -> 1944000.0"
     },
     {
@@ -9016,7 +9016,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1094000.0 -> 1276000.0"
     },
     {
@@ -9028,7 +9028,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1482000.0 -> 1728000.0"
     },
     {
@@ -9040,7 +9040,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1666000.0 -> 1942000.0"
     },
     {
@@ -9052,7 +9052,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Amazonas",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 976000.0 -> 1138000.0"
     },
     {
@@ -9064,7 +9064,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1502000.0 -> 1751000.0"
     },
     {
@@ -9076,7 +9076,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1553000.0 -> 1811000.0"
     },
     {
@@ -9088,7 +9088,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1091000.0 -> 1272000.0"
     },
     {
@@ -9100,7 +9100,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1251000.0 -> 1458000.0"
     },
     {
@@ -9112,7 +9112,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1723000.0 -> 2009000.0"
     },
     {
@@ -9124,7 +9124,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Caquetá",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1877000.0 -> 2188000.0"
     },
     {
@@ -9136,7 +9136,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9148,7 +9148,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Ciencias de la Salud",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9160,7 +9160,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9172,7 +9172,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9184,7 +9184,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9196,7 +9196,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9208,7 +9208,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9220,7 +9220,7 @@
       "MODALIDAD": "Virtual",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9232,7 +9232,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9244,7 +9244,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9256,7 +9256,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9268,7 +9268,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9280,7 +9280,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9292,7 +9292,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9304,7 +9304,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9316,7 +9316,7 @@
       "MODALIDAD": "Virtual",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9328,7 +9328,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9340,7 +9340,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9352,7 +9352,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9364,7 +9364,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9376,7 +9376,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9388,7 +9388,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9400,7 +9400,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9412,7 +9412,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9424,7 +9424,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9436,7 +9436,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Arquitectura, Urbanismo y Diseño",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9448,7 +9448,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9460,7 +9460,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9472,7 +9472,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 3131700.0 -> 3501810.0"
     },
     {
@@ -9484,7 +9484,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Valle del Cauca",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 144.0 -> 136.0"
     },
     {
@@ -9496,7 +9496,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Antioquia",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 162.0 -> 160.0"
     },
     {
@@ -9508,7 +9508,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9520,7 +9520,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9532,7 +9532,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Ciencias Básicas",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9544,7 +9544,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Ciencias de la Salud",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "12.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9556,7 +9556,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9568,7 +9568,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9580,7 +9580,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Ciencias Básicas",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9592,7 +9592,7 @@
       "MODALIDAD": "A distancia",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9604,7 +9604,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9616,7 +9616,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Tolima",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1501935.0 -> 1750905.0"
     },
     {
@@ -9628,7 +9628,7 @@
       "MODALIDAD": "Presencial-Virtual",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Antioquia",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "MODALIDAD: Presencial -> Presencial-Virtual"
     },
     {
@@ -9640,7 +9640,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Cundinamarca",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 161.0 -> 162.0"
     },
     {
@@ -9652,7 +9652,7 @@
       "MODALIDAD": "Presencial-Virtual",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Cundinamarca",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 161.0 -> 162.0"
     },
     {
@@ -9664,7 +9664,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Cundinamarca",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 166.0 -> 168.0"
     },
     {
@@ -9676,7 +9676,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 132.0 -> 144.0"
     },
     {
@@ -9688,7 +9688,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 134.0 -> 136.0"
     },
     {
@@ -9700,7 +9700,7 @@
       "MODALIDAD": "Virtual",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "MODALIDAD: Presencial -> Virtual | NÚMERO_CRÉDITOS: 108.0 -> 113.0"
     },
     {
@@ -9712,7 +9712,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bolívar",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 149.0 -> 142.0"
     },
     {
@@ -9724,7 +9724,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bolívar",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 169.0 -> 154.0"
     },
     {
@@ -9736,7 +9736,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Valle del Cauca",
       "DIVISIÓN UNINORTE": "Ciencias Básicas",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 170.0 -> 140.0"
     },
     {
@@ -16420,7 +16420,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 156.0 -> 155.0"
     },
     {
@@ -16432,7 +16432,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16444,7 +16444,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Ciencias Básicas",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16456,7 +16456,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16468,7 +16468,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Ciencias de la Salud",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16480,7 +16480,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Ciencias de la Salud",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16492,7 +16492,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Ciencias de la Salud",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16504,7 +16504,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16516,7 +16516,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16528,7 +16528,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16540,7 +16540,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16552,7 +16552,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16564,7 +16564,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16576,7 +16576,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16588,7 +16588,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16600,7 +16600,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16612,7 +16612,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16624,7 +16624,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16636,7 +16636,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16648,7 +16648,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16660,7 +16660,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1092300.0 -> 1225600.0"
     },
     {
@@ -16672,7 +16672,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Quindío",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 163.0 -> 175.0"
     },
     {
@@ -16684,7 +16684,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 13882000.0 -> 14145091.0"
     },
     {
@@ -16696,7 +16696,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 10929000.0 -> 10929467.0"
     },
     {
@@ -16708,7 +16708,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 12483000.0 -> 12601198.0"
     },
     {
@@ -16720,7 +16720,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 9066000.0 -> 9066474.0"
     },
     {
@@ -16732,7 +16732,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 14548000.0 -> 14548253.0"
     },
     {
@@ -16744,7 +16744,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 20467000.0 -> 20467419.0"
     },
     {
@@ -16756,7 +16756,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Derecho, C. Política y Rel. Internacionales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 20467000.0 -> 20467419.0"
     },
     {
@@ -16768,7 +16768,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 11716000.0 -> 11716100.0"
     },
     {
@@ -16780,7 +16780,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 10295355.0 -> 10296322.0"
     },
     {
@@ -16792,7 +16792,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Cundinamarca",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 181.0 -> 162.0"
     },
     {
@@ -16804,7 +16804,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Cundinamarca",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 185.0 -> 180.0"
     },
     {
@@ -16816,7 +16816,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Cundinamarca",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 157.0 -> 162.0"
     },
     {
@@ -16828,7 +16828,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Música",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 144.0 -> 138.0"
     },
     {
@@ -16840,7 +16840,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Antioquia",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 150.0 -> 144.0"
     },
     {
@@ -16852,7 +16852,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Boyacá",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 144.0 -> 135.0"
     },
     {
@@ -16864,7 +16864,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 143.0 -> 134.0"
     },
     {
@@ -16876,7 +16876,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Cundinamarca",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 153.0 -> 155.0"
     },
     {
@@ -16888,7 +16888,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bolívar",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 135.0 -> 133.0"
     },
     {
@@ -16900,7 +16900,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1761582.0 -> 1677025.0"
     },
     {
@@ -16912,7 +16912,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1761582.0 -> 1677025.0"
     },
     {
@@ -16924,7 +16924,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Derecho, C. Política y Rel. Internacionales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1761582.0 -> 1677025.0"
     },
     {
@@ -16936,7 +16936,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1761582.0 -> 1677025.0"
     },
     {
@@ -16948,7 +16948,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bolívar",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 4804300.0 -> 5031023.0"
     },
     {
@@ -16960,7 +16960,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bolívar",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 4804300.0 -> 5031023.0"
     },
     {
@@ -16972,7 +16972,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1761582.0 -> 1677025.0"
     },
     {
@@ -16984,7 +16984,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1761582.0 -> 1677025.0"
     },
     {
@@ -16996,7 +16996,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1761582.0 -> 1677025.0"
     },
     {
@@ -17008,7 +17008,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1761582.0 -> 1677025.0"
     },
     {
@@ -17020,7 +17020,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bolívar",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 4804300.0 -> 5031023.0"
     },
     {
@@ -17032,7 +17032,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Otro",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1761582.0 -> 1677025.0"
     },
     {
@@ -17044,7 +17044,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Ciencias Básicas",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1761582.0 -> 1677025.0"
     },
     {
@@ -17056,7 +17056,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bolívar",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 4804300.0 -> 5031075.0"
     },
     {
@@ -17068,7 +17068,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Santander",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 1761582.0 -> 1677025.0"
     },
     {
@@ -17080,7 +17080,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Boyacá",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "8.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 150.0 -> 140.0"
     },
     {
@@ -17092,7 +17092,7 @@
       "MODALIDAD": "Híbrida (Dual-Virtual)",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "7.0",
       "QUE_CAMBIO": ""
     },
     {
@@ -17104,7 +17104,7 @@
       "MODALIDAD": "Híbrida (Dual-Virtual)",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "7.0",
       "QUE_CAMBIO": ""
     },
     {
@@ -17116,7 +17116,7 @@
       "MODALIDAD": "Híbrida (Dual-Virtual)",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "7.0",
       "QUE_CAMBIO": "MODALIDAD: Dual -> Híbrida (Dual-Virtual)"
     },
     {
@@ -17128,7 +17128,7 @@
       "MODALIDAD": "Dual",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Bogotá, D.C.",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "7.0",
       "QUE_CAMBIO": "MODALIDAD: Presencial-Dual -> Dual"
     },
     {
@@ -17140,7 +17140,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Escuela de Arquitectura, Urbanismo y Diseño",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 151.0 -> 3.0"
     },
     {
@@ -17152,7 +17152,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Antioquia",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "9.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 179.0 -> 163.0"
     },
     {
@@ -17164,7 +17164,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Meta",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "NÚMERO_CRÉDITOS: 170.0 -> 164.0"
     },
     {
@@ -17176,7 +17176,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "14.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2845235.0 -> 3270691.0"
     },
     {
@@ -17188,7 +17188,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "13.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2845235.0 -> 3270691.0"
     },
     {
@@ -17200,7 +17200,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Ciencias Básicas",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "12.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2845235.0 -> 3270691.0"
     },
     {
@@ -17212,7 +17212,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Ciencias Básicas",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "13.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2845235.0 -> 3270691.0"
     },
     {
@@ -17224,7 +17224,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "13.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2845235.0 -> 3270691.0"
     },
     {
@@ -17236,7 +17236,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "13.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2845235.0 -> 3270691.0"
     },
     {
@@ -17248,7 +17248,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "13.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2845235.0 -> 3270691.0"
     },
     {
@@ -17260,7 +17260,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "14.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2845235.0 -> 3270691.0"
     },
     {
@@ -17272,7 +17272,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "14.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2845235.0 -> 3270691.0"
     },
     {
@@ -17284,7 +17284,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "14.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2845235.0 -> 3270691.0"
     },
     {
@@ -17296,7 +17296,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "13.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2845235.0 -> 3270691.0"
     },
     {
@@ -17308,7 +17308,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Instituto de Estudios en Educación",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "13.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2845235.0 -> 3270691.0"
     },
     {
@@ -17320,7 +17320,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Atlántico",
       "DIVISIÓN UNINORTE": "Música",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "14.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2845235.0 -> 3270691.0"
     },
     {
@@ -17332,7 +17332,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Magdalena",
       "DIVISIÓN UNINORTE": "Escuela de Negocios",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2491000.0 -> 1525200.0"
     },
     {
@@ -17344,7 +17344,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Magdalena",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2491000.0 -> 2669000.0"
     },
     {
@@ -17356,7 +17356,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Magdalena",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2491000.0 -> 1525200.0"
     },
     {
@@ -17368,7 +17368,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Magdalena",
       "DIVISIÓN UNINORTE": "Ingenierías",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2491000.0 -> 1525200.0"
     },
     {
@@ -17380,7 +17380,7 @@
       "MODALIDAD": "Presencial",
       "DEPARTAMENTO_OFERTA_PROGRAMA": "Magdalena",
       "DIVISIÓN UNINORTE": "Humanidades y Cs. Sociales",
-      "NÚMERO_PERIODOS_DE_DURACIÓN": "",
+      "NÚMERO_PERIODOS_DE_DURACIÓN": "10.0",
       "QUE_CAMBIO": "COSTO_MATRÍCULA_ESTUD_NUEVOS: 2491000.0 -> 2211500.0"
     },
     {
