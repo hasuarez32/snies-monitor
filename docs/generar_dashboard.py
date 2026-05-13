@@ -85,6 +85,18 @@ XFILTER = {
         '<option value="">Todos los cambios</option></select>',
 }
 
+FDIV_SELECT = {
+    "nuevos":
+        '<select id="f-cine" class="f-sel" onchange="applyFilters()">'
+        '<option value="">Todos los campos CINE</option></select>',
+    "inactivos":
+        '<select id="f-cine" class="f-sel" onchange="applyFilters()">'
+        '<option value="">Todos los campos CINE</option></select>',
+    "modificados":
+        '<select id="f-division" class="f-sel" onchange="applyFilters()">'
+        '<option value="">Todas las divisiones</option></select>',
+}
+
 CHARTS_HTML = {
     "nuevos": """
 <div class="g2">
@@ -457,8 +469,9 @@ def main():
             .replace("__DATA__",    rows_js)
             .replace("__CONFIG__",  cfg_js)
             .replace("__CHARTS__",  CHARTS_HTML[tipo])
-            .replace("__XFILTER__", XFILTER[tipo])
-            .replace("__TITLE__",   DETAIL_CFGS[tipo]["title"])
+            .replace("__XFILTER__",      XFILTER[tipo])
+            .replace("__FDIV_SELECT__",  FDIV_SELECT[tipo])
+            .replace("__TITLE__",        DETAIL_CFGS[tipo]["title"])
             .replace("__EMOJI__",   DETAIL_CFGS[tipo]["emoji"])
             .replace("__HDRGRD__",  HDR_GRAD[tipo])
         )
@@ -1008,7 +1021,7 @@ tr:hover td{background:#f8fafc}
   <input id="f-q" class="f-input" placeholder="Buscar por nombre, institución, código SNIES, departamento…" oninput="applyFilters()">
   <select id="f-sector"   class="f-sel" onchange="applyFilters()"><option value="">Todos los sectores</option></select>
   <select id="f-depto"    class="f-sel" onchange="applyFilters()"><option value="">Todos los departamentos</option></select>
-  <select id="f-division" class="f-sel" onchange="applyFilters()"><option value="">Todas las divisiones</option></select>
+  __FDIV_SELECT__
   __XFILTER__
   <select id="f-fecha"    class="f-sel" onchange="applyFilters()"><option value="">Todas las fechas</option></select>
   <button class="f-btn" onclick="resetFilters()">✕ Limpiar</button>
@@ -1083,6 +1096,7 @@ if (CFG.tipo === 'modificados') {
   addOpts('f-tipo-cambio', [...cs].sort());
 } else {
   addOpts('f-modalidad', uniq(ROWS.map(r => r['MODALIDAD'])));
+  addOpts('f-cine', uniq(ROWS.map(r => (r['CINE_F_2013_AC_CAMPO_ESPECÍFIC']||'').trim())));
 }
 
 // ── Filters ────────────────────────────────────────────────────────────────
@@ -1092,6 +1106,7 @@ function applyFilters() {
   const q  = gv('f-q').toLowerCase();
   const se = gv('f-sector'), de = gv('f-depto'), di = gv('f-division');
   const mo = gv('f-modalidad'), fe = gv('f-fecha'), tc = gv('f-tipo-cambio');
+  const ci = gv('f-cine');
 
   filtered = ROWS.filter(r => {
     if (q  && !Object.values(r).some(v => String(v).toLowerCase().includes(q))) return false;
@@ -1101,16 +1116,17 @@ function applyFilters() {
     if (mo && r['MODALIDAD'] !== mo) return false;
     if (fe && r['FECHA_OBTENCION'] !== fe) return false;
     if (tc && !(r['QUE_CAMBIO']||'').includes(tc)) return false;
+    if (ci && (r['CINE_F_2013_AC_CAMPO_ESPECÍFIC']||'').trim() !== ci) return false;
     return true;
   });
   renderAll(filtered);
 }
 
 function resetFilters() {
-  ['f-q','f-sector','f-depto','f-division','f-modalidad','f-fecha','f-tipo-cambio'].forEach(id => {
+  ['f-q','f-sector','f-depto','f-division','f-modalidad','f-fecha','f-tipo-cambio','f-cine'].forEach(id => {
     const el = document.getElementById(id); if (el) el.value = '';
   });
-  _periodosDet=null; _cineFiltro=null;
+  _periodosDet=null;
   applyFilters();
 }
 
@@ -1301,7 +1317,12 @@ function renderCineChart(rows) {
     plot_bgcolor:'white',paper_bgcolor:'white',
     hovermode:'x unified',
     legend:{orientation:'h',y:-0.28,font:{size:11}}
-  },PC);
+  },PC).then(gd=>{
+    gd.removeAllListeners('plotly_click');
+    gd.removeAllListeners('plotly_legendclick');
+    gd.on('plotly_click',ev=>{if(ev.points&&ev.points.length)setCineFiltro(ev.points[0].data.name);});
+    gd.on('plotly_legendclick',data=>{setCineFiltro(gd.data[data.curveNumber].name);return false;});
+  });
 }
 
 function plotAcumuladoCINE(id, rows) {
@@ -1363,17 +1384,13 @@ function plotPeriodos(id, rows) {
   });
 }
 
-let _periodosDet=null, _cineFiltro=null;
+let _periodosDet=null;
 
 function _applySubFilters(rows) {
   let r=rows;
   if(_periodosDet!==null){
     const COL='NÚMERO_PERIODOS_DE_DURACIÓN';
     r=r.filter(x=>{const v=x[COL];return v&&Math.round(parseFloat(String(v)))===_periodosDet;});
-  }
-  if(_cineFiltro!==null){
-    const unc=_cineFiltro==='Sin clasificar';
-    r=r.filter(x=>{const v=(x[CINE_COL]||'').trim();return unc?!v:v===_cineFiltro;});
   }
   return r;
 }
@@ -1391,14 +1408,15 @@ function clearPeriodosDetalleFilter() {
 }
 
 function setCineFiltro(cine) {
-  if(_cineFiltro===cine){clearCineFiltro();return;}
-  _cineFiltro=cine;
+  const el=document.getElementById('f-cine'); if(!el) return;
+  if(el.value===cine){clearCineFiltro();return;}
+  el.value=cine;
   applyFilters();
   document.getElementById('tbl-wrap').scrollIntoView({behavior:'smooth'});
 }
 
 function clearCineFiltro() {
-  _cineFiltro=null;
+  const el=document.getElementById('f-cine'); if(el) el.value='';
   applyFilters();
 }
 
@@ -1495,10 +1513,11 @@ function renderAll(rows) {
     if(_periodosDet!==null) document.getElementById('per-det-val').textContent=
       _periodosDet+' periodos — '+subRows.length.toLocaleString('es-CO')+' programas';
   }
+  const cineFiltroVal=gv('f-cine');
   if(ccd){
-    ccd.style.display=_cineFiltro!==null?'flex':'none';
-    if(_cineFiltro!==null) document.getElementById('cine-det-val').textContent=
-      _cineFiltro+' — '+subRows.length.toLocaleString('es-CO')+' programas';
+    ccd.style.display=cineFiltroVal?'flex':'none';
+    if(cineFiltroVal) document.getElementById('cine-det-val').textContent=
+      cineFiltroVal+' — '+subRows.length.toLocaleString('es-CO')+' programas';
   }
   document.getElementById('f-count').textContent = fmt(subRows.length) + ' programas';
 
