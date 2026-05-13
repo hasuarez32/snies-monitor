@@ -207,11 +207,11 @@
       "value": 112
     },
     {
-      "label": "Nariño",
+      "label": "Tolima",
       "value": 110
     },
     {
-      "label": "Tolima",
+      "label": "Nariño",
       "value": 110
     },
     {
@@ -249,11 +249,11 @@
       "value": 4
     },
     {
-      "label": "Híbrida (A distancia-Virtual)",
+      "label": "Virtual-A distancia",
       "value": 3
     },
     {
-      "label": "Virtual-A distancia",
+      "label": "Híbrida (A distancia-Virtual)",
       "value": 3
     },
     {
@@ -468,12 +468,12 @@
       "pct": 2.1
     },
     {
-      "depto": "NARIÑO",
+      "depto": "TOLIMA",
       "total": 110,
       "pct": 2.1
     },
     {
-      "depto": "TOLIMA",
+      "depto": "NARIÑO",
       "total": 110,
       "pct": 2.1
     },
