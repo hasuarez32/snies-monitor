@@ -214,6 +214,7 @@ function resetFilters() {
   ['f-q','f-sector','f-depto','f-division','f-modalidad','f-fecha','f-tipo-cambio'].forEach(id => {
     const el = document.getElementById(id); if (el) el.value = '';
   });
+  _periodosDet=null; _cineFiltro=null;
   applyFilters();
 }
 
@@ -475,9 +476,8 @@ function _applySubFilters(rows) {
     r=r.filter(x=>{const v=x[COL];return v&&Math.round(parseFloat(String(v)))===_periodosDet;});
   }
   if(_cineFiltro!==null){
-    const CCOL='CINE_F_2013_AC_CAMPO_ESPECÍFIC';
     const unc=_cineFiltro==='Sin clasificar';
-    r=r.filter(x=>{const v=(x[CCOL]||'').trim();return unc?!v:v===_cineFiltro;});
+    r=r.filter(x=>{const v=(x[CINE_COL]||'').trim();return unc?!v:v===_cineFiltro;});
   }
   return r;
 }
@@ -485,35 +485,25 @@ function _applySubFilters(rows) {
 function setPeriodosDetalleFilter(val) {
   if(_periodosDet===val){clearPeriodosDetalleFilter();return;}
   _periodosDet=val;
-  const res=_applySubFilters(filtered);
-  document.getElementById('per-det-chip').style.display='flex';
-  document.getElementById('per-det-val').textContent=
-    val+' periodos — '+res.length.toLocaleString('es-CO')+' programas';
-  renderTbl(res);
+  applyFilters();
   document.getElementById('tbl-wrap').scrollIntoView({behavior:'smooth'});
 }
 
 function clearPeriodosDetalleFilter() {
   _periodosDet=null;
-  document.getElementById('per-det-chip').style.display='none';
-  renderTbl(_applySubFilters(filtered));
+  applyFilters();
 }
 
 function setCineFiltro(cine) {
   if(_cineFiltro===cine){clearCineFiltro();return;}
   _cineFiltro=cine;
-  const res=_applySubFilters(filtered);
-  document.getElementById('cine-det-chip').style.display='flex';
-  document.getElementById('cine-det-val').textContent=
-    cine+' — '+res.length.toLocaleString('es-CO')+' programas';
-  renderTbl(res);
+  applyFilters();
   document.getElementById('tbl-wrap').scrollIntoView({behavior:'smooth'});
 }
 
 function clearCineFiltro() {
   _cineFiltro=null;
-  document.getElementById('cine-det-chip').style.display='none';
-  renderTbl(_applySubFilters(filtered));
+  applyFilters();
 }
 
 function plotTipoCambio(id, rows) {
@@ -596,15 +586,25 @@ function sortTbl(col) {
     const cmp = String(va).localeCompare(String(vb),'es',{numeric:true});
     return sortDir[col] ? cmp : -cmp;
   });
-  renderTbl(filtered);
+  renderTbl(_applySubFilters(filtered));
 }
 
 // ── Render all ─────────────────────────────────────────────────────────────
 function renderAll(rows) {
-  _periodosDet=null; _cineFiltro=null;
-  const _cpd=document.getElementById('per-det-chip'); if(_cpd) _cpd.style.display='none';
-  const _ccd=document.getElementById('cine-det-chip'); if(_ccd) _ccd.style.display='none';
-  document.getElementById('f-count').textContent = fmt(rows.length) + ' programas';
+  const subRows=_applySubFilters(rows);
+  const cpd=document.getElementById('per-det-chip');
+  const ccd=document.getElementById('cine-det-chip');
+  if(cpd){
+    cpd.style.display=_periodosDet!==null?'flex':'none';
+    if(_periodosDet!==null) document.getElementById('per-det-val').textContent=
+      _periodosDet+' periodos — '+subRows.length.toLocaleString('es-CO')+' programas';
+  }
+  if(ccd){
+    ccd.style.display=_cineFiltro!==null?'flex':'none';
+    if(_cineFiltro!==null) document.getElementById('cine-det-val').textContent=
+      _cineFiltro+' — '+subRows.length.toLocaleString('es-CO')+' programas';
+  }
+  document.getElementById('f-count').textContent = fmt(subRows.length) + ' programas';
 
   plotDonut('ch-sector', rows, 'SECTOR');
   plotHBar('ch-instituciones', rows, 'NOMBRE_INSTITUCIÓN', C, 10, 32);
@@ -624,7 +624,7 @@ function renderAll(rows) {
     plotAcumuladoModalidad('ch-timeline', rows);
   }
 
-  renderTbl(rows);
+  renderTbl(subRows);
 }
 
 // ── Init ───────────────────────────────────────────────────────────────────
