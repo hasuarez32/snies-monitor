@@ -118,6 +118,16 @@ tr:hover td{background:#f8fafc}
       ✕ Limpiar filtro</button>
   </div>
 
+  <div id="cine-det-chip" style="display:none;align-items:center;gap:.6rem;
+      padding:.5rem 1.25rem;background:#f0fdf4;border:1px solid #bbf7d0;
+      border-radius:.5rem;margin-bottom:.75rem">
+    <span style="font-size:.78rem;color:#166534">Filtrado por CINE:
+      <strong id="cine-det-val"></strong></span>
+    <button onclick="clearCineFiltro()"
+      style="background:none;border:none;cursor:pointer;color:#16a34a;font-size:.82rem;padding:0">
+      ✕ Limpiar filtro</button>
+  </div>
+
   <section class="card tbl-card">
     <div class="ct">Registros</div>
     <div class="tbl-wrap" id="tbl-wrap"></div>
@@ -342,11 +352,11 @@ function renderCineChart(rows) {
     tagsEl.innerHTML=_cineActive.map((cine,i)=>{
       const col=CINE_COLORS[i%CINE_COLORS.length];
       const safe=cine.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-      return '<span style="display:inline-flex;align-items:center;gap:.3rem;'+
+      return '<span title="Clic para filtrar tabla" onclick="setCineFiltro(\''+safe+'\')" style="display:inline-flex;align-items:center;gap:.3rem;'+
         'background:'+col+'22;border:1px solid '+col+'66;border-radius:2rem;'+
-        'padding:.18rem .55rem;font-size:.72rem;color:'+col+';font-weight:500">'+
+        'padding:.18rem .55rem;font-size:.72rem;color:'+col+';font-weight:500;cursor:pointer">'+
         cine+
-        '<button onclick="cineRemove(\''+safe+'\')" '+
+        '<button onclick="event.stopPropagation();cineRemove(\''+safe+'\')" '+
         'style="background:none;border:none;cursor:pointer;color:'+col+';'+
         'font-size:.9rem;padding:0 0 0 .2rem;line-height:1;opacity:.75">\xd7</button></span>';
     }).join('');
@@ -442,16 +452,26 @@ function plotPeriodos(id, rows) {
   });
 }
 
-let _periodosDet=null;
+let _periodosDet=null, _cineFiltro=null;
+
+function _applySubFilters(rows) {
+  let r=rows;
+  if(_periodosDet!==null){
+    const COL='NÚMERO_PERIODOS_DE_DURACIÓN';
+    r=r.filter(x=>{const v=x[COL];return v&&Math.round(parseFloat(String(v)))===_periodosDet;});
+  }
+  if(_cineFiltro!==null){
+    const CCOL='CINE_F_2013_AC_CAMPO_ESPECÍFIC';
+    const unc=_cineFiltro==='Sin clasificar';
+    r=r.filter(x=>{const v=(x[CCOL]||'').trim();return unc?!v:v===_cineFiltro;});
+  }
+  return r;
+}
 
 function setPeriodosDetalleFilter(val) {
   if(_periodosDet===val){clearPeriodosDetalleFilter();return;}
   _periodosDet=val;
-  const COL='NÚMERO_PERIODOS_DE_DURACIÓN';
-  const res=filtered.filter(r=>{
-    const v=r[COL]; if(!v&&v!==0) return false;
-    return Math.round(parseFloat(String(v)))===val;
-  });
+  const res=_applySubFilters(filtered);
   document.getElementById('per-det-chip').style.display='flex';
   document.getElementById('per-det-val').textContent=
     val+' periodos — '+res.length.toLocaleString('es-CO')+' programas';
@@ -462,7 +482,24 @@ function setPeriodosDetalleFilter(val) {
 function clearPeriodosDetalleFilter() {
   _periodosDet=null;
   document.getElementById('per-det-chip').style.display='none';
-  renderTbl(filtered);
+  renderTbl(_applySubFilters(filtered));
+}
+
+function setCineFiltro(cine) {
+  if(_cineFiltro===cine){clearCineFiltro();return;}
+  _cineFiltro=cine;
+  const res=_applySubFilters(filtered);
+  document.getElementById('cine-det-chip').style.display='flex';
+  document.getElementById('cine-det-val').textContent=
+    cine+' — '+res.length.toLocaleString('es-CO')+' programas';
+  renderTbl(res);
+  document.getElementById('tbl-wrap').scrollIntoView({behavior:'smooth'});
+}
+
+function clearCineFiltro() {
+  _cineFiltro=null;
+  document.getElementById('cine-det-chip').style.display='none';
+  renderTbl(_applySubFilters(filtered));
 }
 
 function plotTipoCambio(id, rows) {
@@ -550,8 +587,9 @@ function sortTbl(col) {
 
 // ── Render all ─────────────────────────────────────────────────────────────
 function renderAll(rows) {
-  _periodosDet=null;
+  _periodosDet=null; _cineFiltro=null;
   const _cpd=document.getElementById('per-det-chip'); if(_cpd) _cpd.style.display='none';
+  const _ccd=document.getElementById('cine-det-chip'); if(_ccd) _ccd.style.display='none';
   document.getElementById('f-count').textContent = fmt(rows.length) + ' programas';
 
   plotDonut('ch-sector', rows, 'SECTOR');
