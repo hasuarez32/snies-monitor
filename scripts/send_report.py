@@ -174,9 +174,9 @@ def construir_cuerpo(resultados: dict, today: date) -> str:
 
 # ── Envío ─────────────────────────────────────────────────────────────────────
 
-def enviar_reporte(resultados: dict, today: date, chart_paths: list | None = None) -> None:
+def enviar_reporte(resultados: dict, today: date) -> None:
     """
-    Construye y envía el correo HTML con los adjuntos de novedades y gráficos.
+    Construye y envía el correo HTML con los adjuntos de novedades.
     Lee credenciales y destinatarios desde variables de entorno.
     """
     smtp_user     = os.environ["SMTP_USER"]
@@ -190,22 +190,6 @@ def enviar_reporte(resultados: dict, today: date, chart_paths: list | None = Non
     msg["From"]    = smtp_user
     msg["To"]      = ", ".join(destinatarios)
     msg.attach(MIMEText(cuerpo, "html", "utf-8"))
-
-    # Adjuntar gráficos PNG
-    for png_path in (chart_paths or []):
-        try:
-            with open(png_path, "rb") as f:
-                part = MIMEBase("image", "png")
-                part.set_payload(f.read())
-            encoders.encode_base64(part)
-            part.add_header(
-                "Content-Disposition",
-                f'attachment; filename="{Path(png_path).name}"',
-            )
-            msg.attach(part)
-            log.info(f"Adjunto gráfico: {Path(png_path).name}")
-        except Exception:
-            log.exception(f"No se pudo adjuntar {png_path}")
 
     # Adjuntar solo los xlsx de novedades de pregrado
     adjuntos = sorted(NOVEDADES_DIR.glob("*_pregrado.xlsx"))

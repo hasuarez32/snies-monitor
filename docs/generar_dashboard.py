@@ -52,25 +52,25 @@ COLS_MOD_DETAIL = COLS_DETAIL + ["QUE_CAMBIO", "NÚMERO_CRÉDITOS_ANTERIOR"]
 DETAIL_CFGS = {
     "nuevos": {
         "tipo": "nuevos", "title": "Programas Nuevos", "emoji": "✅",
-        "color": "#059669", "colorAlpha": "rgba(5,150,105,0.08)",
+        "color": "#fcc10e", "colorAlpha": "rgba(252,193,14,0.08)",
         "cols": COLS_DETAIL,
     },
     "inactivos": {
         "tipo": "inactivos", "title": "Programas Inactivos", "emoji": "❌",
-        "color": "#dc2626", "colorAlpha": "rgba(220,38,38,0.08)",
+        "color": "#ae1e22", "colorAlpha": "rgba(174,30,34,0.08)",
         "cols": COLS_DETAIL,
     },
     "modificados": {
         "tipo": "modificados", "title": "Programas Modificados", "emoji": "⚠️",
-        "color": "#d97706", "colorAlpha": "rgba(217,119,6,0.08)",
+        "color": "#bd900b", "colorAlpha": "rgba(189,144,11,0.08)",
         "cols": COLS_MOD_DETAIL,
     },
 }
 
 HDR_GRAD = {
-    "nuevos":      "linear-gradient(135deg,#065f46,#059669)",
-    "inactivos":   "linear-gradient(135deg,#991b1b,#dc2626)",
-    "modificados": "linear-gradient(135deg,#92400e,#d97706)",
+    "nuevos":      "linear-gradient(135deg,#15284b,#fcc10e)",
+    "inactivos":   "linear-gradient(135deg,#7a1518,#ae1e22)",
+    "modificados": "linear-gradient(135deg,#15284b,#bd900b)",
 }
 
 XFILTER = {
@@ -117,7 +117,7 @@ CHARTS_HTML = {
              onkeydown="if(event.key==='Enter')cineAdd()">
       <datalist id="cine-list"></datalist>
       <button onclick="cineAdd()"
-              style="padding:.35rem .8rem;background:#2563eb;color:#fff;border:none;border-radius:.4rem;font-size:.78rem;cursor:pointer;white-space:nowrap">+ Agregar</button>
+              style="padding:.35rem .8rem;background:#2d5b9e;color:#fff;border:none;border-radius:.4rem;font-size:.78rem;cursor:pointer;white-space:nowrap">+ Agregar</button>
     </div>
   </div>
   <div id="cine-tags" style="display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.6rem;min-height:1.4rem"></div>
@@ -144,7 +144,7 @@ CHARTS_HTML = {
              onkeydown="if(event.key==='Enter')cineAdd()">
       <datalist id="cine-list"></datalist>
       <button onclick="cineAdd()"
-              style="padding:.35rem .8rem;background:#2563eb;color:#fff;border:none;border-radius:.4rem;font-size:.78rem;cursor:pointer;white-space:nowrap">+ Agregar</button>
+              style="padding:.35rem .8rem;background:#2d5b9e;color:#fff;border:none;border-radius:.4rem;font-size:.78rem;cursor:pointer;white-space:nowrap">+ Agregar</button>
     </div>
   </div>
   <div id="cine-tags" style="display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.6rem;min-height:1.4rem"></div>
@@ -498,9 +498,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 <style>
 :root {
-  --bg:#f1f5f9; --surface:#fff; --hdr1:#1e3a8a; --hdr2:#2563eb;
+  --bg:#f1f5f9; --surface:#fff; --hdr1:#15284b; --hdr2:#2d5b9e;
   --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
-  --blue:#2563eb; --green:#059669; --red:#dc2626; --amber:#d97706;
+  --blue:#2d5b9e; --green:#fcc10e; --red:#ae1e22; --amber:#bd900b;
   --radius:0.75rem;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -622,12 +622,12 @@ tr:hover td{background:#f8fafc}
   </section>
 
   <div id="periodos-chip" style="display:none;align-items:center;gap:.6rem;
-      padding:.55rem 1.5rem;background:#eff6ff;border:1px solid #bfdbfe;
+      padding:.55rem 1.5rem;background:#eaf1f8;border:1px solid #c7d7ea;
       border-radius:.5rem;margin-bottom:.75rem">
-    <span style="font-size:.78rem;color:#1e40af">Filtrado por duración:
+    <span style="font-size:.78rem;color:#15284b">Filtrado por duración:
       <strong id="periodos-chip-val"></strong></span>
     <button onclick="clearPeriodosFilter()"
-      style="background:none;border:none;cursor:pointer;color:#2563eb;font-size:.82rem;padding:0">
+      style="background:none;border:none;cursor:pointer;color:#2d5b9e;font-size:.82rem;padding:0">
       ✕ Limpiar filtro</button>
   </div>
 
@@ -687,7 +687,7 @@ document.getElementById('k-mod-sub').textContent = 'acumulado: ' + fmt(D.kpis.mo
   Plotly.newPlot('ch-sector', [{
     labels: d.map(x => x.label), values: d.map(x => x.value),
     type:'pie', hole:0.45,
-    marker:{colors:['#2563eb','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4']},
+    marker:{colors:['#2d5b9e','#fcc10e','#bd900b','#ae1e22','#6e91b9','#214174']},
     textinfo:'label+percent',
     hovertemplate:'%{label}<br><b>%{value:,}</b><extra></extra>'
   }], {
@@ -702,7 +702,7 @@ document.getElementById('k-mod-sub').textContent = 'acumulado: ' + fmt(D.kpis.mo
   Plotly.newPlot('ch-depto', [{
     y: d.map(x => x.label), x: d.map(x => x.value),
     type:'bar', orientation:'h',
-    marker:{color:'#2563eb', opacity:0.82},
+    marker:{color:'#2d5b9e', opacity:0.82},
     hovertemplate:'%{y}<br><b>%{x:,}</b><extra></extra>'
   }], {
     margin:{t:10,r:20,b:40,l:170},
@@ -727,7 +727,7 @@ document.getElementById('k-mod-sub').textContent = 'acumulado: ' + fmt(D.kpis.mo
         z: d.map(x => x.total),
         text: d.map(x => x.depto + '<br>' + x.total.toLocaleString('es-CO') + ' programas (' + x.pct + '%)'),
         hovertemplate: '%{text}<extra></extra>',
-        colorscale: [[0,'#93c5fd'],[0.4,'#2563eb'],[0.7,'#34d399'],[1,'#059669']],
+        colorscale: [[0,'#feecb7'],[0.35,'#fcc10e'],[0.7,'#2d5b9e'],[1,'#15284b']],
         showscale: true,
         colorbar: {thickness: 14, len: 0.6, title: {text: 'Programas', side: 'right', font: {size: 11}}},
         marker: {line: {color: 'white', width: 0.5}}
@@ -737,7 +737,7 @@ document.getElementById('k-mod-sub').textContent = 'acumulado: ' + fmt(D.kpis.mo
           showframe: false,
           showcoastlines: false,
           showland: true, landcolor: '#f1f5f9',
-          showocean: true, oceancolor: '#e0f2fe',
+          showocean: true, oceancolor: '#e4ecf6',
           showlakes: false,
           projection: {type: 'mercator'}
         },
@@ -754,8 +754,8 @@ document.getElementById('k-mod-sub').textContent = 'acumulado: ' + fmt(D.kpis.mo
 (function() {
   const ds = D.por_periodos_stacked;
   if (!ds || !ds.labels || !ds.labels.length) return;
-  const PCOLORS = ['#2563eb','#059669','#d97706','#dc2626','#8b5cf6',
-                   '#06b6d4','#ec4899','#f97316','#84cc16','#14b8a6'];
+  const PCOLORS = ['#2d5b9e','#fcc10e','#bd900b','#ae1e22','#6e91b9',
+                   '#214174','#d56f18','#948e56','#15284b','#7a1518'];
   const traces = ds.series.map((s, i) => ({
     x: ds.labels, y: s.values, name: s.name, type: 'bar',
     marker: {color: PCOLORS[i % PCOLORS.length], opacity: 0.85},
@@ -828,9 +828,9 @@ function filterSnap(q) {
 function _updateChipStyles() {
   document.querySelectorAll('[id^="pchip-"]').forEach(btn => {
     const active = btn.id === 'pchip-' + periodosFiltro;
-    btn.style.background    = active ? '#2563eb' : '#f1f5f9';
+    btn.style.background    = active ? '#2d5b9e' : '#f1f5f9';
     btn.style.color         = active ? '#fff'    : '';
-    btn.style.borderColor   = active ? '#2563eb' : '#e2e8f0';
+    btn.style.borderColor   = active ? '#2d5b9e' : '#e2e8f0';
     btn.style.fontWeight    = active ? '600'     : '';
   });
 }
@@ -943,7 +943,7 @@ DETAIL_TEMPLATE = r"""<!DOCTYPE html>
 <style>
 :root{
   --bg:#f1f5f9;--surface:#fff;--text:#0f172a;--muted:#64748b;
-  --border:#e2e8f0;--blue:#2563eb;--radius:0.75rem;
+  --border:#e2e8f0;--blue:#2d5b9e;--radius:0.75rem;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px}
@@ -1032,22 +1032,22 @@ tr:hover td{background:#f8fafc}
   <section>__CHARTS__</section>
 
   <div id="per-det-chip" style="display:none;align-items:center;gap:.6rem;
-      padding:.5rem 1.25rem;background:#eff6ff;border:1px solid #bfdbfe;
+      padding:.5rem 1.25rem;background:#eaf1f8;border:1px solid #c7d7ea;
       border-radius:.5rem;margin-bottom:.75rem">
-    <span style="font-size:.78rem;color:#1e40af">Filtrado por duración:
+    <span style="font-size:.78rem;color:#15284b">Filtrado por duración:
       <strong id="per-det-val"></strong></span>
     <button onclick="clearPeriodosDetalleFilter()"
-      style="background:none;border:none;cursor:pointer;color:#2563eb;font-size:.82rem;padding:0">
+      style="background:none;border:none;cursor:pointer;color:#2d5b9e;font-size:.82rem;padding:0">
       ✕ Limpiar filtro</button>
   </div>
 
   <div id="cine-det-chip" style="display:none;align-items:center;gap:.6rem;
-      padding:.5rem 1.25rem;background:#f0fdf4;border:1px solid #bbf7d0;
+      padding:.5rem 1.25rem;background:#fef6dc;border:1px solid #fce6a6;
       border-radius:.5rem;margin-bottom:.75rem">
-    <span style="font-size:.78rem;color:#166534">Filtrado por CINE:
+    <span style="font-size:.78rem;color:#7a5d06">Filtrado por CINE:
       <strong id="cine-det-val"></strong></span>
     <button onclick="clearCineFiltro()"
-      style="background:none;border:none;cursor:pointer;color:#16a34a;font-size:.82rem;padding:0">
+      style="background:none;border:none;cursor:pointer;color:#bd900b;font-size:.82rem;padding:0">
       ✕ Limpiar filtro</button>
   </div>
 
@@ -1159,7 +1159,7 @@ function plotDonut(id, rows, field) {
   const el=document.getElementById(id); if(!el) return;
   const d=countBy(rows,field,20); if(!d.length) return;
   Plotly.react(id,[{labels:d.map(e=>e[0]),values:d.map(e=>e[1]),type:'pie',hole:.45,
-    marker:{colors:['#2563eb','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#ec4899']},
+    marker:{colors:['#2d5b9e','#fcc10e','#bd900b','#ae1e22','#6e91b9','#214174','#d56f18']},
     textinfo:'label+percent',hovertemplate:'%{label}<br><b>%{value:,}</b><extra></extra>'}],
     {margin:{t:10,r:10,b:35,l:10},showlegend:true,legend:{orientation:'h',y:-0.12,font:{size:10}},
     plot_bgcolor:'white',paper_bgcolor:'white'},PC);
@@ -1218,7 +1218,7 @@ function plotAcumuladoModalidad(id, rows) {
   }
 
   const mods=[...new Set(rows.map(r=>r['MODALIDAD']).filter(v=>v&&v.trim()))].sort();
-  const COLORS=['#2563eb','#059669','#d97706','#dc2626','#8b5cf6','#06b6d4','#ec4899'];
+  const COLORS=['#2d5b9e','#fcc10e','#bd900b','#ae1e22','#6e91b9','#214174','#d56f18'];
 
   const traces=mods.map((mod,i)=>{
     const bySem={};
@@ -1246,8 +1246,8 @@ function plotAcumuladoModalidad(id, rows) {
 }
 
 // ── CINE cumulative chart (nuevos page only) ───────────────────────────────
-const CINE_COLORS=['#2563eb','#059669','#d97706','#dc2626','#8b5cf6',
-                   '#06b6d4','#ec4899','#f97316','#84cc16','#14b8a6'];
+const CINE_COLORS=['#2d5b9e','#fcc10e','#bd900b','#ae1e22','#6e91b9',
+                   '#214174','#d56f18','#948e56','#15284b','#7a1518'];
 const CINE_COL='CINE_F_2013_AC_CAMPO_ESPECÍFIC';
 let _cineInit=false, _cineAll=[], _cineActive=[];
 
@@ -1347,8 +1347,8 @@ function cineRemove(cine) {
 function plotPeriodos(id, rows) {
   const el=document.getElementById(id); if(!el) return;
   const COL='NÚMERO_PERIODOS_DE_DURACIÓN', PCOL='PERIODICIDAD';
-  const PCOLORS=['#2563eb','#059669','#d97706','#dc2626','#8b5cf6',
-                 '#06b6d4','#ec4899','#f97316','#84cc16','#14b8a6'];
+  const PCOLORS=['#2d5b9e','#fcc10e','#bd900b','#ae1e22','#6e91b9',
+                 '#214174','#d56f18','#948e56','#15284b','#7a1518'];
   const pivot={}, periSet=new Set();
   rows.forEach(r=>{
     const v=r[COL]; if(!v||String(v).trim()==='') return;
@@ -1426,7 +1426,7 @@ function plotTipoCambio(id, rows) {
   rows.forEach(r => { (r['QUE_CAMBIO']||'').split(' | ').forEach(p => { const f=p.split(':')[0].trim(); if(f&&f!=='nan'&&f!=='') c[f]=(c[f]||0)+1; }); });
   const d=Object.entries(c).sort((a,b)=>b[1]-a[1]); if(!d.length) return;
   Plotly.react(id,[{x:d.map(e=>e[0]),y:d.map(e=>e[1]),type:'bar',
-    marker:{color:'#d97706',opacity:.85},
+    marker:{color:'#bd900b',opacity:.85},
     hovertemplate:'%{x}<br><b>%{y:,}</b> cambios<extra></extra>'}],
     {margin:{t:10,r:20,b:80,l:50},
     xaxis:{tickfont:{size:11},tickangle:-20},
@@ -1450,10 +1450,10 @@ function plotScatter(id, rows) {
   Plotly.react(id,[
     {x:pts.map(p=>p.x),y:pts.map(p=>p.y),text:pts.map(p=>p.t),
      mode:'markers',type:'scatter',
-     marker:{color:'#d97706',size:8,opacity:.7},
+     marker:{color:'#bd900b',size:8,opacity:.7},
      hovertemplate:'<b>%{text}</b><br>Antes: %{x} creditos<br>Despues: %{y} creditos<extra></extra>'},
     {x:[mn,mx],y:[mn,mx],mode:'lines',
-     line:{color:'#94a3b8',width:1,dash:'dot'},hoverinfo:'skip',showlegend:false}
+     line:{color:'#9fb0c9',width:1,dash:'dot'},hoverinfo:'skip',showlegend:false}
   ],{margin:{t:10,r:20,b:50,l:60},
     xaxis:{title:'Creditos anteriores',showgrid:true,gridcolor:'#e2e8f0'},
     yaxis:{title:'Creditos actuales',showgrid:true,gridcolor:'#e2e8f0'},
@@ -1524,7 +1524,7 @@ function renderAll(rows) {
   plotDonut('ch-sector', rows, 'SECTOR');
   plotHBar('ch-instituciones', rows, 'NOMBRE_INSTITUCIÓN', C, 10, 32);
   plotHBar('ch-division',      rows, 'DIVISIÓN UNINORTE',  C, 12);
-  plotHBar('ch-depto',         rows, 'DEPARTAMENTO_OFERTA_PROGRAMA', '#6366f1', 15);
+  plotHBar('ch-depto',         rows, 'DEPARTAMENTO_OFERTA_PROGRAMA', '#214174', 15);
 
   if (CFG.tipo === 'modificados') {
     plotTipoCambio('ch-tipo-cambio', rows);

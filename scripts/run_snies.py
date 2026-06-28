@@ -19,9 +19,6 @@ import time
 from datetime import date, datetime
 from pathlib import Path
 
-import matplotlib
-matplotlib.use("Agg")  # debe ir antes de cualquier import de pyplot
-
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -562,18 +559,9 @@ def main() -> None:
     except Exception:
         log.exception("Error fatal procesando pregrado.")
 
-    # Generar gráficos antes del correo
-    chart_paths = []
-    try:
-        sys.path.insert(0, str(ROOT))
-        from analisis_historico_pregrado import generar_graficos
-        chart_paths = generar_graficos()
-    except Exception:
-        log.exception("Error generando gráficos de novedades.")
-
     try:
         from send_report import enviar_reporte
-        enviar_reporte(resultados, today, chart_paths)
+        enviar_reporte(resultados, today)
     except Exception:
         log.exception("Error enviando el correo.")
 

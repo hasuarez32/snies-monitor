@@ -231,11 +231,11 @@
       "value": 112
     },
     {
-      "label": "Nariño",
+      "label": "Tolima",
       "value": 110
     },
     {
-      "label": "Tolima",
+      "label": "Nariño",
       "value": 110
     },
     {
@@ -492,12 +492,12 @@
       "pct": 2.1
     },
     {
-      "depto": "NARIÑO",
+      "depto": "TOLIMA",
       "total": 110,
       "pct": 2.1
     },
     {
-      "depto": "TOLIMA",
+      "depto": "NARIÑO",
       "total": 110,
       "pct": 2.1
     },
