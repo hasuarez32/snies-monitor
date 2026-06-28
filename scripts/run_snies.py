@@ -1,4 +1,4 @@
-"""
+}"""
 run_snies.py
 ------------
 Orquestador principal del monitor SNIES para pregrado.

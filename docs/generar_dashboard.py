@@ -354,132 +354,96 @@ def _normalizar_modificados(df: pd.DataFrame) -> pd.DataFrame:
 
 # ── análisis de créditos (pagina dedicada modificados_creditos.html) ──────────
 
+def _clean_json_scalar(v):
+    """Convierte escalares numpy/NaN a tipos nativos de Python para json.dumps."""
+    if isinstance(v, float) and np.isnan(v):
+        return None
+    if v is None:
+        return None
+    try:
+        if pd.isna(v):
+            return None
+    except (TypeError, ValueError):
+        pass
+    if isinstance(v, np.bool_):
+        return bool(v)
+    if isinstance(v, np.integer):
+        return int(v)
+    if isinstance(v, np.floating):
+        return float(v)
+    return v
+
+
 def calcular_analisis_creditos(mods_df: pd.DataFrame) -> dict:
-    """Aisla, dentro de Modificados, los programas que cambiaron de NÚMERO_CRÉDITOS
-    y calcula los cruces que la pagina dedicada necesita: ranking de instituciones/
-    departamentos, sube-vs-baja por sector, y co-cambio con periodos/costo/modalidad/
-    municipio comparado contra la tasa base de cambio de cada uno de esos campos."""
-    vacio = {
-        "n_cambios": 0, "por_sector": [], "top_instituciones": [], "top_departamentos": [],
-        "co_cambios": [], "scatter": [], "deltas": [], "rows": [],
-    }
+    """Exporta, fila por fila, TODO Modificados con flags booleanos de co-cambio
+    ya resueltos (cambia_credito/periodo/costo/modalidad/municipio: True/False/None
+    si no hay dato comparable). La pagina dedicada hace los agregados (KPIs,
+    rankings, histograma, co-cambios, scatter) en JS a partir de este 'universo',
+    para que TODO -no solo la tabla- se recalcule cuando el usuario filtra por
+    texto, sector o departamento."""
     if mods_df is None or mods_df.empty:
-        return vacio
+        return {"universo": []}
 
     df = mods_df.copy()
-    cred_n = pd.to_numeric(df.get("NÚMERO_CRÉDITOS"), errors="coerce")
-    cred_a = pd.to_numeric(df.get("NÚMERO_CRÉDITOS_ANTERIOR"), errors="coerce")
-    mask = cred_n.notna() & cred_a.notna() & (cred_n != cred_a)
-    if not mask.any():
-        return vacio
 
-    sub = df[mask].copy()
-    sub["_delta"] = (cred_n[mask] - cred_a[mask]).astype(int)
-    sub["_cred_antes"] = cred_a[mask].astype(int)
-    sub["_cred_despues"] = cred_n[mask].astype(int)
-
-    por_sector = [
-        {
-            "sector": sector,
-            "n": int(len(g)),
-            "promedio_delta": round(float(g["_delta"].mean()), 1),
-            "suben": int((g["_delta"] > 0).sum()),
-            "bajan": int((g["_delta"] < 0).sum()),
-        }
-        for sector, g in sub.groupby("SECTOR")
-    ]
-
-    def _ranking(group_col, top_n=15):
-        out = []
-        for nombre, g in sub.groupby(group_col):
-            if not nombre or str(nombre).strip() in ("", "nan"):
-                continue
-            out.append({
-                "nombre": str(nombre),
-                "n": int(len(g)),
-                "promedio_delta": round(float(g["_delta"].mean()), 1),
-                "suben": int((g["_delta"] > 0).sum()),
-                "bajan": int((g["_delta"] < 0).sum()),
-            })
-        out.sort(key=lambda r: r["n"], reverse=True)
-        return out[:top_n]
-
-    top_instituciones = _ranking("NOMBRE_INSTITUCIÓN")
-    top_departamentos = _ranking("DEPARTAMENTO_OFERTA_PROGRAMA")
-
-    def _coalesced_pair(col):
+    def _num_pair(col):
         n = pd.to_numeric(df.get(col), errors="coerce")
         a = pd.to_numeric(df.get(f"{col}_ANTERIOR"), errors="coerce")
         return n, a
 
-    def _coalesced_pair_text(col):
-        n = df.get(col)
-        a = df.get(f"{col}_ANTERIOR")
-        return n, a
-
-    co_cambios = []
-    campos_num = [
-        ("NÚMERO_PERIODOS_DE_DURACIÓN", "Duración (periodos)"),
-        ("COSTO_MATRÍCULA_ESTUD_NUEVOS", "Costo de matrícula"),
-    ]
-    for col, label in campos_num:
-        n, a = _coalesced_pair(col)
+    def _flag_num(col):
+        n, a = _num_pair(col)
         valido = n.notna() & a.notna()
-        cambia = valido & (n != a)
-        con_credito = mask & valido
-        co_cambios.append({
-            "campo": label,
-            "n_con_dato": int(con_credito.sum()),
-            "tasa_con_cambio_credito": round(float(100 * (con_credito & cambia).sum()) / max(int(con_credito.sum()), 1), 1),
-            "tasa_base": round(float(100 * cambia.sum()) / max(int(valido.sum()), 1), 1),
-        })
+        out = pd.Series(pd.NA, index=df.index, dtype="boolean")
+        out[valido] = (n != a)[valido]
+        return out
 
-    campos_text = [
-        ("MODALIDAD", "Modalidad"),
-        ("MUNICIPIO_OFERTA_PROGRAMA", "Municipio"),
-    ]
-    for col, label in campos_text:
-        n, a = _coalesced_pair_text(col)
+    def _flag_text(col):
+        n, a = df.get(col), df.get(f"{col}_ANTERIOR")
+        out = pd.Series(pd.NA, index=df.index, dtype="boolean")
         if n is None or a is None:
-            continue
+            return out
         valido = n.notna() & a.notna() & (n.astype(str).str.strip() != "") & (a.astype(str).str.strip() != "")
-        cambia = valido & (n.astype(str).str.strip() != a.astype(str).str.strip())
-        con_credito = mask & valido
-        co_cambios.append({
-            "campo": label,
-            "n_con_dato": int(con_credito.sum()),
-            "tasa_con_cambio_credito": round(float(100 * (con_credito & cambia).sum()) / max(int(con_credito.sum()), 1), 1),
-            "tasa_base": round(float(100 * cambia.sum()) / max(int(valido.sum()), 1), 1),
-        })
+        cambia = n.astype(str).str.strip() != a.astype(str).str.strip()
+        out[valido] = cambia[valido]
+        return out
 
-    scatter = [
-        {
-            "antes": int(r["_cred_antes"]), "despues": int(r["_cred_despues"]),
-            "sector": str(r.get("SECTOR", "")), "institucion": str(r.get("NOMBRE_INSTITUCIÓN", "")),
-            "programa": str(r.get("NOMBRE_DEL_PROGRAMA", "")),
-        }
-        for _, r in sub.iterrows()
-    ]
+    cred_n, cred_a = _num_pair("NÚMERO_CRÉDITOS")
+    cred_valido = cred_n.notna() & cred_a.notna()
+    if not cred_valido.any():
+        return {"universo": []}
 
-    rows = sub.copy()
-    rows["QUE_CAMBIO"] = rows["QUE_CAMBIO"].fillna("")
-    cols_tabla = [
-        "FECHA_OBTENCION", "CÓDIGO_SNIES_DEL_PROGRAMA", "NOMBRE_DEL_PROGRAMA",
-        "NOMBRE_INSTITUCIÓN", "SECTOR", "DEPARTAMENTO_OFERTA_PROGRAMA",
-        "DIVISIÓN UNINORTE", "_cred_antes", "_cred_despues", "_delta", "QUE_CAMBIO",
-    ]
-    rows_out = _to_records(rows, [c for c in cols_tabla if c in rows.columns])
+    out = pd.DataFrame({
+        "FECHA_OBTENCION":               df.get("FECHA_OBTENCION"),
+        "CÓDIGO_SNIES_DEL_PROGRAMA":     df.get("CÓDIGO_SNIES_DEL_PROGRAMA"),
+        "NOMBRE_DEL_PROGRAMA":           df.get("NOMBRE_DEL_PROGRAMA"),
+        "NOMBRE_INSTITUCIÓN":            df.get("NOMBRE_INSTITUCIÓN"),
+        "SECTOR":                        df.get("SECTOR"),
+        "DEPARTAMENTO_OFERTA_PROGRAMA":  df.get("DEPARTAMENTO_OFERTA_PROGRAMA"),
+        "DIVISIÓN UNINORTE":             df.get("DIVISIÓN UNINORTE"),
+        "QUE_CAMBIO":                    df.get("QUE_CAMBIO"),
+        "_cred_antes":    cred_a,
+        "_cred_despues":  cred_n,
+        "_delta":         cred_n - cred_a,
+        "_cambia_credito": cred_n != cred_a,
+        "_cambia_periodo":    _flag_num("NÚMERO_PERIODOS_DE_DURACIÓN"),
+        "_cambia_costo":      _flag_num("COSTO_MATRÍCULA_ESTUD_NUEVOS"),
+        "_cambia_modalidad":  _flag_text("MODALIDAD"),
+        "_cambia_municipio":  _flag_text("MUNICIPIO_OFERTA_PROGRAMA"),
+    })
 
-    return {
-        "n_cambios": int(len(sub)),
-        "por_sector": por_sector,
-        "top_instituciones": top_instituciones,
-        "top_departamentos": top_departamentos,
-        "co_cambios": co_cambios,
-        "scatter": scatter,
-        "deltas": [int(d) for d in sub["_delta"].tolist()],
-        "rows": rows_out,
-    }
+    # El universo de esta pagina son los programas con par antes/despues de
+    # creditos verificable (con o sin cambio real: el "sin cambio" es el grupo
+    # de control para la tasa base de los otros campos).
+    out = out[cred_valido].copy()
+    out["QUE_CAMBIO"] = out["QUE_CAMBIO"].fillna("")
+    for c in ("_cred_antes", "_cred_despues", "_delta"):
+        out[c] = out[c].astype(int)
+
+    records = out.to_dict("records")
+    universo = [{k: _clean_json_scalar(v) for k, v in r.items()} for r in records]
+
+    return {"universo": universo}
 
 
 # ── mapa coroplético ──────────────────────────────────────────────────────────
@@ -1781,7 +1745,7 @@ CREDITOS_TEMPLATE = r"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Análisis de Créditos · SNIES Monitor</title>
+<title>Analisis de Creditos . SNIES Monitor</title>
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 <style>
 :root{
@@ -1799,6 +1763,19 @@ header .sub{font-size:.77rem;opacity:.75;margin-top:.2rem}
   border:1px solid rgba(255,255,255,.35);color:#fff;text-decoration:none;padding:.38rem .85rem;
   border-radius:.4rem;font-size:.8rem;font-weight:500;white-space:nowrap;transition:background .15s}
 .back-btn:hover{background:rgba(255,255,255,.32)}
+.filter-bar{position:sticky;top:0;z-index:100;background:var(--surface);
+  border-bottom:1px solid var(--border);padding:.6rem 2rem;
+  display:flex;gap:.45rem;flex-wrap:wrap;align-items:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.f-input{flex:1;min-width:200px;padding:.5rem .8rem;border:1px solid var(--border);
+  border-radius:.4rem;font-size:.8rem;outline:none}
+.f-input:focus{border-color:var(--blue)}
+.f-sel{padding:.4rem .6rem;border:1px solid var(--border);border-radius:.4rem;
+  font-size:.77rem;background:var(--surface);outline:none;cursor:pointer;max-width:200px}
+.f-btn{padding:.4rem .85rem;border:1px solid var(--border);border-radius:.4rem;
+  font-size:.77rem;background:var(--surface);cursor:pointer;color:var(--muted);white-space:nowrap}
+.f-btn:hover{background:var(--bg)}
+.f-count{margin-left:auto;font-size:.82rem;font-weight:600;color:var(--blue);white-space:nowrap}
 main{max-width:1380px;margin:0 auto;padding:1.5rem 2rem}
 section{margin-bottom:1.25rem}
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
@@ -1812,18 +1789,8 @@ section{margin-bottom:1.25rem}
   box-shadow:0 1px 3px rgba(0,0,0,.07);margin-bottom:1rem}
 .ct{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
   color:var(--muted);margin-bottom:.85rem}
-.ct-note{font-size:.74rem;color:var(--muted);margin-top:-.5rem;margin-bottom:.75rem}
+.ct-note{font-size:.74rem;color:var(--muted);margin-top:-.5rem;margin-bottom:.75rem;line-height:1.4}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.filter-bar{display:flex;gap:.45rem;flex-wrap:wrap;align-items:center;margin-bottom:.75rem}
-.f-input{flex:1;min-width:200px;padding:.5rem .8rem;border:1px solid var(--border);
-  border-radius:.4rem;font-size:.8rem;outline:none}
-.f-input:focus{border-color:var(--blue)}
-.f-sel{padding:.4rem .6rem;border:1px solid var(--border);border-radius:.4rem;
-  font-size:.77rem;background:var(--surface);outline:none;cursor:pointer;max-width:200px}
-.f-btn{padding:.4rem .85rem;border:1px solid var(--border);border-radius:.4rem;
-  font-size:.77rem;background:var(--surface);cursor:pointer;color:var(--muted);white-space:nowrap}
-.f-btn:hover{background:var(--bg)}
-.f-count{margin-left:auto;font-size:.82rem;font-weight:600;color:var(--blue);white-space:nowrap}
 .tbl-wrap{max-height:480px;overflow-y:auto;border:1px solid var(--border);border-radius:.5rem}
 table{width:100%;border-collapse:collapse;font-size:.77rem}
 th{background:var(--bg);padding:.6rem .85rem;text-align:left;font-size:.67rem;
@@ -1842,6 +1809,7 @@ tr:hover td{background:#f8fafc}
   .g2{grid-template-columns:1fr}
   main{padding:1rem}
   header{flex-direction:column;text-align:center}
+  .f-count{margin-left:0}
 }
 </style>
 </head>
@@ -1850,35 +1818,48 @@ tr:hover td{background:#f8fafc}
   <div style="display:flex;align-items:center;gap:.9rem">
     <a href="modificados.html" class="back-btn">← Modificados</a>
     <div>
-      <h1>📐 Análisis de Créditos</h1>
-      <div class="sub">Qué cambia cuando un programa modifica su número de créditos</div>
+      <h1>📐 Analisis de Creditos</h1>
+      <div class="sub">Que cambia cuando un programa modifica su numero de creditos</div>
     </div>
   </div>
 </header>
 
+<div class="filter-bar">
+  <input id="f-q" class="f-input" placeholder="Buscar por nombre, institucion, departamento... (filtra TODA la pagina)" oninput="applyFilters()">
+  <select id="f-sector" class="f-sel" onchange="applyFilters()"><option value="">Todos los sectores</option></select>
+  <select id="f-depto"  class="f-sel" onchange="applyFilters()"><option value="">Todos los departamentos</option></select>
+  <button class="f-btn" onclick="resetFilters()">✕ Limpiar</button>
+  <span class="f-count" id="f-count">–</span>
+</div>
+
 <main>
   <section class="kpi-grid">
     <div class="kpi">
-      <div class="kpi-label">Cambios de créditos detectados</div>
+      <div class="kpi-label">Cambios de creditos detectados</div>
       <div class="kpi-val" id="k-total">–</div>
-      <div class="kpi-sub">programas con créditos antes/después distintos</div>
+      <div class="kpi-sub">programas con creditos antes/despues distintos</div>
     </div>
     <div class="kpi g">
-      <div class="kpi-label">Promedio Oficial</div>
+      <div class="kpi-label">delta promedio . Oficial</div>
       <div class="kpi-val" id="k-oficial">–</div>
-      <div class="kpi-sub" id="k-oficial-sub">créditos por cambio</div>
+      <div class="kpi-sub" id="k-oficial-sub">creditos por cambio</div>
     </div>
     <div class="kpi r">
-      <div class="kpi-label">Promedio Privado</div>
+      <div class="kpi-label">delta promedio . Privado</div>
       <div class="kpi-val" id="k-privado">–</div>
-      <div class="kpi-sub" id="k-privado-sub">créditos por cambio</div>
+      <div class="kpi-sub" id="k-privado-sub">creditos por cambio</div>
     </div>
     <div class="kpi a">
-      <div class="kpi-label">También cambia la duración</div>
+      <div class="kpi-label">Tambien cambia la duracion</div>
       <div class="kpi-val" id="k-cocambio">–</div>
       <div class="kpi-sub" id="k-cocambio-sub">vs. tasa general</div>
     </div>
   </section>
+  <div class="ct-note" style="margin:-.5rem 0 1rem">
+    "delta promedio" = cambio promedio en numero de creditos (creditos despues - creditos antes) entre los programas
+    modificados de ese grupo. <strong>Negativo</strong> significa que, en promedio, le quitan creditos al programa;
+    <strong>positivo</strong>, que le agregan.
+  </div>
 
   <section class="g2">
     <div class="card">
@@ -1886,42 +1867,39 @@ tr:hover td{background:#f8fafc}
       <div id="ch-sector" style="height:280px"></div>
     </div>
     <div class="card">
-      <div class="ct">Distribución del cambio (créditos ganados/perdidos)</div>
+      <div class="ct">Distribucion del cambio (creditos ganados/perdidos)</div>
       <div id="ch-hist" style="height:280px"></div>
     </div>
   </section>
 
   <section class="g2">
     <div class="card">
-      <div class="ct">Top instituciones que más cambian créditos</div>
+      <div class="ct">Top instituciones que mas cambian creditos</div>
+      <div class="ct-note">Numero al lado de la barra: delta promedio de esa institucion (ver definicion arriba).</div>
       <div id="ch-instituciones" style="height:380px"></div>
     </div>
     <div class="card">
-      <div class="ct">Top departamentos que más cambian créditos</div>
+      <div class="ct">Top departamentos que mas cambian creditos</div>
+      <div class="ct-note">Numero al lado de la barra: delta promedio de ese departamento (ver definicion arriba).</div>
       <div id="ch-departamentos" style="height:380px"></div>
     </div>
   </section>
 
   <section class="card">
-    <div class="ct">¿Cuando cambian los créditos, qué más cambia?</div>
-    <div class="ct-note">Barra clara = tasa de co-cambio cuando ESTE programa cambió de créditos. Barra oscura = tasa base de cambio de ese campo en todo el universo de Modificados (control).</div>
+    <div class="ct">Cuando cambian los creditos, que mas cambia?</div>
+    <div class="ct-note">Barra ambar = entre los programas <strong>con</strong> cambio de creditos, que % tambien
+      cambio ese campo. Barra gris = tasa base: que % cambia ese campo entre TODOS los programas modificados
+      visibles con los filtros actuales (con o sin cambio de creditos) - es el punto de comparacion.</div>
     <div id="ch-cocambios" style="height:300px"></div>
   </section>
 
   <section class="card">
-    <div class="ct">Créditos: antes → después (coloreado por sector)</div>
+    <div class="ct">Creditos: antes -&gt; despues (coloreado por sector)</div>
     <div id="ch-scatter" style="height:380px"></div>
   </section>
 
   <section class="card">
-    <div class="ct">Registros con cambio de créditos</div>
-    <div class="filter-bar">
-      <input id="f-q" class="f-input" placeholder="Buscar por nombre, institución, departamento…" oninput="applyFilters()">
-      <select id="f-sector" class="f-sel" onchange="applyFilters()"><option value="">Todos los sectores</option></select>
-      <select id="f-depto"  class="f-sel" onchange="applyFilters()"><option value="">Todos los departamentos</option></select>
-      <button class="f-btn" onclick="resetFilters()">✕ Limpiar</button>
-      <span class="f-count" id="f-count">–</span>
-    </div>
+    <div class="ct">Registros con cambio de creditos</div>
     <div class="tbl-wrap" id="tbl-wrap"></div>
   </section>
 </main>
@@ -1937,31 +1915,78 @@ function _rowMatches(r, tokens) {
   return tokens.every(t => hay.includes(t));
 }
 
-document.getElementById('k-total').textContent = fmt(D.n_cambios);
-
-const sOficial = D.por_sector.find(s => s.sector === 'Oficial');
-const sPrivado = D.por_sector.find(s => s.sector === 'Privado');
-if (sOficial) {
-  document.getElementById('k-oficial').textContent = (sOficial.promedio_delta > 0 ? '+' : '') + sOficial.promedio_delta;
-  document.getElementById('k-oficial-sub').textContent = `${sOficial.suben} suben / ${sOficial.bajan} bajan`;
-}
-if (sPrivado) {
-  document.getElementById('k-privado').textContent = (sPrivado.promedio_delta > 0 ? '+' : '') + sPrivado.promedio_delta;
-  document.getElementById('k-privado-sub').textContent = `${sPrivado.suben} suben / ${sPrivado.bajan} bajan`;
-}
-const coDuracion = D.co_cambios.find(c => c.campo.includes('Duración'));
-if (coDuracion) {
-  document.getElementById('k-cocambio').textContent = coDuracion.tasa_con_cambio_credito + '%';
-  document.getElementById('k-cocambio-sub').textContent = `vs. ${coDuracion.tasa_base}% tasa general`;
+function _emptyChart(id, msg) {
+  const el = document.getElementById(id); if (!el) return;
+  Plotly.purge(el);
+  el.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#64748b;font-size:.82rem">' + (msg || 'Sin datos para los filtros aplicados') + '</div>';
 }
 
-(function() {
-  const el = document.getElementById('ch-sector'); if (!el || !D.por_sector.length) return;
-  const labels = D.por_sector.map(s => s.sector);
-  Plotly.newPlot('ch-sector', [
-    {x: labels, y: D.por_sector.map(s => s.suben), name: 'Suben', type: 'bar',
+function agruparPorCampo(rows, field) {
+  const m = new Map();
+  rows.forEach(r => {
+    const k = r[field]; if (!k) return;
+    if (!m.has(k)) m.set(k, []);
+    m.get(k).push(r);
+  });
+  return m;
+}
+
+function resumenGrupo(rows) {
+  const n = rows.length;
+  const suben = rows.filter(r => r._delta > 0).length;
+  const bajan = rows.filter(r => r._delta < 0).length;
+  const promedio = n ? rows.reduce((s, r) => s + r._delta, 0) / n : 0;
+  return {n, suben, bajan, promedio_delta: Math.round(promedio * 10) / 10};
+}
+
+function ranking(rows, field, topN) {
+  const m = agruparPorCampo(rows, field);
+  const out = [...m.entries()].map(([nombre, g]) => ({nombre, ...resumenGrupo(g)}));
+  out.sort((a, b) => b.n - a.n);
+  return out.slice(0, topN);
+}
+
+function binDeltas(rows, binWidth) {
+  const counts = new Map();
+  rows.forEach(r => {
+    const b = Math.floor(r._delta / binWidth) * binWidth;
+    counts.set(b, (counts.get(b) || 0) + 1);
+  });
+  const bins = [...counts.keys()].sort((a, b) => a - b);
+  return {
+    labels: bins.map(b => `${b} a ${b + binWidth - 1}`),
+    counts: bins.map(b => counts.get(b)),
+  };
+}
+
+const CAMPOS_COCAMBIO = [
+  {flag: '_cambia_periodo',   label: 'Duracion (periodos)'},
+  {flag: '_cambia_costo',     label: 'Costo de matricula'},
+  {flag: '_cambia_modalidad', label: 'Modalidad'},
+  {flag: '_cambia_municipio', label: 'Municipio'},
+];
+
+function calcularCoCambios(filtrados, creditRows) {
+  return CAMPOS_COCAMBIO.map(({flag, label}) => {
+    const conCredito = creditRows.filter(r => r[flag] !== null);
+    const tasaConCredito = conCredito.length
+      ? Math.round(1000 * conCredito.filter(r => r[flag] === true).length / conCredito.length) / 10
+      : 0;
+    const baseValidos = filtrados.filter(r => r[flag] !== null);
+    const tasaBase = baseValidos.length
+      ? Math.round(1000 * baseValidos.filter(r => r[flag] === true).length / baseValidos.length) / 10
+      : 0;
+    return {campo: label, n_con_dato: conCredito.length, tasa_con_cambio_credito: tasaConCredito, tasa_base: tasaBase};
+  });
+}
+
+function renderSector(porSector) {
+  if (!porSector.length) { _emptyChart('ch-sector'); return; }
+  const labels = porSector.map(s => s.nombre);
+  Plotly.react('ch-sector', [
+    {x: labels, y: porSector.map(s => s.suben), name: 'Suben', type: 'bar',
      marker: {color: '#1a9e6b', opacity: .85}},
-    {x: labels, y: D.por_sector.map(s => s.bajan), name: 'Bajan', type: 'bar',
+    {x: labels, y: porSector.map(s => s.bajan), name: 'Bajan', type: 'bar',
      marker: {color: '#ae1e22', opacity: .85}},
   ], {
     barmode: 'group', margin: {t:10,r:10,b:30,l:45},
@@ -1969,126 +1994,96 @@ if (coDuracion) {
     plot_bgcolor: 'white', paper_bgcolor: 'white',
     legend: {orientation: 'h', y: -0.18}
   }, PC);
-})();
+}
 
-(function() {
-  const el = document.getElementById('ch-hist'); if (!el || !D.deltas.length) return;
-  Plotly.newPlot('ch-hist', [{
-    x: D.deltas, type: 'histogram', marker: {color: '#bd900b', opacity: .85},
-    hovertemplate: 'delta: %{x}<br><b>%{y}</b> programas<extra></extra>'
+function renderHist(creditRows) {
+  const h = binDeltas(creditRows, 5);
+  if (!h.labels.length) { _emptyChart('ch-hist'); return; }
+  Plotly.react('ch-hist', [{
+    x: h.labels, y: h.counts, type: 'bar',
+    marker: {color: '#bd900b', opacity: .85},
+    hovertemplate: 'Rango: %{x} creditos<br><b>%{y}</b> programas<extra></extra>'
   }], {
-    margin: {t:10,r:10,b:40,l:45},
-    xaxis: {title: 'Δ créditos (después - antes)', zeroline: true, zerolinecolor: '#94a3b8'},
+    margin: {t:10,r:10,b:55,l:45},
+    xaxis: {title: 'Delta creditos (despues - antes)', tickangle: -45, tickfont: {size: 9}},
     yaxis: {title: 'N. programas', showgrid: true, gridcolor: '#e2e8f0'},
-    plot_bgcolor: 'white', paper_bgcolor: 'white', bargap: .05
+    plot_bgcolor: 'white', paper_bgcolor: 'white', bargap: .1
   }, PC);
-})();
+}
 
-function plotRanking(id, data) {
-  const el = document.getElementById(id); if (!el) return;
-  if (!data.length) {
-    el.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#64748b;font-size:.82rem">Sin datos</div>';
-    return;
-  }
+function renderRanking(id, data) {
+  if (!data.length) { _emptyChart(id); return; }
   const d = [...data].slice(0, 12).reverse();
-  const trunc = s => s.length > 38 ? s.slice(0, 38) + '…' : s;
-  Plotly.newPlot(id, [{
+  const trunc = s => s.length > 36 ? s.slice(0, 36) + '...' : s;
+  const maxN = Math.max(...d.map(r => r.n));
+  Plotly.react(id, [{
     y: d.map(r => trunc(r.nombre)), x: d.map(r => r.n), customdata: d.map(r => r.nombre),
     type: 'bar', orientation: 'h', marker: {color: '#bd900b', opacity: .85},
-    text: d.map(r => `prom. ${r.promedio_delta > 0 ? '+' : ''}${r.promedio_delta}`),
-    textposition: 'auto', textfont: {size: 10, color: '#fff'},
+    text: d.map(r => `${r.promedio_delta > 0 ? '+' : ''}${r.promedio_delta}`),
+    textposition: 'outside', cliponaxis: false,
+    textfont: {size: 10, color: '#7a5d06'},
     hovertemplate: '%{customdata}<br><b>%{x}</b> cambios<extra></extra>'
   }], {
-    margin: {t:10,r:20,b:30,l:230},
-    xaxis: {showgrid: true, gridcolor: '#e2e8f0'},
+    margin: {t:10,r:60,b:30,l:230},
+    xaxis: {showgrid: true, gridcolor: '#e2e8f0', range: [0, maxN * 1.35]},
     yaxis: {tickfont: {size: 10}},
     plot_bgcolor: 'white', paper_bgcolor: 'white', bargap: .3
   }, PC);
 }
-plotRanking('ch-instituciones', D.top_instituciones);
-plotRanking('ch-departamentos', D.top_departamentos);
 
-(function() {
-  const el = document.getElementById('ch-cocambios'); if (!el || !D.co_cambios.length) return;
-  const labels = D.co_cambios.map(c => c.campo);
-  Plotly.newPlot('ch-cocambios', [
-    {x: labels, y: D.co_cambios.map(c => c.tasa_con_cambio_credito), name: 'Cuando cambian créditos',
-     type: 'bar', marker: {color: '#bd900b', opacity: .9}},
-    {x: labels, y: D.co_cambios.map(c => c.tasa_base), name: 'Tasa general (control)',
-     type: 'bar', marker: {color: '#94a3b8', opacity: .9}},
+function renderCoCambios(coCambios) {
+  if (!coCambios.length) { _emptyChart('ch-cocambios'); return; }
+  const labels = coCambios.map(c => c.campo);
+  Plotly.react('ch-cocambios', [
+    {x: labels, y: coCambios.map(c => c.tasa_con_cambio_credito), name: 'Cuando cambian creditos',
+     type: 'bar', marker: {color: '#bd900b', opacity: .9},
+     text: coCambios.map(c => c.tasa_con_cambio_credito + '%'), textposition: 'outside', cliponaxis: false},
+    {x: labels, y: coCambios.map(c => c.tasa_base), name: 'Tasa general (control)',
+     type: 'bar', marker: {color: '#94a3b8', opacity: .9},
+     text: coCambios.map(c => c.tasa_base + '%'), textposition: 'outside', cliponaxis: false},
   ], {
-    barmode: 'group', margin: {t:10,r:10,b:50,l:50},
-    yaxis: {title: '% de los casos', showgrid: true, gridcolor: '#e2e8f0'},
+    barmode: 'group', margin: {t:30,r:10,b:50,l:50},
+    yaxis: {title: '% de los casos', showgrid: true, gridcolor: '#e2e8f0', range: [0, 100]},
     plot_bgcolor: 'white', paper_bgcolor: 'white',
     legend: {orientation: 'h', y: -0.25}
   }, PC);
-})();
+}
 
-(function() {
-  const el = document.getElementById('ch-scatter'); if (!el || !D.scatter.length) return;
+function renderScatter(creditRows) {
+  if (!creditRows.length) { _emptyChart('ch-scatter'); return; }
   const porSector = {};
-  D.scatter.forEach(p => { (porSector[p.sector] = porSector[p.sector] || []).push(p); });
+  creditRows.forEach(p => { (porSector[p.SECTOR] = porSector[p.SECTOR] || []).push(p); });
   const colores = {Oficial: '#2d5b9e', Privado: '#bd900b'};
-  const vals = D.scatter.flatMap(p => [p.antes, p.despues]);
+  const vals = creditRows.flatMap(p => [p._cred_antes, p._cred_despues]);
   const mn = Math.min(...vals), mx = Math.max(...vals);
   const traces = Object.entries(porSector).map(([sector, pts]) => ({
-    x: pts.map(p => p.antes), y: pts.map(p => p.despues),
-    text: pts.map(p => p.institucion + ' — ' + p.programa),
+    x: pts.map(p => p._cred_antes), y: pts.map(p => p._cred_despues),
+    text: pts.map(p => p['NOMBRE_INSTITUCIÓN'] + ' - ' + p['NOMBRE_DEL_PROGRAMA']),
     mode: 'markers', type: 'scatter', name: sector,
     marker: {color: colores[sector] || '#64748b', size: 7, opacity: .65},
-    hovertemplate: '<b>%{text}</b><br>Antes: %{x} créditos<br>Después: %{y} créditos<extra></extra>'
+    hovertemplate: '<b>%{text}</b><br>Antes: %{x} creditos<br>Despues: %{y} creditos<extra></extra>'
   }));
   traces.push({x: [mn, mx], y: [mn, mx], mode: 'lines', line: {color: '#9fb0c9', width: 1, dash: 'dot'},
     hoverinfo: 'skip', showlegend: false});
-  Plotly.newPlot('ch-scatter', traces, {
+  Plotly.react('ch-scatter', traces, {
     margin: {t:10,r:20,b:50,l:60},
-    xaxis: {title: 'Créditos antes', showgrid: true, gridcolor: '#e2e8f0'},
-    yaxis: {title: 'Créditos después', showgrid: true, gridcolor: '#e2e8f0'},
+    xaxis: {title: 'Creditos antes', showgrid: true, gridcolor: '#e2e8f0'},
+    yaxis: {title: 'Creditos despues', showgrid: true, gridcolor: '#e2e8f0'},
     plot_bgcolor: 'white', paper_bgcolor: 'white',
     legend: {orientation: 'h', y: -0.2}
   }, PC);
-})();
-
-// ── tabla filtrable ──────────────────────────────────────────────────────────
-function uniq(arr) { return [...new Set(arr.filter(v => v && String(v).trim() !== ''))].sort(); }
-function addOpts(id, vals) {
-  const el = document.getElementById(id); if (!el) return;
-  vals.forEach(v => { const o = document.createElement('option'); o.value = o.textContent = v; el.appendChild(o); });
-}
-addOpts('f-sector', uniq(D.rows.map(r => r['SECTOR'])));
-addOpts('f-depto',  uniq(D.rows.map(r => r['DEPARTAMENTO_OFERTA_PROGRAMA'])));
-
-let filtered = [...D.rows];
-let sortDir = {};
-
-function gv(id) { const el = document.getElementById(id); return el ? el.value : ''; }
-
-function applyFilters() {
-  const qTokens = _norm(gv('f-q')).split(/\s+/).filter(Boolean);
-  const se = gv('f-sector'), de = gv('f-depto');
-  filtered = D.rows.filter(r => {
-    if (!_rowMatches(r, qTokens)) return false;
-    if (se && r['SECTOR'] !== se) return false;
-    if (de && r['DEPARTAMENTO_OFERTA_PROGRAMA'] !== de) return false;
-    return true;
-  });
-  document.getElementById('f-count').textContent = fmt(filtered.length) + ' programas';
-  renderTbl(filtered);
-}
-
-function resetFilters() {
-  ['f-q', 'f-sector', 'f-depto'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-  applyFilters();
 }
 
 const COL_HEAD = {
-  FECHA_OBTENCION: 'Fecha', 'CÓDIGO_SNIES_DEL_PROGRAMA': 'Cód. SNIES', NOMBRE_DEL_PROGRAMA: 'Programa',
-  'NOMBRE_INSTITUCIÓN': 'Institución', SECTOR: 'Sector', DEPARTAMENTO_OFERTA_PROGRAMA: 'Departamento',
-  'DIVISIÓN UNINORTE': 'División', _cred_antes: 'Créd. antes', _cred_despues: 'Créd. después',
-  _delta: 'Δ', QUE_CAMBIO: '¿Qué más cambió?'
+  FECHA_OBTENCION: 'Fecha', 'CODIGO_SNIES_DEL_PROGRAMA': 'Cod. SNIES', NOMBRE_DEL_PROGRAMA: 'Programa',
+  'NOMBRE_INSTITUCIÓN': 'Institucion', SECTOR: 'Sector', DEPARTAMENTO_OFERTA_PROGRAMA: 'Departamento',
+  'DIVISION UNINORTE': 'Division', _cred_antes: 'Cred. antes', _cred_despues: 'Cred. despues',
+  _delta: 'Delta', QUE_CAMBIO: 'Que mas cambio?'
 };
 const TBL_COLS = ['FECHA_OBTENCION', 'NOMBRE_DEL_PROGRAMA', 'NOMBRE_INSTITUCIÓN', 'SECTOR',
   'DEPARTAMENTO_OFERTA_PROGRAMA', '_cred_antes', '_cred_despues', '_delta', 'QUE_CAMBIO'];
+let sortDir = {};
+let tablaRows = [];
 
 function buildTbl(rows) {
   const cols = TBL_COLS.filter(c => !rows.length || c in rows[0]);
@@ -2101,28 +2096,80 @@ function buildTbl(rows) {
     rows.forEach(r => {
       h += '<tr>' + cols.map(c => {
         if (c === '_delta') {
-          const v = parseFloat(r[c]);
+          const v = r[c];
           const cls = v > 0 ? 'delta-up' : (v < 0 ? 'delta-down' : '');
-          return '<td class="' + cls + '">' + (v > 0 ? '+' : '') + r[c] + '</td>';
+          return '<td class="' + cls + '">' + (v > 0 ? '+' : '') + v + '</td>';
         }
-        return '<td>' + (r[c] || '') + '</td>';
+        return '<td>' + (r[c] ?? '') + '</td>';
       }).join('') + '</tr>';
     });
   }
   return h + '</tbody></table>';
 }
 
-function renderTbl(rows) { document.getElementById('tbl-wrap').innerHTML = buildTbl(rows); }
+function renderTbl(rows) { tablaRows = rows; document.getElementById('tbl-wrap').innerHTML = buildTbl(rows); }
 
 function sortTbl(col) {
   sortDir[col] = !sortDir[col];
-  filtered = [...filtered].sort((a, b) => {
-    const va = a[col] || '', vb = b[col] || '';
+  tablaRows = [...tablaRows].sort((a, b) => {
+    const va = a[col] ?? '', vb = b[col] ?? '';
     const na = parseFloat(va), nb = parseFloat(vb);
     const cmp = (!isNaN(na) && !isNaN(nb)) ? na - nb : String(va).localeCompare(String(vb), 'es');
     return sortDir[col] ? cmp : -cmp;
   });
-  renderTbl(filtered);
+  document.getElementById('tbl-wrap').innerHTML = buildTbl(tablaRows);
+}
+
+function uniq(arr) { return [...new Set(arr.filter(v => v && String(v).trim() !== ''))].sort(); }
+function addOpts(id, vals) {
+  const el = document.getElementById(id); if (!el) return;
+  vals.forEach(v => { const o = document.createElement('option'); o.value = o.textContent = v; el.appendChild(o); });
+}
+addOpts('f-sector', uniq(D.universo.map(r => r['SECTOR'])));
+addOpts('f-depto',  uniq(D.universo.map(r => r['DEPARTAMENTO_OFERTA_PROGRAMA'])));
+
+function gv(id) { const el = document.getElementById(id); return el ? el.value : ''; }
+
+function applyFilters() {
+  const qTokens = _norm(gv('f-q')).split(/\s+/).filter(Boolean);
+  const se = gv('f-sector'), de = gv('f-depto');
+
+  const filtrados = D.universo.filter(r => {
+    if (!_rowMatches(r, qTokens)) return false;
+    if (se && r['SECTOR'] !== se) return false;
+    if (de && r['DEPARTAMENTO_OFERTA_PROGRAMA'] !== de) return false;
+    return true;
+  });
+  const creditRows = filtrados.filter(r => r._cambia_credito);
+
+  document.getElementById('f-count').textContent = fmt(creditRows.length) + ' cambios de creditos (' + fmt(filtrados.length) + ' programas modificados en total)';
+  document.getElementById('k-total').textContent = fmt(creditRows.length);
+
+  const porSectorAgg = ranking(creditRows, 'SECTOR', 10).sort((a, b) => a.nombre.localeCompare(b.nombre));
+  const sOficial = porSectorAgg.find(s => s.nombre === 'Oficial');
+  const sPrivado = porSectorAgg.find(s => s.nombre === 'Privado');
+  document.getElementById('k-oficial').textContent = sOficial ? (sOficial.promedio_delta > 0 ? '+' : '') + sOficial.promedio_delta : '-';
+  document.getElementById('k-oficial-sub').textContent = sOficial ? `${sOficial.suben} suben / ${sOficial.bajan} bajan` : 'sin datos';
+  document.getElementById('k-privado').textContent = sPrivado ? (sPrivado.promedio_delta > 0 ? '+' : '') + sPrivado.promedio_delta : '-';
+  document.getElementById('k-privado-sub').textContent = sPrivado ? `${sPrivado.suben} suben / ${sPrivado.bajan} bajan` : 'sin datos';
+
+  const coCambios = calcularCoCambios(filtrados, creditRows);
+  const coDuracion = coCambios.find(c => c.campo.includes('Duracion'));
+  document.getElementById('k-cocambio').textContent = coDuracion ? coDuracion.tasa_con_cambio_credito + '%' : '-';
+  document.getElementById('k-cocambio-sub').textContent = coDuracion ? `vs. ${coDuracion.tasa_base}% tasa general` : '';
+
+  renderSector(porSectorAgg);
+  renderHist(creditRows);
+  renderRanking('ch-instituciones', ranking(creditRows, 'NOMBRE_INSTITUCIÓN', 20));
+  renderRanking('ch-departamentos', ranking(creditRows, 'DEPARTAMENTO_OFERTA_PROGRAMA', 20));
+  renderCoCambios(coCambios);
+  renderScatter(creditRows);
+  renderTbl(creditRows);
+}
+
+function resetFilters() {
+  ['f-q', 'f-sector', 'f-depto'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  applyFilters();
 }
 
 applyFilters();
@@ -2130,6 +2177,5 @@ applyFilters();
 </body>
 </html>
 """
-
 if __name__ == "__main__":
     main()
