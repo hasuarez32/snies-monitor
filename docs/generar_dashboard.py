@@ -671,6 +671,12 @@ tr:hover td{background:#f8fafc}
 <script>
 const D = __DATA__;
 const fmt = n => (n ?? 0).toLocaleString('es-CO');
+const _norm = s => String(s==null?'':s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+function _rowMatches(r, tokens) {
+  if (!tokens.length) return true;
+  const hay = _norm(Object.values(r).join(' '));
+  return tokens.every(t => hay.includes(t));
+}
 document.getElementById('fecha-update').textContent = D.ultima_actualizacion;
 document.getElementById('k-total').textContent = fmt(D.kpis.total_activos);
 document.getElementById('k-nue').textContent   = fmt(D.kpis.nuevos_ultimo);
@@ -816,12 +822,12 @@ function _buildSnapTbl(data) {
 }
 
 function filterSnap(q) {
-  q = q.toLowerCase();
+  const tokens = _norm(q).split(/\s+/).filter(Boolean);
   const base = _snapAll.filter(r => {
     const v = r['NÚMERO_PERIODOS_DE_DURACIÓN'];
     return v !== undefined && v !== '' && Math.round(parseFloat(String(v))) === periodosFiltro;
   });
-  const res = q ? base.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q))) : base;
+  const res = tokens.length ? base.filter(r => _rowMatches(r, tokens)) : base;
   document.getElementById('snap-tbl').innerHTML = _buildSnapTbl(res);
 }
 
@@ -912,8 +918,8 @@ function tab(id, btn) {
 }
 
 function filter(type, q) {
-  q = q.toLowerCase();
-  const res = q ? rows[type].filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q))) : rows[type];
+  const tokens = _norm(q).split(/\s+/).filter(Boolean);
+  const res = tokens.length ? rows[type].filter(r => _rowMatches(r, tokens)) : rows[type];
   render(type, res);
 }
 
@@ -1063,6 +1069,12 @@ const CFG  = __CONFIG__;
 
 const PC = {responsive:true, displayModeBar:false};
 const fmt = n => (n ?? 0).toLocaleString('es-CO');
+const _norm = s => String(s==null?'':s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+function _rowMatches(r, tokens) {
+  if (!tokens.length) return true;
+  const hay = _norm(Object.values(r).join(' '));
+  return tokens.every(t => hay.includes(t));
+}
 const C   = CFG.color;
 const CA  = CFG.colorAlpha;
 
@@ -1103,13 +1115,13 @@ if (CFG.tipo === 'modificados') {
 function gv(id) { const el=document.getElementById(id); return el?el.value:''; }
 
 function applyFilters() {
-  const q  = gv('f-q').toLowerCase();
+  const qTokens = _norm(gv('f-q')).split(/\s+/).filter(Boolean);
   const se = gv('f-sector'), de = gv('f-depto'), di = gv('f-division');
   const mo = gv('f-modalidad'), fe = gv('f-fecha'), tc = gv('f-tipo-cambio');
   const ci = gv('f-cine');
 
   filtered = ROWS.filter(r => {
-    if (q  && !Object.values(r).some(v => String(v).toLowerCase().includes(q))) return false;
+    if (!_rowMatches(r, qTokens)) return false;
     if (se && r['SECTOR'] !== se) return false;
     if (de && r['DEPARTAMENTO_OFERTA_PROGRAMA'] !== de) return false;
     if (di && r['DIVISIÓN UNINORTE'] !== di) return false;
@@ -1155,9 +1167,14 @@ function getSem(s) {
 }
 
 // ── Charts ─────────────────────────────────────────────────────────────────
+function _emptyChart(el, msg) {
+  Plotly.purge(el);
+  el.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#64748b;font-size:.82rem">'+(msg||'Sin datos para los filtros aplicados')+'</div>';
+}
+
 function plotDonut(id, rows, field) {
   const el=document.getElementById(id); if(!el) return;
-  const d=countBy(rows,field,20); if(!d.length) return;
+  const d=countBy(rows,field,20); if(!d.length){ _emptyChart(el); return; }
   Plotly.react(id,[{labels:d.map(e=>e[0]),values:d.map(e=>e[1]),type:'pie',hole:.45,
     marker:{colors:['#2d5b9e','#fcc10e','#bd900b','#ae1e22','#6e91b9','#214174','#d56f18']},
     textinfo:'label+percent',hovertemplate:'%{label}<br><b>%{value:,}</b><extra></extra>'}],
@@ -1167,7 +1184,7 @@ function plotDonut(id, rows, field) {
 
 function plotHBar(id, rows, field, color, n, maxLen) {
   const el=document.getElementById(id); if(!el) return;
-  const d=[...countBy(rows,field,n||10)].reverse(); if(!d.length) return;
+  const d=[...countBy(rows,field,n||10)].reverse(); if(!d.length){ _emptyChart(el); return; }
   const trunc=s=>maxLen&&s.length>maxLen?s.slice(0,maxLen)+'…':s;
   const labels=d.map(e=>trunc(e[0]));
   const full=d.map(e=>e[0]);
@@ -1183,7 +1200,7 @@ function plotHBar(id, rows, field, color, n, maxLen) {
 
 function plotVBar(id, rows, field, color) {
   const el=document.getElementById(id); if(!el) return;
-  const d=countBy(rows,field,10); if(!d.length) return;
+  const d=countBy(rows,field,10); if(!d.length){ _emptyChart(el); return; }
   Plotly.react(id,[{x:d.map(e=>e[0]),y:d.map(e=>e[1]),type:'bar',
     marker:{color,opacity:.85},hovertemplate:'%{x}<br><b>%{y:,}</b><extra></extra>'}],
     {margin:{t:10,r:10,b:80,l:45},
@@ -1194,7 +1211,7 @@ function plotVBar(id, rows, field, color) {
 
 function plotTimeline(id, rows) {
   const el=document.getElementById(id); if(!el) return;
-  const {x,y}=byDate(rows); if(!x.length) return;
+  const {x,y}=byDate(rows); if(!x.length){ _emptyChart(el); return; }
   Plotly.react(id,[{x,y,type:'scatter',mode:'lines+markers',
     line:{color:C,width:2.5},marker:{color:C,size:7},
     fill:'tozeroy',fillcolor:CA,
@@ -1206,14 +1223,15 @@ function plotTimeline(id, rows) {
 }
 
 function plotAcumuladoModalidad(id, rows) {
-  const el=document.getElementById(id); if(!el||!rows.length) return;
+  const el=document.getElementById(id); if(!el) return;
+  if(!rows.length){ _emptyChart(el); return; }
 
   const semSet=new Set();
   rows.forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)semSet.add(s);});
   const sems=[...semSet].sort(); // "YYYY-S1" < "YYYY-S2" sorts correctly as strings
 
   if(!sems.length){
-    el.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#64748b;font-size:.82rem">Sin datos de fecha de registro en SNIES</div>';
+    _emptyChart(el, 'Sin datos de fecha de registro en SNIES');
     return;
   }
 
@@ -1234,7 +1252,7 @@ function plotAcumuladoModalidad(id, rows) {
       hovertemplate:mod+'<br><b>%{x}</b><br>%{y:,} acumulados<extra></extra>'};
   }).filter(Boolean);
 
-  if(!traces.length) return;
+  if(!traces.length){ _emptyChart(el); return; }
   Plotly.react(id,traces,{
     margin:{t:10,r:20,b:65,l:55},
     xaxis:{showgrid:false,tickfont:{size:11},tickangle:-30,type:'category'},
@@ -1290,8 +1308,7 @@ function renderCineChart(rows) {
   }
 
   if(!sems.length){
-    el.innerHTML='<div style="display:flex;align-items:center;justify-content:center;'+
-      'height:100%;color:#64748b;font-size:.82rem">Sin datos de fecha de registro</div>';
+    _emptyChart(el, 'Sin datos de fecha de registro');
     return;
   }
 
@@ -1309,7 +1326,7 @@ function renderCineChart(rows) {
       hovertemplate:cine+'<br><b>%{x}</b><br>%{y:,} acumulados<extra></extra>'};
   }).filter(Boolean);
 
-  if(!traces.length) return;
+  if(!traces.length){ _emptyChart(el, 'Sin datos de fecha de registro'); return; }
   Plotly.react('ch-timeline',traces,{
     margin:{t:10,r:20,b:65,l:55},
     xaxis:{showgrid:false,tickfont:{size:11},tickangle:-30,type:'category'},
@@ -1359,7 +1376,7 @@ function plotPeriodos(id, rows) {
     periSet.add(p);
   });
   const labels=Object.keys(pivot).map(Number).sort((a,b)=>a-b);
-  if(!labels.length) return;
+  if(!labels.length){ _emptyChart(el); return; }
   const peris=[...periSet].sort((a,b)=>{
     const ta=labels.reduce((s,l)=>s+(pivot[l][a]||0),0);
     const tb=labels.reduce((s,l)=>s+(pivot[l][b]||0),0);
@@ -1424,7 +1441,7 @@ function plotTipoCambio(id, rows) {
   const el=document.getElementById(id); if(!el) return;
   const c={};
   rows.forEach(r => { (r['QUE_CAMBIO']||'').split(' | ').forEach(p => { const f=p.split(':')[0].trim(); if(f&&f!=='nan'&&f!=='') c[f]=(c[f]||0)+1; }); });
-  const d=Object.entries(c).sort((a,b)=>b[1]-a[1]); if(!d.length) return;
+  const d=Object.entries(c).sort((a,b)=>b[1]-a[1]); if(!d.length){ _emptyChart(el); return; }
   Plotly.react(id,[{x:d.map(e=>e[0]),y:d.map(e=>e[1]),type:'bar',
     marker:{color:'#bd900b',opacity:.85},
     hovertemplate:'%{x}<br><b>%{y:,}</b> cambios<extra></extra>'}],
@@ -1441,10 +1458,7 @@ function plotScatter(id, rows) {
     y:parseFloat(r['NÚMERO_CRÉDITOS']),
     t:r['NOMBRE_DEL_PROGRAMA']||''
   })).filter(p=>!isNaN(p.x)&&!isNaN(p.y)&&p.x!==p.y);
-  if(!pts.length){
-    el.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#64748b;font-size:.82rem">Sin datos de creditos para comparar</div>';
-    return;
-  }
+  if(!pts.length){ _emptyChart(el, 'Sin datos de creditos para comparar'); return; }
   const vals=pts.flatMap(p=>[p.x,p.y]);
   const mn=Math.min(...vals), mx=Math.max(...vals);
   Plotly.react(id,[
