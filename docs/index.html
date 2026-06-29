@@ -126,6 +126,18 @@ tr:hover td{background:#f8fafc}
     </div>
   </section>
 
+  <section class="chart-2col" style="grid-template-columns:1fr 1fr">
+    <div class="card">
+      <div class="card-title">Total acumulado de programas activos</div>
+      <div id="ch-historico" style="height:260px"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Aperturas vs. cierres netos por periodo</div>
+      <div id="ch-flujo" style="height:260px"></div>
+      <div id="flujo-note" style="font-size:.7rem;color:#64748b;margin-top:.6rem;line-height:1.4"></div>
+    </div>
+  </section>
+
   <section class="chart-2col">
     <div class="card">
       <div class="card-title">Por sector</div>
@@ -254,6 +266,14 @@ function _rowMatches(r, tokens) {
 }
 function gv(id) { const el = document.getElementById(id); return el ? el.value : ''; }
 const parseFecha = s => { try { const [d,m,y]=s.split('/'); return new Date(+y,+m-1,+d); } catch(e){return new Date(0);} };
+function getSem(s) {
+  if (!s || !s.trim()) return null;
+  let y, m;
+  const dmy = s.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
+  if (dmy) { y = +dmy[3]; m = +dmy[2]; }
+  if (!y || y < 2014 || y > 2035) return null;
+  return y + '-' + (m <= 6 ? '1' : '2');
+}
 function uniq(arr) { return [...new Set(arr.filter(v => v && String(v).trim() !== ''))].sort(); }
 function addOpts(id, vals) {
   const el = document.getElementById(id); if (!el) return;
@@ -400,6 +420,83 @@ document.getElementById('k-mod-sub').textContent = 'acumulado: ' + fmt(D.kpis.mo
       'border-radius:2rem;font-size:.72rem;cursor:pointer;transition:all .15s;white-space:nowrap">'+
       l+' sem&nbsp;<span style="opacity:.6">('+totals[l].toLocaleString('es-CO')+')</span></button>'
     ).join('');
+  }
+})();
+
+(function() {
+  const hist = D.historico || [];
+  if (!hist.length) { _emptyChart(document.getElementById('ch-historico')); return; }
+  Plotly.newPlot('ch-historico', [{
+    x: hist.map(h => h.fecha), y: hist.map(h => h.total),
+    type: 'scatter', mode: 'lines+markers',
+    line: {color: '#2d5b9e', width: 2.5}, marker: {color: '#2d5b9e', size: 6},
+    hovertemplate: '%{x}<br><b>%{y:,}</b> programas activos<extra></extra>'
+  }], {
+    margin: {t:10, r:20, b:40, l:55},
+    xaxis: {showgrid: false, tickfont: {size: 10}},
+    yaxis: {showgrid: true, gridcolor: '#e2e8f0', tickfont: {size: 11}},
+    plot_bgcolor: 'white', paper_bgcolor: 'white', hovermode: 'x unified'
+  }, {responsive: true, displayModeBar: false});
+})();
+
+(function() {
+  const porSem = {};
+  const runsPorSem = {};
+  const trackRun = (r, key) => {
+    const s = getSem(r['FECHA_OBTENCION']); if (!s) return null;
+    (porSem[s] = porSem[s] || {nuevos: 0, inactivos: 0})[key]++;
+    (runsPorSem[s] = runsPorSem[s] || new Set()).add(r['FECHA_OBTENCION']);
+    return s;
+  };
+  (D.nuevos || []).forEach(r => trackRun(r, 'nuevos'));
+  (D.inactivos || []).forEach(r => trackRun(r, 'inactivos'));
+  const sems = Object.keys(porSem).sort();
+  if (!sems.length) { _emptyChart(document.getElementById('ch-flujo')); return; }
+  const aperturas = sems.map(s => porSem[s].nuevos);
+  const cierres = sems.map(s => -porSem[s].inactivos);
+  const netos = sems.map((s, i) => aperturas[i] + cierres[i]);
+  const runs = sems.map(s => runsPorSem[s].size);
+
+  // Periodos con muy pocas corridas del monitor no son comparables: el conteo
+  // bajo refleja un hueco en el pipeline, no menos aperturas/cierres reales.
+  const UMBRAL_RUNS = 5;
+  const incompletos = sems.map((s, i) => runs[i] < UMBRAL_RUNS);
+  const opacityAp = incompletos.map(f => f ? .35 : .85);
+  const opacityCi = incompletos.map(f => f ? .35 : .85);
+
+  Plotly.newPlot('ch-flujo', [
+    {x: sems, y: aperturas, name: 'Aperturas (nuevos)', type: 'bar',
+     marker: {color: '#1a9e6b', opacity: opacityAp},
+     customdata: runs,
+     hovertemplate: '%{x}<br>+%{y} aperturas<br>(%{customdata} corridas del monitor)<extra></extra>'},
+    {x: sems, y: cierres, name: 'Cierres (inactivos)', type: 'bar',
+     marker: {color: '#ae1e22', opacity: opacityCi},
+     customdata: runs,
+     hovertemplate: '%{x}<br>%{y} cierres<br>(%{customdata} corridas del monitor)<extra></extra>'},
+    {x: sems, y: netos, name: 'Neto', type: 'scatter', mode: 'lines+markers',
+     line: {color: '#15284b', width: 2}, marker: {color: '#15284b', size: 6},
+     hovertemplate: '%{x}<br>Neto: <b>%{y}</b><extra></extra>'},
+  ], {
+    barmode: 'relative',
+    margin: {t:10, r:20, b:40, l:45},
+    xaxis: {showgrid: false, tickfont: {size: 10}, type: 'category'},
+    yaxis: {showgrid: true, gridcolor: '#e2e8f0', zeroline: true, zerolinecolor: '#94a3b8', tickfont: {size: 11}},
+    plot_bgcolor: 'white', paper_bgcolor: 'white', hovermode: 'x unified',
+    legend: {orientation: 'h', y: -0.22, font: {size: 10}},
+    annotations: sems.map((s, i) => incompletos[i] ? {
+      x: s, y: Math.max(aperturas[i], 0), yshift: 16, xref: 'x', yref: 'y',
+      text: '⚠ ' + runs[i] + ' corrida' + (runs[i] === 1 ? '' : 's'),
+      showarrow: false, font: {size: 9, color: '#bd900b'}
+    } : null).filter(Boolean)
+  }, {responsive: true, displayModeBar: false});
+
+  const noteEl = document.getElementById('flujo-note');
+  if (noteEl) {
+    const flagged = sems.filter((s, i) => incompletos[i]);
+    noteEl.textContent = flagged.length
+      ? '⚠ Cobertura incompleta en ' + flagged.join(', ') + ': el monitor corrio muy pocas veces ese periodo (menos de ' +
+        UMBRAL_RUNS + ' corridas), asi que las cifras no son comparables 1:1 con los demas periodos.'
+      : '';
   }
 })();
 
