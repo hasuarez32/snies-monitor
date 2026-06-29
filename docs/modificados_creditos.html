@@ -34,6 +34,14 @@ header .sub{font-size:.77rem;opacity:.75;margin-top:.2rem}
   font-size:.77rem;background:var(--surface);cursor:pointer;color:var(--muted);white-space:nowrap}
 .f-btn:hover{background:var(--bg)}
 .f-count{margin-left:auto;font-size:.82rem;font-weight:600;color:var(--blue);white-space:nowrap}
+.ac-wrap{position:relative;flex:0 1 240px}
+.ac-menu{position:absolute;top:calc(100% + 2px);left:0;right:0;z-index:300;
+  background:var(--surface);border:1px solid var(--border);border-radius:.4rem;
+  box-shadow:0 8px 20px rgba(0,0,0,.14);max-height:260px;overflow-y:auto;display:none}
+.ac-menu.show{display:block}
+.ac-item{padding:.45rem .75rem;font-size:.78rem;cursor:pointer;color:var(--text)}
+.ac-item:hover{background:var(--bg)}
+.ac-empty{padding:.45rem .75rem;font-size:.78rem;color:var(--muted)}
 main{max-width:1380px;margin:0 auto;padding:1.5rem 2rem}
 section{margin-bottom:1.25rem}
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
@@ -86,9 +94,10 @@ tr:hover td{background:#f8fafc}
   <input id="f-q" class="f-input" placeholder="Buscar por nombre, institucion, departamento... (filtra TODA la pagina)" oninput="applyFilters()">
   <select id="f-sector" class="f-sel" onchange="applyFilters()"><option value="">Todos los sectores</option></select>
   <select id="f-depto"  class="f-sel" onchange="applyFilters()"><option value="">Todos los departamentos</option></select>
-  <input id="f-institucion" class="f-sel" list="institucion-list" placeholder="Buscar institucion..."
-         style="cursor:text;max-width:240px" oninput="applyFilters()">
-  <datalist id="institucion-list"></datalist>
+  <div class="ac-wrap">
+    <input id="f-institucion" class="f-sel" placeholder="Buscar institucion..." style="cursor:text;width:100%" oninput="applyFilters()">
+    <div class="ac-menu" id="f-institucion-menu"></div>
+  </div>
   <button class="f-btn" onclick="resetFilters()">✕ Limpiar</button>
   <span class="f-count" id="f-count">–</span>
 </div>
@@ -428,9 +437,33 @@ function addOpts(id, vals) {
   const el = document.getElementById(id); if (!el) return;
   vals.forEach(v => { const o = document.createElement('option'); o.value = o.textContent = v; el.appendChild(o); });
 }
+function initAutocomplete(inputId, menuId, options, onChange) {
+  const inp = document.getElementById(inputId), menu = document.getElementById(menuId);
+  if (!inp || !menu) return;
+  function render() {
+    const q = _norm(inp.value).trim();
+    const matches = (q ? options.filter(o => _norm(o).includes(q)) : options).slice(0, 50);
+    menu.innerHTML = matches.length
+      ? matches.map(o => '<div class="ac-item">' + o.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</div>').join('')
+      : '<div class="ac-empty">Sin coincidencias</div>';
+    menu.classList.add('show');
+  }
+  inp.addEventListener('focus', render);
+  inp.addEventListener('input', () => { render(); onChange(); });
+  menu.addEventListener('mousedown', e => {
+    const it = e.target.closest('.ac-item'); if (!it) return;
+    e.preventDefault();
+    inp.value = it.textContent;
+    menu.classList.remove('show');
+    onChange();
+  });
+  document.addEventListener('click', e => {
+    if (e.target !== inp && !menu.contains(e.target)) menu.classList.remove('show');
+  });
+}
 addOpts('f-sector', uniq(D.universo.map(r => r['SECTOR'])));
 addOpts('f-depto',  uniq(D.universo.map(r => r['DEPARTAMENTO_OFERTA_PROGRAMA'])));
-addOpts('institucion-list', uniq(D.universo.map(r => r['NOMBRE_INSTITUCIÓN'])));
+initAutocomplete('f-institucion', 'f-institucion-menu', uniq(D.universo.map(r => r['NOMBRE_INSTITUCIÓN'])), applyFilters);
 
 function gv(id) { const el = document.getElementById(id); return el ? el.value : ''; }
 

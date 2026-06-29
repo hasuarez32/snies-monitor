@@ -728,6 +728,14 @@ section{margin-bottom:1.5rem}
 .f-btn{padding:.45rem .85rem;border:1px solid var(--border);border-radius:.4rem;
   font-size:.77rem;background:var(--surface);cursor:pointer;color:var(--muted);white-space:nowrap}
 .f-btn:hover{background:var(--bg)}
+.ac-wrap{position:relative;flex:1;min-width:170px;max-width:300px}
+.ac-menu{position:absolute;top:calc(100% + 2px);left:0;right:0;z-index:300;
+  background:var(--surface);border:1px solid var(--border);border-radius:.4rem;
+  box-shadow:0 8px 20px rgba(0,0,0,.14);max-height:260px;overflow-y:auto;display:none}
+.ac-menu.show{display:block}
+.ac-item{padding:.45rem .75rem;font-size:.78rem;cursor:pointer;color:var(--text)}
+.ac-item:hover{background:var(--bg)}
+.ac-empty{padding:.45rem .75rem;font-size:.78rem;color:var(--muted)}
 .tbl-wrap{max-height:420px;overflow-y:auto;border:1px solid var(--border);border-radius:.5rem}
 table{width:100%;border-collapse:collapse;font-size:.78rem}
 th{background:var(--bg);padding:.65rem .9rem;text-align:left;font-size:.68rem;
@@ -748,7 +756,6 @@ tr:hover td{background:#f8fafc}
 </style>
 </head>
 <body>
-<datalist id="institucion-list"></datalist>
 <header>
   <div>
     <h1>📊 SNIES Monitor · Uninorte</h1>
@@ -825,7 +832,10 @@ tr:hover td{background:#f8fafc}
       </div>
       <div class="f-row">
         <input class="f-input" id="snap-search" placeholder="Buscar por nombre, código SNIES…" oninput="filterSnap()">
-        <input class="f-input" id="snap-institucion" list="institucion-list" placeholder="Buscar institución…" oninput="filterSnap()">
+        <div class="ac-wrap">
+          <input class="f-input" id="snap-institucion" style="width:100%" placeholder="Buscar institución…" oninput="filterSnap()">
+          <div class="ac-menu" id="snap-institucion-menu"></div>
+        </div>
         <select id="snap-sector" class="f-sel" onchange="filterSnap()"><option value="">Todos los sectores</option></select>
         <select id="snap-depto" class="f-sel" onchange="filterSnap()"><option value="">Todos los departamentos</option></select>
         <select id="snap-modalidad" class="f-sel" onchange="filterSnap()"><option value="">Todas las modalidades</option></select>
@@ -850,7 +860,10 @@ tr:hover td{background:#f8fafc}
     <div id="tp-nue" class="tab-pane on">
       <div class="f-row">
         <input class="f-input" id="q-nue" placeholder="Buscar por nombre, código SNIES…" oninput="filter('nue')">
-        <input class="f-input" id="ins-nue" list="institucion-list" placeholder="Buscar institución…" oninput="filter('nue')">
+        <div class="ac-wrap">
+          <input class="f-input" id="ins-nue" style="width:100%" placeholder="Buscar institución…" oninput="filter('nue')">
+          <div class="ac-menu" id="ins-nue-menu"></div>
+        </div>
         <select id="se-nue" class="f-sel" onchange="filter('nue')"><option value="">Todos los sectores</option></select>
         <select id="de-nue" class="f-sel" onchange="filter('nue')"><option value="">Todos los departamentos</option></select>
         <select id="di-nue" class="f-sel" onchange="filter('nue')"><option value="">Todas las divisiones</option></select>
@@ -864,7 +877,10 @@ tr:hover td{background:#f8fafc}
     <div id="tp-ina" class="tab-pane">
       <div class="f-row">
         <input class="f-input" id="q-ina" placeholder="Buscar por nombre, código SNIES…" oninput="filter('ina')">
-        <input class="f-input" id="ins-ina" list="institucion-list" placeholder="Buscar institución…" oninput="filter('ina')">
+        <div class="ac-wrap">
+          <input class="f-input" id="ins-ina" style="width:100%" placeholder="Buscar institución…" oninput="filter('ina')">
+          <div class="ac-menu" id="ins-ina-menu"></div>
+        </div>
         <select id="se-ina" class="f-sel" onchange="filter('ina')"><option value="">Todos los sectores</option></select>
         <select id="de-ina" class="f-sel" onchange="filter('ina')"><option value="">Todos los departamentos</option></select>
         <select id="di-ina" class="f-sel" onchange="filter('ina')"><option value="">Todas las divisiones</option></select>
@@ -878,7 +894,10 @@ tr:hover td{background:#f8fafc}
     <div id="tp-mod" class="tab-pane">
       <div class="f-row">
         <input class="f-input" id="q-mod" placeholder="Buscar por nombre, código SNIES…" oninput="filter('mod')">
-        <input class="f-input" id="ins-mod" list="institucion-list" placeholder="Buscar institución…" oninput="filter('mod')">
+        <div class="ac-wrap">
+          <input class="f-input" id="ins-mod" style="width:100%" placeholder="Buscar institución…" oninput="filter('mod')">
+          <div class="ac-menu" id="ins-mod-menu"></div>
+        </div>
         <select id="se-mod" class="f-sel" onchange="filter('mod')"><option value="">Todos los sectores</option></select>
         <select id="de-mod" class="f-sel" onchange="filter('mod')"><option value="">Todos los departamentos</option></select>
         <select id="di-mod" class="f-sel" onchange="filter('mod')"><option value="">Todas las divisiones</option></select>
@@ -906,6 +925,30 @@ function uniq(arr) { return [...new Set(arr.filter(v => v && String(v).trim() !=
 function addOpts(id, vals) {
   const el = document.getElementById(id); if (!el) return;
   vals.forEach(v => { const o = document.createElement('option'); o.value = o.textContent = v; el.appendChild(o); });
+}
+function initAutocomplete(inputId, menuId, options, onChange) {
+  const inp = document.getElementById(inputId), menu = document.getElementById(menuId);
+  if (!inp || !menu) return;
+  function render() {
+    const q = _norm(inp.value).trim();
+    const matches = (q ? options.filter(o => _norm(o).includes(q)) : options).slice(0, 50);
+    menu.innerHTML = matches.length
+      ? matches.map(o => '<div class="ac-item">' + o.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</div>').join('')
+      : '<div class="ac-empty">Sin coincidencias</div>';
+    menu.classList.add('show');
+  }
+  inp.addEventListener('focus', render);
+  inp.addEventListener('input', () => { render(); onChange(); });
+  menu.addEventListener('mousedown', e => {
+    const it = e.target.closest('.ac-item'); if (!it) return;
+    e.preventDefault();
+    inp.value = it.textContent;
+    menu.classList.remove('show');
+    onChange();
+  });
+  document.addEventListener('click', e => {
+    if (e.target !== inp && !menu.contains(e.target)) menu.classList.remove('show');
+  });
 }
 document.getElementById('fecha-update').textContent = D.ultima_actualizacion;
 document.getElementById('k-total').textContent = fmt(D.kpis.total_activos);
@@ -1144,12 +1187,16 @@ const FILTROS_TIPO = {
   mod: ['se','de','di','fe','tc'],
 };
 
-addOpts('institucion-list', uniq([
+const INSTITUCIONES_TODAS = uniq([
   ..._snapAll.map(r => r['NOMBRE_INSTITUCIÓN']),
   ...rows.nue.map(r => r['NOMBRE_INSTITUCIÓN']),
   ...rows.ina.map(r => r['NOMBRE_INSTITUCIÓN']),
   ...rows.mod.map(r => r['NOMBRE_INSTITUCIÓN']),
-]));
+]);
+initAutocomplete('snap-institucion', 'snap-institucion-menu', INSTITUCIONES_TODAS, filterSnap);
+initAutocomplete('ins-nue', 'ins-nue-menu', INSTITUCIONES_TODAS, () => filter('nue'));
+initAutocomplete('ins-ina', 'ins-ina-menu', INSTITUCIONES_TODAS, () => filter('ina'));
+initAutocomplete('ins-mod', 'ins-mod-menu', INSTITUCIONES_TODAS, () => filter('mod'));
 
 ['nue','ina'].forEach(t => {
   addOpts('se-'+t, uniq(rows[t].map(r => r['SECTOR'])));
@@ -1288,6 +1335,14 @@ header .sub{font-size:.77rem;opacity:.75;margin-top:.2rem}
   font-size:.77rem;background:var(--surface);cursor:pointer;color:var(--muted);white-space:nowrap}
 .f-btn:hover{background:var(--bg)}
 .f-count{margin-left:auto;font-size:.82rem;font-weight:600;color:var(--blue);white-space:nowrap}
+.ac-wrap{position:relative;flex:0 1 240px}
+.ac-menu{position:absolute;top:calc(100% + 2px);left:0;right:0;z-index:300;
+  background:var(--surface);border:1px solid var(--border);border-radius:.4rem;
+  box-shadow:0 8px 20px rgba(0,0,0,.14);max-height:260px;overflow-y:auto;display:none}
+.ac-menu.show{display:block}
+.ac-item{padding:.45rem .75rem;font-size:.78rem;cursor:pointer;color:var(--text)}
+.ac-item:hover{background:var(--bg)}
+.ac-empty{padding:.45rem .75rem;font-size:.78rem;color:var(--muted)}
 /* layout */
 main{max-width:1380px;margin:0 auto;padding:1.4rem 2rem}
 .card{background:var(--surface);border-radius:var(--radius);padding:1.2rem;
@@ -1338,9 +1393,10 @@ tr:hover td{background:#f8fafc}
   <input id="f-q" class="f-input" placeholder="Buscar por nombre, institución, código SNIES, departamento…" oninput="applyFilters()">
   <select id="f-sector"   class="f-sel" onchange="applyFilters()"><option value="">Todos los sectores</option></select>
   <select id="f-depto"    class="f-sel" onchange="applyFilters()"><option value="">Todos los departamentos</option></select>
-  <input id="f-institucion" class="f-sel" list="institucion-list" placeholder="Buscar institucion..."
-         style="cursor:text;max-width:240px" oninput="applyFilters()">
-  <datalist id="institucion-list"></datalist>
+  <div class="ac-wrap">
+    <input id="f-institucion" class="f-sel" placeholder="Buscar institucion..." style="cursor:text;width:100%" oninput="applyFilters()">
+    <div class="ac-menu" id="f-institucion-menu"></div>
+  </div>
   __FDIV_SELECT__
   __XFILTER__
   <select id="f-fecha"    class="f-sel" onchange="applyFilters()"><option value="">Todas las fechas</option></select>
@@ -1406,11 +1462,35 @@ function addOpts(id, vals) {
   if (!el) return;
   vals.forEach(v => { const o = document.createElement('option'); o.value = o.textContent = v; el.appendChild(o); });
 }
+function initAutocomplete(inputId, menuId, options, onChange) {
+  const inp = document.getElementById(inputId), menu = document.getElementById(menuId);
+  if (!inp || !menu) return;
+  function render() {
+    const q = _norm(inp.value).trim();
+    const matches = (q ? options.filter(o => _norm(o).includes(q)) : options).slice(0, 50);
+    menu.innerHTML = matches.length
+      ? matches.map(o => '<div class="ac-item">' + o.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</div>').join('')
+      : '<div class="ac-empty">Sin coincidencias</div>';
+    menu.classList.add('show');
+  }
+  inp.addEventListener('focus', render);
+  inp.addEventListener('input', () => { render(); onChange(); });
+  menu.addEventListener('mousedown', e => {
+    const it = e.target.closest('.ac-item'); if (!it) return;
+    e.preventDefault();
+    inp.value = it.textContent;
+    menu.classList.remove('show');
+    onChange();
+  });
+  document.addEventListener('click', e => {
+    if (e.target !== inp && !menu.contains(e.target)) menu.classList.remove('show');
+  });
+}
 
 addOpts('f-sector',   uniq(ROWS.map(r => r['SECTOR'])));
 addOpts('f-depto',    uniq(ROWS.map(r => r['DEPARTAMENTO_OFERTA_PROGRAMA'])));
 addOpts('f-division', uniq(ROWS.map(r => r['DIVISIÓN UNINORTE'])));
-addOpts('institucion-list', uniq(ROWS.map(r => r['NOMBRE_INSTITUCIÓN'])));
+initAutocomplete('f-institucion', 'f-institucion-menu', uniq(ROWS.map(r => r['NOMBRE_INSTITUCIÓN'])), applyFilters);
 
 // Sort fechas newest-first (DD/MM/YYYY)
 const parseFecha = s => { try { const [d,m,y]=s.split('/'); return new Date(+y,+m-1,+d); } catch(e){return new Date(0);} };
@@ -1918,6 +1998,14 @@ header .sub{font-size:.77rem;opacity:.75;margin-top:.2rem}
   font-size:.77rem;background:var(--surface);cursor:pointer;color:var(--muted);white-space:nowrap}
 .f-btn:hover{background:var(--bg)}
 .f-count{margin-left:auto;font-size:.82rem;font-weight:600;color:var(--blue);white-space:nowrap}
+.ac-wrap{position:relative;flex:0 1 240px}
+.ac-menu{position:absolute;top:calc(100% + 2px);left:0;right:0;z-index:300;
+  background:var(--surface);border:1px solid var(--border);border-radius:.4rem;
+  box-shadow:0 8px 20px rgba(0,0,0,.14);max-height:260px;overflow-y:auto;display:none}
+.ac-menu.show{display:block}
+.ac-item{padding:.45rem .75rem;font-size:.78rem;cursor:pointer;color:var(--text)}
+.ac-item:hover{background:var(--bg)}
+.ac-empty{padding:.45rem .75rem;font-size:.78rem;color:var(--muted)}
 main{max-width:1380px;margin:0 auto;padding:1.5rem 2rem}
 section{margin-bottom:1.25rem}
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
@@ -1970,9 +2058,10 @@ tr:hover td{background:#f8fafc}
   <input id="f-q" class="f-input" placeholder="Buscar por nombre, institucion, departamento... (filtra TODA la pagina)" oninput="applyFilters()">
   <select id="f-sector" class="f-sel" onchange="applyFilters()"><option value="">Todos los sectores</option></select>
   <select id="f-depto"  class="f-sel" onchange="applyFilters()"><option value="">Todos los departamentos</option></select>
-  <input id="f-institucion" class="f-sel" list="institucion-list" placeholder="Buscar institucion..."
-         style="cursor:text;max-width:240px" oninput="applyFilters()">
-  <datalist id="institucion-list"></datalist>
+  <div class="ac-wrap">
+    <input id="f-institucion" class="f-sel" placeholder="Buscar institucion..." style="cursor:text;width:100%" oninput="applyFilters()">
+    <div class="ac-menu" id="f-institucion-menu"></div>
+  </div>
   <button class="f-btn" onclick="resetFilters()">✕ Limpiar</button>
   <span class="f-count" id="f-count">–</span>
 </div>
@@ -2312,9 +2401,33 @@ function addOpts(id, vals) {
   const el = document.getElementById(id); if (!el) return;
   vals.forEach(v => { const o = document.createElement('option'); o.value = o.textContent = v; el.appendChild(o); });
 }
+function initAutocomplete(inputId, menuId, options, onChange) {
+  const inp = document.getElementById(inputId), menu = document.getElementById(menuId);
+  if (!inp || !menu) return;
+  function render() {
+    const q = _norm(inp.value).trim();
+    const matches = (q ? options.filter(o => _norm(o).includes(q)) : options).slice(0, 50);
+    menu.innerHTML = matches.length
+      ? matches.map(o => '<div class="ac-item">' + o.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</div>').join('')
+      : '<div class="ac-empty">Sin coincidencias</div>';
+    menu.classList.add('show');
+  }
+  inp.addEventListener('focus', render);
+  inp.addEventListener('input', () => { render(); onChange(); });
+  menu.addEventListener('mousedown', e => {
+    const it = e.target.closest('.ac-item'); if (!it) return;
+    e.preventDefault();
+    inp.value = it.textContent;
+    menu.classList.remove('show');
+    onChange();
+  });
+  document.addEventListener('click', e => {
+    if (e.target !== inp && !menu.contains(e.target)) menu.classList.remove('show');
+  });
+}
 addOpts('f-sector', uniq(D.universo.map(r => r['SECTOR'])));
 addOpts('f-depto',  uniq(D.universo.map(r => r['DEPARTAMENTO_OFERTA_PROGRAMA'])));
-addOpts('institucion-list', uniq(D.universo.map(r => r['NOMBRE_INSTITUCIÓN'])));
+initAutocomplete('f-institucion', 'f-institucion-menu', uniq(D.universo.map(r => r['NOMBRE_INSTITUCIÓN'])), applyFilters);
 
 function gv(id) { const el = document.getElementById(id); return el ? el.value : ''; }
 
