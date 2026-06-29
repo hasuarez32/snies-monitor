@@ -170,7 +170,7 @@ CHARTS_HTML = {
   <div class="card"><div class="ct">Por sector</div><div id="ch-sector" style="height:300px"></div></div>
 </div>
 <div class="card"><div class="ct">Top 15 departamentos afectados</div><div id="ch-depto" style="height:310px"></div></div>
-<div class="card"><div class="ct">Modificaciones por fecha de run</div><div id="ch-timeline" style="height:200px"></div></div>
+<div class="card"><div class="ct">Modificaciones por periodo de run</div><div id="ch-timeline" style="height:200px"></div></div>
 """,
 }
 
@@ -421,6 +421,7 @@ def calcular_analisis_creditos(mods_df: pd.DataFrame) -> dict:
         "SECTOR":                        df.get("SECTOR"),
         "DEPARTAMENTO_OFERTA_PROGRAMA":  df.get("DEPARTAMENTO_OFERTA_PROGRAMA"),
         "DIVISIÓN UNINORTE":             df.get("DIVISIÓN UNINORTE"),
+        "CINE_F_2013_AC_CAMPO_ESPECÍFIC": df.get("CINE_F_2013_AC_CAMPO_ESPECÍFIC"),
         "QUE_CAMBIO":                    df.get("QUE_CAMBIO"),
         "_cred_antes":    cred_a,
         "_cred_despues":  cred_n,
@@ -1323,13 +1324,6 @@ function countBy(rows, field, n) {
   rows.forEach(r => { const v=(r[field]||'Sin datos').toString().trim()||'Sin datos'; c[v]=(c[v]||0)+1; });
   return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,n||12);
 }
-function byDate(rows) {
-  const c={};
-  rows.forEach(r => { const v=r['FECHA_OBTENCION']||'?'; c[v]=(c[v]||0)+1; });
-  const e=Object.entries(c).sort();
-  return {x:e.map(i=>i[0]), y:e.map(i=>i[1])};
-}
-
 // ── Shared date helper ─────────────────────────────────────────────────────
 function getSem(s) {
   if(!s||!s.trim()) return null;
@@ -1338,7 +1332,7 @@ function getSem(s) {
   if(iso){y=+iso[1];m=+iso[2];}
   else{const dmy=s.match(/^(\d{2})\/(\d{2})\/(\d{4})/);if(dmy){y=+dmy[3];m=+dmy[2];}}
   if(!y||y<2014||y>2035) return null;
-  return y+'-'+(m<=6?'S1':'S2');
+  return y+'-'+(m<=6?'1':'2');
 }
 
 // ── Charts ─────────────────────────────────────────────────────────────────
@@ -1386,13 +1380,17 @@ function plotVBar(id, rows, field, color) {
 
 function plotTimeline(id, rows) {
   const el=document.getElementById(id); if(!el) return;
-  const {x,y}=byDate(rows); if(!x.length){ _emptyChart(el); return; }
+  const bySem={};
+  rows.forEach(r=>{const s=getSem(r['FECHA_OBTENCION']); if(s) bySem[s]=(bySem[s]||0)+1;});
+  const sems=Object.keys(bySem).sort();
+  if(!sems.length){ _emptyChart(el, 'Sin datos de fecha de run'); return; }
+  const x=sems, y=sems.map(s=>bySem[s]);
   Plotly.react(id,[{x,y,type:'scatter',mode:'lines+markers',
     line:{color:C,width:2.5},marker:{color:C,size:7},
     fill:'tozeroy',fillcolor:CA,
     hovertemplate:'%{x}<br><b>%{y:,}</b><extra></extra>'}],
     {margin:{t:10,r:20,b:40,l:50},
-    xaxis:{showgrid:false,tickfont:{size:11}},
+    xaxis:{showgrid:false,tickfont:{size:11},type:'category'},
     yaxis:{showgrid:true,gridcolor:'#e2e8f0',rangemode:'tozero'},
     plot_bgcolor:'white',paper_bgcolor:'white',hovermode:'x unified'},PC);
 }
@@ -1403,7 +1401,7 @@ function plotAcumuladoModalidad(id, rows) {
 
   const semSet=new Set();
   rows.forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)semSet.add(s);});
-  const sems=[...semSet].sort(); // "YYYY-S1" < "YYYY-S2" sorts correctly as strings
+  const sems=[...semSet].sort(); // "YYYY-1" < "YYYY-2" sorts correctly as strings
 
   if(!sems.length){
     _emptyChart(el, 'Sin datos de fecha de registro en SNIES');
@@ -1465,7 +1463,7 @@ function renderCineChart(rows) {
   const semSet=new Set();
   rows.forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)semSet.add(s);});
   const allSems=[...semSet].sort();
-  const sems=allSems.filter(s=>s>='2023-S2');
+  const sems=allSems.filter(s=>s>='2023-2');
 
   const tagsEl=document.getElementById('cine-tags');
   if(tagsEl){
@@ -1493,7 +1491,7 @@ function renderCineChart(rows) {
     rows.filter(r=>{const v=(r[CINE_COL]||'').trim();return isUnclass?!v:v===cine;})
         .forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)bySem[s]=(bySem[s]||0)+1;});
     let cum=0;const x=[],y=[];
-    allSems.forEach(s=>{cum+=(bySem[s]||0);if(s>='2023-S2'){x.push(s);y.push(cum);}});
+    allSems.forEach(s=>{cum+=(bySem[s]||0);if(s>='2023-2'){x.push(s);y.push(cum);}});
     if(cum===0) return null;
     const col=CINE_COLORS[i%CINE_COLORS.length];
     return{x,y,name:cine,type:'scatter',mode:'lines+markers',
@@ -1828,6 +1826,7 @@ tr:hover td{background:#f8fafc}
   <input id="f-q" class="f-input" placeholder="Buscar por nombre, institucion, departamento... (filtra TODA la pagina)" oninput="applyFilters()">
   <select id="f-sector" class="f-sel" onchange="applyFilters()"><option value="">Todos los sectores</option></select>
   <select id="f-depto"  class="f-sel" onchange="applyFilters()"><option value="">Todos los departamentos</option></select>
+  <select id="f-institucion" class="f-sel" onchange="applyFilters()"><option value="">Todas las instituciones</option></select>
   <button class="f-btn" onclick="resetFilters()">✕ Limpiar</button>
   <span class="f-count" id="f-count">–</span>
 </div>
@@ -1883,6 +1882,14 @@ tr:hover td{background:#f8fafc}
       <div class="ct-note">Numero al lado de la barra: delta promedio de ese departamento (ver definicion arriba).</div>
       <div id="ch-departamentos" style="height:380px"></div>
     </div>
+  </section>
+
+  <section class="card">
+    <div class="ct">Por campo CINE: que programas suben o bajan creditos</div>
+    <div class="ct-note">Filtra por institucion arriba para ver el detalle de su oferta. Cada barra es un campo
+      CINE; el valor es el balance neto de creditos ganados/perdidos entre los programas de ese campo
+      (suma de los deltas). Verde = el campo gana creditos en neto; rojo = los pierde.</div>
+    <div id="ch-cine-delta" style="height:420px"></div>
   </section>
 
   <section class="card">
@@ -2034,6 +2041,37 @@ function renderRanking(id, data) {
   }, PC);
 }
 
+function renderCineDelta(creditRows) {
+  const CINE_COL = 'CINE_F_2013_AC_CAMPO_ESPECÍFIC';
+  const m = agruparPorCampo(creditRows, CINE_COL);
+  const data = [...m.entries()].map(([campo, rows]) => ({
+    campo,
+    n: rows.length,
+    suben: rows.filter(r => r._delta > 0).length,
+    bajan: rows.filter(r => r._delta < 0).length,
+    neto: rows.reduce((s, r) => s + r._delta, 0),
+  }));
+  data.sort((a, b) => Math.abs(b.neto) - Math.abs(a.neto));
+  const top = data.slice(0, 20).reverse();
+  if (!top.length) { _emptyChart('ch-cine-delta'); return; }
+  const trunc = s => s.length > 42 ? s.slice(0, 42) + '...' : s;
+  Plotly.react('ch-cine-delta', [{
+    y: top.map(d => trunc(d.campo)), x: top.map(d => d.neto), customdata: top,
+    type: 'bar', orientation: 'h',
+    marker: {color: top.map(d => d.neto >= 0 ? '#1a9e6b' : '#ae1e22'), opacity: .85},
+    text: top.map(d => (d.neto > 0 ? '+' : '') + d.neto),
+    textposition: 'outside', cliponaxis: false, textfont: {size: 10},
+    hovertemplate: '%{y}<br>Balance neto: <b>%{x}</b> creditos' +
+      '<br>%{customdata.suben} suben / %{customdata.bajan} bajan (%{customdata.n} programas)<extra></extra>'
+  }], {
+    margin: {t:10,r:50,b:40,l:270},
+    xaxis: {title: 'Balance neto de creditos (suma de deltas)', zeroline: true, zerolinecolor: '#94a3b8',
+      showgrid: true, gridcolor: '#e2e8f0'},
+    yaxis: {tickfont: {size: 10}},
+    plot_bgcolor: 'white', paper_bgcolor: 'white', bargap: .3
+  }, PC);
+}
+
 function renderCoCambios(coCambios) {
   if (!coCambios.length) { _emptyChart('ch-cocambios'); return; }
   const labels = coCambios.map(c => c.campo);
@@ -2130,17 +2168,19 @@ function addOpts(id, vals) {
 }
 addOpts('f-sector', uniq(D.universo.map(r => r['SECTOR'])));
 addOpts('f-depto',  uniq(D.universo.map(r => r['DEPARTAMENTO_OFERTA_PROGRAMA'])));
+addOpts('f-institucion', uniq(D.universo.map(r => r['NOMBRE_INSTITUCIÓN'])));
 
 function gv(id) { const el = document.getElementById(id); return el ? el.value : ''; }
 
 function applyFilters() {
   const qTokens = _norm(gv('f-q')).split(/\s+/).filter(Boolean);
-  const se = gv('f-sector'), de = gv('f-depto');
+  const se = gv('f-sector'), de = gv('f-depto'), ins = gv('f-institucion');
 
   const filtrados = D.universo.filter(r => {
     if (!_rowMatches(r, qTokens)) return false;
     if (se && r['SECTOR'] !== se) return false;
     if (de && r['DEPARTAMENTO_OFERTA_PROGRAMA'] !== de) return false;
+    if (ins && r['NOMBRE_INSTITUCIÓN'] !== ins) return false;
     return true;
   });
   const creditRows = filtrados.filter(r => r._cambia_credito);
@@ -2165,13 +2205,14 @@ function applyFilters() {
   renderHist(creditRows);
   renderRanking('ch-instituciones', ranking(creditRows, 'NOMBRE_INSTITUCIÓN', 20));
   renderRanking('ch-departamentos', ranking(creditRows, 'DEPARTAMENTO_OFERTA_PROGRAMA', 20));
+  renderCineDelta(creditRows);
   renderCoCambios(coCambios);
   renderScatter(creditRows);
   renderTbl(creditRows);
 }
 
 function resetFilters() {
-  ['f-q', 'f-sector', 'f-depto'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  ['f-q', 'f-sector', 'f-depto', 'f-institucion'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
   applyFilters();
 }
 

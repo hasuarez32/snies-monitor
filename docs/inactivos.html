@@ -234,13 +234,6 @@ function countBy(rows, field, n) {
   rows.forEach(r => { const v=(r[field]||'Sin datos').toString().trim()||'Sin datos'; c[v]=(c[v]||0)+1; });
   return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,n||12);
 }
-function byDate(rows) {
-  const c={};
-  rows.forEach(r => { const v=r['FECHA_OBTENCION']||'?'; c[v]=(c[v]||0)+1; });
-  const e=Object.entries(c).sort();
-  return {x:e.map(i=>i[0]), y:e.map(i=>i[1])};
-}
-
 // ── Shared date helper ─────────────────────────────────────────────────────
 function getSem(s) {
   if(!s||!s.trim()) return null;
@@ -249,7 +242,7 @@ function getSem(s) {
   if(iso){y=+iso[1];m=+iso[2];}
   else{const dmy=s.match(/^(\d{2})\/(\d{2})\/(\d{4})/);if(dmy){y=+dmy[3];m=+dmy[2];}}
   if(!y||y<2014||y>2035) return null;
-  return y+'-'+(m<=6?'S1':'S2');
+  return y+'-'+(m<=6?'1':'2');
 }
 
 // ── Charts ─────────────────────────────────────────────────────────────────
@@ -297,13 +290,17 @@ function plotVBar(id, rows, field, color) {
 
 function plotTimeline(id, rows) {
   const el=document.getElementById(id); if(!el) return;
-  const {x,y}=byDate(rows); if(!x.length){ _emptyChart(el); return; }
+  const bySem={};
+  rows.forEach(r=>{const s=getSem(r['FECHA_OBTENCION']); if(s) bySem[s]=(bySem[s]||0)+1;});
+  const sems=Object.keys(bySem).sort();
+  if(!sems.length){ _emptyChart(el, 'Sin datos de fecha de run'); return; }
+  const x=sems, y=sems.map(s=>bySem[s]);
   Plotly.react(id,[{x,y,type:'scatter',mode:'lines+markers',
     line:{color:C,width:2.5},marker:{color:C,size:7},
     fill:'tozeroy',fillcolor:CA,
     hovertemplate:'%{x}<br><b>%{y:,}</b><extra></extra>'}],
     {margin:{t:10,r:20,b:40,l:50},
-    xaxis:{showgrid:false,tickfont:{size:11}},
+    xaxis:{showgrid:false,tickfont:{size:11},type:'category'},
     yaxis:{showgrid:true,gridcolor:'#e2e8f0',rangemode:'tozero'},
     plot_bgcolor:'white',paper_bgcolor:'white',hovermode:'x unified'},PC);
 }
@@ -314,7 +311,7 @@ function plotAcumuladoModalidad(id, rows) {
 
   const semSet=new Set();
   rows.forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)semSet.add(s);});
-  const sems=[...semSet].sort(); // "YYYY-S1" < "YYYY-S2" sorts correctly as strings
+  const sems=[...semSet].sort(); // "YYYY-1" < "YYYY-2" sorts correctly as strings
 
   if(!sems.length){
     _emptyChart(el, 'Sin datos de fecha de registro en SNIES');
@@ -376,7 +373,7 @@ function renderCineChart(rows) {
   const semSet=new Set();
   rows.forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)semSet.add(s);});
   const allSems=[...semSet].sort();
-  const sems=allSems.filter(s=>s>='2023-S2');
+  const sems=allSems.filter(s=>s>='2023-2');
 
   const tagsEl=document.getElementById('cine-tags');
   if(tagsEl){
@@ -404,7 +401,7 @@ function renderCineChart(rows) {
     rows.filter(r=>{const v=(r[CINE_COL]||'').trim();return isUnclass?!v:v===cine;})
         .forEach(r=>{const s=getSem(r['FECHA_DE_REGISTRO_EN_SNIES']);if(s)bySem[s]=(bySem[s]||0)+1;});
     let cum=0;const x=[],y=[];
-    allSems.forEach(s=>{cum+=(bySem[s]||0);if(s>='2023-S2'){x.push(s);y.push(cum);}});
+    allSems.forEach(s=>{cum+=(bySem[s]||0);if(s>='2023-2'){x.push(s);y.push(cum);}});
     if(cum===0) return null;
     const col=CINE_COLORS[i%CINE_COLORS.length];
     return{x,y,name:cine,type:'scatter',mode:'lines+markers',
