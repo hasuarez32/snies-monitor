@@ -166,14 +166,6 @@ tr:hover td{background:#f8fafc}
   </section>
 
   <section class="card">
-    <div class="ct">Cuando cambia el costo, que mas cambia?</div>
-    <div class="ct-note">Barra ambar = entre los programas <strong>con</strong> cambio de costo, que % tambien
-      cambio ese campo. Barra gris = tasa base: que % cambia ese campo entre TODOS los programas modificados
-      visibles con los filtros actuales (con o sin cambio de costo) - es el punto de comparacion.</div>
-    <div id="ch-cocambios" style="height:300px"></div>
-  </section>
-
-  <section class="card">
     <div class="ct">Costo de matricula: antes -&gt; despues (coloreado por sector, escala log)</div>
     <div id="ch-scatter" style="height:380px"></div>
   </section>
@@ -228,12 +220,12 @@ function ranking(rows, field, topN) {
 
 const BUCKETS_DELTA = [
   {min: -Infinity, max: -20,      label: '≤ -20%'},
-  {min: -19,       max: -10,      label: '-19% a -10%'},
-  {min: -9,        max: -1,       label: '-9% a -1%'},
+  {min: -19,       max: -10,      label: '-19 a -10%'},
+  {min: -9,        max: -1,       label: '-9 a -1%'},
   {min: 0,         max: 0,        label: '0%'},
-  {min: 1,         max: 9,        label: '1% a 9%'},
-  {min: 10,        max: 19,       label: '10% a 19%'},
-  {min: 20,        max: 49,       label: '20% a 49%'},
+  {min: 1,         max: 9,        label: '1 a 9%'},
+  {min: 10,        max: 19,       label: '10 a 19%'},
+  {min: 20,        max: 49,       label: '20 a 49%'},
   {min: 50,        max: Infinity, label: '≥ 50%'},
 ];
 
@@ -241,27 +233,6 @@ function binDeltas(rows) {
   const counts = BUCKETS_DELTA.map(b => rows.filter(r => r._delta_pct >= b.min && r._delta_pct <= b.max).length);
   const colors = BUCKETS_DELTA.map(b => b.max < 0 ? '#1a9e6b' : b.min > 0 ? '#ae1e22' : '#94a3b8');
   return {labels: BUCKETS_DELTA.map(b => b.label), counts, colors};
-}
-
-const CAMPOS_COCAMBIO = [
-  {flag: '_cambia_credito',  label: 'Creditos'},
-  {flag: '_cambia_periodo',  label: 'Duracion (periodos)'},
-  {flag: '_cambia_modalidad', label: 'Modalidad'},
-  {flag: '_cambia_municipio', label: 'Municipio'},
-];
-
-function calcularCoCambios(filtrados, costRows) {
-  return CAMPOS_COCAMBIO.map(({flag, label}) => {
-    const conCosto = costRows.filter(r => r[flag] !== null);
-    const tasaConCosto = conCosto.length
-      ? Math.round(1000 * conCosto.filter(r => r[flag] === true).length / conCosto.length) / 10
-      : 0;
-    const baseValidos = filtrados.filter(r => r[flag] !== null);
-    const tasaBase = baseValidos.length
-      ? Math.round(1000 * baseValidos.filter(r => r[flag] === true).length / baseValidos.length) / 10
-      : 0;
-    return {campo: label, n_con_dato: conCosto.length, tasa_con_cambio_credito: tasaConCosto, tasa_base: tasaBase};
-  });
 }
 
 function renderSector(porSector) {
@@ -288,8 +259,8 @@ function renderHist(costRows) {
     marker: {color: h.colors, opacity: .85},
     hovertemplate: 'Rango: %{x}<br><b>%{y}</b> programas<extra></extra>'
   }], {
-    margin: {t:10,r:10,b:45,l:45},
-    xaxis: {title: 'Cambio en costo de matricula (%)', tickfont: {size: 11}},
+    margin: {t:10,r:10,b:75,l:45},
+    xaxis: {title: {text: 'Cambio en costo de matricula (%)', standoff: 25}, tickangle: -30, tickfont: {size: 10}},
     yaxis: {title: 'N. programas', showgrid: true, gridcolor: '#e2e8f0'},
     plot_bgcolor: 'white', paper_bgcolor: 'white', bargap: .15
   }, PC);
@@ -344,24 +315,6 @@ function renderCineDelta(costRows) {
       showgrid: true, gridcolor: '#e2e8f0'},
     yaxis: {tickfont: {size: 10}},
     plot_bgcolor: 'white', paper_bgcolor: 'white', bargap: .3
-  }, PC);
-}
-
-function renderCoCambios(coCambios) {
-  if (!coCambios.length) { _emptyChart('ch-cocambios'); return; }
-  const labels = coCambios.map(c => c.campo);
-  Plotly.react('ch-cocambios', [
-    {x: labels, y: coCambios.map(c => c.tasa_con_cambio_credito), name: 'Cuando cambia el costo',
-     type: 'bar', marker: {color: '#bd900b', opacity: .9},
-     text: coCambios.map(c => c.tasa_con_cambio_credito + '%'), textposition: 'outside', cliponaxis: false},
-    {x: labels, y: coCambios.map(c => c.tasa_base), name: 'Tasa general (control)',
-     type: 'bar', marker: {color: '#94a3b8', opacity: .9},
-     text: coCambios.map(c => c.tasa_base + '%'), textposition: 'outside', cliponaxis: false},
-  ], {
-    barmode: 'group', margin: {t:30,r:10,b:50,l:50},
-    yaxis: {title: '% de los casos', showgrid: true, gridcolor: '#e2e8f0', range: [0, 100]},
-    plot_bgcolor: 'white', paper_bgcolor: 'white',
-    legend: {orientation: 'h', y: -0.25}
   }, PC);
 }
 
@@ -507,14 +460,11 @@ function applyFilters() {
   document.getElementById('k-max').textContent = maxRow ? (maxRow._delta_pct > 0 ? '+' : '') + maxRow._delta_pct + '%' : '-';
   document.getElementById('k-max-sub').textContent = maxRow ? truncKpi(maxRow['NOMBRE_INSTITUCIÓN'] + ' — ' + maxRow['NOMBRE_DEL_PROGRAMA']) : 'sin datos';
 
-  const coCambios = calcularCoCambios(filtrados, costRows);
-
   renderSector(porSectorAgg);
   renderHist(costRows);
   renderRanking('ch-instituciones', ranking(costRows, 'NOMBRE_INSTITUCIÓN', 20));
   renderRanking('ch-departamentos', ranking(costRows, 'DEPARTAMENTO_OFERTA_PROGRAMA', 20));
   renderCineDelta(costRows);
-  renderCoCambios(coCambios);
   renderScatter(costRows);
   renderTbl(costRows);
 }
