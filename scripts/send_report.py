@@ -34,12 +34,12 @@ DASHBOARD_URL = "https://hasuarez32.github.io/snies-monitor/"
 
 # ── HTML helpers ──────────────────────────────────────────────────────────────
 
-def _tabla_html(df: pd.DataFrame | None, color_header: str) -> str:
-    """Genera una tabla HTML con las primeras 10 filas del DataFrame."""
+def _tabla_html(df: pd.DataFrame | None, color_header: str, show_all: bool = False) -> str:
+    """Genera una tabla HTML. Si show_all=True muestra todos los registros, si no solo 10."""
     if df is None or df.empty:
         return (
             "<p style='color:#666;font-family:Arial,sans-serif;font-size:13px;'>"
-            "Sin novedades este día.</p>"
+            "Sin novedades esta semana.</p>"
         )
 
     # Columnas preferidas para la vista previa del correo
@@ -69,7 +69,8 @@ def _tabla_html(df: pd.DataFrame | None, color_header: str) -> str:
         html += f'<th style="{style_th}">{col.replace("_", " ")}</th>'
     html += "</tr></thead><tbody>"
 
-    for _, row in df.head(10).iterrows():
+    rows_to_show = df if show_all else df.head(10)
+    for _, row in rows_to_show.iterrows():
         html += "<tr>"
         for col in cols:
             val = row.get(col, "")
@@ -78,7 +79,7 @@ def _tabla_html(df: pd.DataFrame | None, color_header: str) -> str:
 
     html += "</tbody></table>"
 
-    if len(df) > 10:
+    if not show_all and len(df) > 10:
         html += (
             f"<p style='font-size:11px;color:#666;'>"
             f"... y {len(df) - 10} registro(s) más en el adjunto Excel.</p>"
@@ -109,9 +110,9 @@ def _bloque_pregrado(res: dict | None) -> str:
         ✅ Programas Nuevos ({len(nuevos)})
     </h4>
     <p style="font-size:12px;color:#555;font-family:Arial,sans-serif;">
-        Aparecieron hoy en el SNIES pero no estaban en el snapshot anterior.
+        Aparecieron esta semana en el SNIES pero no estaban en el snapshot anterior.
     </p>
-    {_tabla_html(nuevos, "#28a745")}
+    {_tabla_html(nuevos, "#28a745", show_all=True)}
 
     <h4 style="color:#dc3545;font-family:Arial,sans-serif;">
         ❌ Programas Inactivos ({len(inactivos)})
@@ -140,7 +141,7 @@ def construir_cuerpo(resultados: dict, today: date) -> str:
     return f"""
     <div style="font-family:Arial,sans-serif;max-width:950px;margin:auto;">
         <h2 style="color:#003893;border-bottom:3px solid #003893;padding-bottom:10px;">
-            Reporte Diario SNIES — Pregrado — {today_str}
+            Reporte Semanal SNIES — Pregrado — {today_str}
         </h2>
         <p style="font-size:13px;color:#333;">
             Monitoreo automático de programas académicos de pregrado en Colombia.
@@ -166,7 +167,7 @@ def construir_cuerpo(resultados: dict, today: date) -> str:
                   border-left:5px solid #003893;font-size:11px;color:#555;">
             <strong>Fuente:</strong>
             SNIES — Sistema Nacional de Información de la Educación Superior.<br>
-            <strong>Generado automáticamente</strong> por el workflow diario en GitHub Actions.
+            <strong>Generado automáticamente</strong> por el workflow semanal en GitHub Actions.
         </p>
     </div>
     """
@@ -186,7 +187,7 @@ def enviar_reporte(resultados: dict, today: date) -> None:
     cuerpo = construir_cuerpo(resultados, today)
 
     msg            = MIMEMultipart("mixed")
-    msg["Subject"] = f"Reporte SNIES Pregrado — {today.strftime('%d/%m/%Y')}"
+    msg["Subject"] = f"Reporte Semanal SNIES Pregrado — {today.strftime('%d/%m/%Y')}"
     msg["From"]    = smtp_user
     msg["To"]      = ", ".join(destinatarios)
     msg.attach(MIMEText(cuerpo, "html", "utf-8"))
